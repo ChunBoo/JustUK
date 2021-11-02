@@ -15,14 +15,14 @@ class Solution
             std::vector<int> right;
             for(int i=0;i<mid;++i)
                 left.push_back(nums[i]);
-            for(int i=mid;i<nums.size()-1;++i)
+            for(int i=mid;i<nums.size();++i)
                 right.push_back(nums[i]);
             
-            mergeSort(left);
-            mergeSort(right);
+            left=mergeSort(left);
+            right=mergeSort(right);
 
             std::vector<int> retVector;
-            for(int i=0;i<nums.size()-1;++i)
+            for(int i=0;i<nums.size();++i)
             {
                 if(i<mid)
                     retVector.push_back(left[i]);
