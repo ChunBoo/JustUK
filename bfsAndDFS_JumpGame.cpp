@@ -43,7 +43,7 @@ class Solution
             if(nums[s]==t)
                 return true;
             std::queue<int> q;
-            std::vector<int> directVec{-1,1};
+            std::vector<int> directionVec{-1,1};
             q.push(s);
             while(q.size()>0)
             {
@@ -54,11 +54,9 @@ class Solution
                 if(nums[now]==t)
                     return true;
  
-                for(auto i:directVec)
+                for(auto i:directionVec)
                 {
                     int nextPos=now+i*nums[now];
-                    // if(nums[nextPos]==t)
-                    //     return true;
                     tmpIt=gSet.find(nextPos);
                     if(tmpIt==gSet.end() && nextPos>=0 &&nextPos<sz)
                     {
