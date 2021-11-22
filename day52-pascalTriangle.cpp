@@ -12,16 +12,23 @@ int pascalTriangle(int row,int col)
 
 int main()
 {
+    std::vector<std::vector<int>> allVal{};
     std::vector<int> val{};
-    for(int i=0;i<8;i++)
-        for(int j=0;i<i;++j)
-        {
-            val.push_back(pascalTriangle(i,j));
-        }
-    
-    for(auto i:val)
+    for(int row=1;row<8;row++)
     {
-        std::cout<<i<<' ';
+        for(int col=1;col<=row;++col)
+        {
+            
+            val.push_back(pascalTriangle(row,col));
+        }
+        allVal.push_back(val);
+        val.clear();
+    }
+    for(int i=0;i<allVal.size();++i)
+    {
+        for(auto v:allVal[i])
+            std::cout<<v<<' ';
+        std::cout<<'\n';
     }
     return 0;
 }
