@@ -27,7 +27,7 @@ bool hasCycle(LinkNode* head)
     {
         fast=fast->next->next;
         slow=slow->next;
-        if(fast==slow)
+        if(fast==slow)  // can not judge by value
             return true;
     }
     return false;
@@ -44,7 +44,7 @@ int main()
         p->next=newNode;
         p=p->next;
     }
-    p->next=head->next;
+    // p->next=head->next;
     bool isCycled=hasCycle(head);
     std::cout<<"LL has cycle:"<<(isCycled?"Yes":"No")<<'\n';
     return 0;
