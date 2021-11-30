@@ -47,5 +47,4 @@ int main()
     LinkNode* midNode=middleNode(head);
     std::cout<<"Middle node value: "<<midNode->val<<'\n';
     return 0;
-
 }

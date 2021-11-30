@@ -11,8 +11,8 @@ bool canPlaceInThisRow(std::vector<int>& curRows,int newRow)
         int curRow=curRows[col];
         if(std::abs(curRow-newRow)==(curRows.size()-col) || newRow==curRow)
             return false;
-        return true;
     }
+    return true;
 }
 
 int dfs(std::vector<int>& cur,int row)
@@ -25,7 +25,7 @@ int dfs(std::vector<int>& cur,int row)
         if(canPlaceInThisRow(cur,i))
         {
             cur.push_back(i);
-            ans+=dfs(cur,row);
+            ans+=dfs(cur,i);
         }
     }
     return ans;

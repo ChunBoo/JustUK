@@ -19,7 +19,7 @@ TreeNode* buildBSTFromSortedList(std::vector<int>& nums)
     {
         leftPart.push_back(nums[i]);
     }
-    for(int i=mid+1;i<nums.size();++i)
+    for(int i=mid;i<nums.size();++i)
     {
         rightPart.push_back(nums[i]);
     }

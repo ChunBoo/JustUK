@@ -24,7 +24,7 @@ bool check(const std::string& s)
     for(auto i: countMap)
     {
         int cnt=i.second;
-        if(cnt&1==1)
+        if(cnt&1==1)  //judge current value is odd
         {   
             oddCnt++;
             if(oddCnt>1)
