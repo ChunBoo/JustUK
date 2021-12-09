@@ -1,8 +1,18 @@
 // check if a number is a power of 3,using bf
 #include<iostream>
 
-
 bool isPowerOfThree(int n)
+{
+    if(n<=0)
+        return false;
+    if(n==1)
+        return true;
+
+    return (n%3==0)&& isPowerOfThree(n/=3);
+}
+
+
+bool isPowerOfThreeUsingBS(int n)
 {
     if(n<=0)
         return false;
@@ -26,7 +36,7 @@ bool isPowerOfThree(int n)
 
 int main()
 {
-    int n=3;
+    int n=9;
     std::cout<<isPowerOfThree(n)<<'\n';
     return 0;
 }

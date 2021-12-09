@@ -18,7 +18,7 @@ int checkZerosInFactorialNumberTail(int n)
 
 int main()
 {
-    int n=14;
+    int n=25;
     std::cout<<checkZerosInFactorialNumberTail(n)<<'\n';
 
     return 0;
