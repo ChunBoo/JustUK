@@ -19,7 +19,7 @@ class LinkNode
 
         void printNode()
         {
-            LinkNode* p=this->next;
+            LinkNode* p=this;
             while(p&&p->next)
             {
                 std::cout<<p->m_val<<'-';
@@ -28,8 +28,8 @@ class LinkNode
             std::cout<<p->m_val<<'\n';
         }
 };
-/*
-LinkNode* mergeLists(LinkNode* headA,LinkNode* headB)
+
+LinkNode* mergeListsOld(LinkNode* headA,LinkNode* headB)
 {
     if(!headA||!headB)
         return headA?headA:headB;
@@ -55,7 +55,7 @@ LinkNode* mergeLists(LinkNode* headA,LinkNode* headB)
         dummy->next=headB;
     return dummy->next;
 }
-*/
+
 
 
     LinkNode* mergeLists(LinkNode* list1,LinkNode* list2){

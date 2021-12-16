@@ -41,7 +41,7 @@ int main()
         pA->next=new LinkNode(i);
         pA=pA->next;
     }
-        for(int i=3;i<5;++i)
+    for(int i=3;i<5;++i)
     {
         pB->next=new LinkNode(i);
         pB=pB->next;
