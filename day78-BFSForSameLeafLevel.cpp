@@ -23,13 +23,15 @@ bool isSameLeafLevel(TreeNode* root)
         if(!tempNode.first->left && !tempNode.first->right)
         {
             d.insert(tempNode.second);
+            if(d.size()>1)
+                return false;
         }
         if(tempNode.first->left)
             q.push(std::pair<TreeNode*,int>(tempNode.first->left,tempNode.second+1));
         if(tempNode.first->right)
             q.push(std::pair<TreeNode*,int>(tempNode.first->right,tempNode.second+1));
     }
-    return d.size()==1;
+    return true;
 }
 
 int main()

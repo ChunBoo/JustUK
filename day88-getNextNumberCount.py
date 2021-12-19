@@ -8,9 +8,9 @@ from typing import Counter
 def  f(nums):
     d=Counter(nums)
     ans=0
-    for i in d.keys():
-            if i+1 in d:
-                    ans+=d[i]
+    for i in nums:  # d.keys() is wrong
+        if i+1 in d:
+            ans+=d[i+1]
     return ans
 
 nums=[1,2,2,3,5,7]

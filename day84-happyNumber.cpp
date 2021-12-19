@@ -3,23 +3,23 @@
 #include<set>
 bool isHappyNumber(int n)
 {
-    if(n==1)
-        return true;
-    std::set<int> d{};
-    while(n!=1&&d.find(n)==d.end())
-    {
-        d.insert(n);
-        int sum=0;
-        int cur=n;
-        while(cur)
-        {
-            int reminder=cur%10;
-            sum+=(reminder*reminder);
-            cur/=10;
-        }
-        n=sum;
-    }
-    return n==1;
+ if(n==1)
+    return true;
+ std::set<int> d{};
+ while(n!=1 && d.find(n)==d.end())
+ {
+     d.insert(n);
+     int sum=0;
+     int cur=n;
+     while(cur>0)
+     {
+         int temp=cur%10;
+         sum+=temp*temp;
+         cur/=10;
+     }
+     n=sum;
+ }
+ return n==1;
 }
 
 int main()
