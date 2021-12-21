@@ -19,6 +19,7 @@ bool sameLeavesLevel(TreeNode* root)
 {
     std::set<int> s{};
     dfs(root,0,s);
+    std::cout<<s.size()<<'\n';
     return s.size()==1;
 }
 
@@ -27,7 +28,7 @@ int main()
 {
     TreeNode* root=new TreeNode(4);
     TreeNode* left=new TreeNode(3);
-    // left->addLeftChild(2);
+    left->addLeftChild(2);
     root->left=left;
     TreeNode* right=new TreeNode(5);
     root->right=right;

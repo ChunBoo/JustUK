@@ -1,6 +1,7 @@
 //given a integer,return the 1 in this number with binary format
 
-
+// bin(5)
+//O(Log2n)
 #include<iostream>
 
 int count1(int n)
