@@ -2,15 +2,27 @@
 
 #include<iostream>
 #include<map>
+//bottom-up method
+
+int f(int n)
+{
+    int f1=1,f2=1;
+    for(int i=1;i<n;++i)
+    {
+        int t=f1;
+        f1=f2;
+        f2=t+f1;
+    }
+    return f2;
+}
+
 
 int getWaysOfClimbingStairs(int n,std::map<int,int>& nb)
 {
-    if(n<1)
-        return 0;
     if(n==1)
-    {
-        nb.insert(std::pair<int,int>(1,2));
-    }
+        return 1;
+    if(n==2)
+        return 2;
         // return 2;
     std::map<int,int>::iterator it=nb.find(n);
     if(it!=nb.end())
@@ -26,7 +38,8 @@ int main()
 {
     std::map<int,int> nb{};
 
-    int count=getWaysOfClimbingStairs(5,nb);
+    // int count=getWaysOfClimbingStairs(4,nb);
+    int count=f(4);
     std::cout<<"Count: "<<count<<'\n';
 
     return 0;
