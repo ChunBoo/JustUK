@@ -3,44 +3,52 @@
 #include<iostream>
 #include<vector>
 #include<map>
-int getMaxValue(std::vector<int>& vals)
+int dfBottom2Up(const std::vector<int>& vals)
 {
     if(vals.empty())
         return 0;
-    
     int sz=vals.size();
     if(sz==1)
         return vals[0];
-    
-    int f0=vals[0];
-    int f1=std::max(f0,vals[1]);
+    if(sz==2)
+        return std::max(vals[0],vals[1]);
+    std::map<int,int> dp{};
+    dp[0]=vals[0];
+    dp[1]=std::max(dp[0],vals[1]);
+
     for(int i=2;i<sz;++i)
     {
-        int t=f0;
-        f1=std::max(f0+vals[i],f1);
-        f0=f1;
+        dp[i]=std::max(vals[i]+dp[i-2],dp[i-1]);
     }
-    return f1;
+    return dp[sz-1];
 }
 
-int getMax(std::vector<int>& values,int n,std::map<int,int>& nb)  
+int dfTop2Down(const std::vector<int>& val,int n,std::map<int,int>& nb)
 {
-    if(n<1)
+    
+    int sz=val.size();
+    if(n<0||n>sz)
         return 0;
-    if(values.empty())
+    if(sz==0)
         return 0;
-    if(values.size()==1)
-        return values[0];
-
-    int f1=values[0];
-    int f2=std::max(f1,values[1]);
-    // return std::max(values[n-1]+getMax(values,n-2),getMax(values,n-1));
+    if(sz==1)
+        return val[0];
+    
+    std::map<int,int>::iterator it=nb.find(n);
+    if(it!=nb.end())
+        return nb[n];
+    
+    int temp=std::max(val[n]+dfTop2Down(val,n-2,nb),dfTop2Down(val,n-1,nb));
+    nb[n]=temp;
+    return nb[n];
 }
+
 
 int main()
 {
-    std::vector<int> val{1,7,7};
-    int result=getMaxValue(val);
+    std::vector<int> val{1,9,10};
+    std::map<int,int> nb{};
+    int result=dfTop2Down(val,3,nb);
     // int result=getMax(val,3);
     std::cout<<"Result is: "<<result<<'\n';
 
