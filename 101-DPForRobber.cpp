@@ -3,52 +3,52 @@
 #include<iostream>
 #include<vector>
 #include<map>
-int dfBottom2Up(const std::vector<int>& vals)
-{
-    if(vals.empty())
-        return 0;
-    int sz=vals.size();
-    if(sz==1)
-        return vals[0];
-    if(sz==2)
-        return std::max(vals[0],vals[1]);
-    std::map<int,int> dp{};
-    dp[0]=vals[0];
-    dp[1]=std::max(dp[0],vals[1]);
 
-    for(int i=2;i<sz;++i)
-    {
-        dp[i]=std::max(vals[i]+dp[i-2],dp[i-1]);
-    }
-    return dp[sz-1];
+int dfTop2Down(const std::vector<int>& vals,int n,std::map<int,int>& dp)
+{
+    int sz=vals.size();
+
+    if(n<0||n>sz)  // this condition should be satisfied,or it will be dead-loop
+        return 0;
+
+    std::map<int,int>::iterator it=dp.find(n);
+    
+    if(it!=dp.end())
+        return dp[n];
+    
+    int temp=std::max(dfTop2Down(vals,n-2,dp)+vals[n],dfTop2Down(vals,n-1,dp));
+    dp[n]=temp;
+    return dp[n];
 }
 
-int dfTop2Down(const std::vector<int>& val,int n,std::map<int,int>& nb)
+
+int dfBottom2Top(const std::vector<int>& vals)
 {
-    
-    int sz=val.size();
-    if(n<0||n>sz)
-        return 0;
+    int sz=vals.size();
     if(sz==0)
         return 0;
     if(sz==1)
-        return val[0];
-    
-    std::map<int,int>::iterator it=nb.find(n);
-    if(it!=nb.end())
-        return nb[n];
-    
-    int temp=std::max(val[n]+dfTop2Down(val,n-2,nb),dfTop2Down(val,n-1,nb));
-    nb[n]=temp;
-    return nb[n];
+        return vals[0];
+    std::map<int,int> dp{};
+    dp[0]=vals[0];
+    dp[1]=std::max(vals[0],vals[1]);
+    for(int i=2;i<sz;++i)
+    {
+        dp[i]=std::max(dp[i-2]+vals[i],dp[i-1]);
+    }
+
+    return dp[sz-1];
 }
+
+
 
 
 int main()
 {
-    std::vector<int> val{1,9,10};
+    std::vector<int> val{1,12,10};
     std::map<int,int> nb{};
     int result=dfTop2Down(val,3,nb);
+    // int result=dfBottom2Top(val);
     // int result=getMax(val,3);
     std::cout<<"Result is: "<<result<<'\n';
 
