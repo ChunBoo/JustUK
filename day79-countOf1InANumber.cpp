@@ -20,7 +20,7 @@ int countOfOne(int n)
     while(n>0)
     {
         ans+=1;
-        n=n&(n-1);  //这里与上面差别比较大
+        n=n&(n-1);  //这里与上面差别比较大,这个操作将每次都移除一个1
     }
     return ans;
 }
