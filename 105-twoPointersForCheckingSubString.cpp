@@ -3,29 +3,30 @@
 #include<string>
 #include<iostream>
 
-
 bool isSubString(const std::string& s, const std::string& t)
 {
-    int ls=s.size();
-    int lt=t.size();
-
-    if(!ls||!lt||ls>lt)
+    if(s.empty())
+        return true;
+    
+    int ls=s.size(),lt=t.size();
+    if(ls>lt)
         return false;
     
-    int is=0,it=0;
-    while(is<ls&&it<lt)
+    int si=0,st=0;
+    while(si<ls&&st<lt)
     {
-        if(s[is]==t[it])
-            is+=1;
-        it+=1;
+        if(s[si]==t[st])
+            si++;
+        st++;
     }
-    return is==ls;    
+    return si==ls;
 }
+
 
 int main()
 {
-    std::string s{"abc"};
-    std::string t{"acddce"};
+    std::string s{""};
+    std::string t{"acdbde"};
 
     bool res=isSubString(s,t);
     std::cout<<s<<" is a substring of "<<t<<" ? "<<(res?"Yes":"No")<<'\n';
