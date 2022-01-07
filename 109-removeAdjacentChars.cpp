@@ -19,8 +19,8 @@ std::string removeAdjacentCharsFromString(const std::string& s)
         else    
             st.push(s[i]);
     }
-    // std::string ret(sz,' ');  //std::string initialized way
-    std::string ret{};
+    std::string ret(sz,' ');  //std::string initialized way
+    // std::string ret{};  // this way can not work
     for(int i=st.size()-1;i>=0;--i)
     {
         ret[i]=st.top();
@@ -32,7 +32,7 @@ std::string removeAdjacentCharsFromString(const std::string& s)
 
 int main()
 {
-    std::string s{"ab"};
+    std::string s{"abccbae"};
     std::string ret=removeAdjacentCharsFromString(s);
     std::cout<<"After removing: "<<ret<<"\n";
     return 0;

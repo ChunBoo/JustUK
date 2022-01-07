@@ -3,19 +3,15 @@
 #include<map>
 #include<vector>
 
-int dpForCount1(int n,std::map<int,int>& dp)
+int dpForCount1(int n,std::map<int,int>& dp)  //bottom 2 top 
 {
     if(n==0)
         return 0;
-    
     if(n==1)
         return 1;
-
     std::map<int,int>::iterator it=dp.find(n);
-    
     if(it!=dp.end())
         return dp[n];
-    
     dp[0]=0;
     dp[1]=1;
     for(int i=2;i<=n;++i)
