@@ -15,7 +15,7 @@ int longestSubString(const std::string& s,int from,int end)  //top2bottom
     return std::max(longestSubString(s,from,end-1),longestSubString(s,from+1,end));
 }
 
-int getLongestSubString(const std::string& s)
+int getLongestSubString(const std::string& s)  //bottom2top
 {
     int sz=s.size();
     if(sz==0)
