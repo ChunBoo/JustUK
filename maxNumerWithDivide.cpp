@@ -32,7 +32,7 @@ class Solution
 
 int main()
 {
-    std::vector<int> nums{2,0,69,3,-1,9,4};
+    std::vector<int> nums{2,0,19,3,-1,9,4};
     Solution s;
     int max=s.maxNumber(nums);
     std::cout<<"Max= "<<max;

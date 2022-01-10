@@ -22,8 +22,8 @@ int prefixSum(std::vector<int>& nums,int start,int end)
 
 int main()
 {
-    std::vector<int> nums{1,2,3,4,5};
-    int start=0,end=0;
+    std::vector<int> nums{1,2,3,7,9};
+    int start=0,end=2;
     std::cout<<"Result=: "<<prefixSum(nums,start,end);
     return 0;
 }

@@ -42,7 +42,7 @@ int getLongestSubString(const std::string& s)  //bottom2top
 
 int main()
 {
-    std::string s="abbbdbb";
+    std::string s="abbcbbeb";
     int res=getLongestSubString(s);
     std::cout<<res<<'\n';
     return 0;
