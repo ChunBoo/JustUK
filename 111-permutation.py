@@ -10,7 +10,7 @@ def perm(nums):
         for i in range(cur,len(nums)):
             nums[i],nums[cur]=nums[cur],nums[i]
             help(cur+1)
-            # nums[i],nums[cur]=nums[cur],nums[i]
+            nums[i],nums[cur]=nums[cur],nums[i]
     help(0)
     return ans
 
