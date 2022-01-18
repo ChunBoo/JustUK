@@ -17,15 +17,19 @@ int getMinSumOfPathBT(std::vector<std::vector<int>>& nums,int row,int col)
         for(int c=0;c<_sz;++c)
         {
             // if(nb.find(std::pair<int,int>(r,c))!=nb.end())
+            if(nb.find(std::pair<int,int>(r+1,c))==nb.end())
+                nb[std::pair<int,int>(r+1,c)]=nums[r+1][c];
+            if(nb.find(std::pair<int,int>(r+1,c+1))==nb.end())
+                nb[std::pair<int,int>(r+1,c+1)]=nums[r+1][c+1];
 
-            nums[r][c]+=std::min(nums[r+1][c],nums[r+1][c+1]);
+            // nums[r][c]+=std::min(nums[r+1][c],nums[r+1][c+1]);
             // nb[std::pair<int,int>(r,c)]=nums[r][c];
-            // nb[std::pair<int,int>(r,c)]+=std::min(nb[std::pair<int,int>(r+1,c)],nb[std::pair<int,int>(r+1,c+1)]);
+            nb[std::pair<int,int>(r,c)]=std::min(nb[std::pair<int,int>(r+1,c)],nb[std::pair<int,int>(r+1,c+1)])+nums[r][c];
             
         }
     }
-    return nums[0][0];
-    // return nb[std::pair<int,int>(0,0)];
+    // return nums[0][0];
+    return nb[std::pair<int,int>(0,0)];
 }
 
 
