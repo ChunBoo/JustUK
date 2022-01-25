@@ -14,5 +14,5 @@ def perm(nums):
     help(0)
     return ans
 
-nums=[1,2,3]
+nums=[1,2,3,4]
 print(perm(nums))

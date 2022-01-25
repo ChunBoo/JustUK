@@ -37,7 +37,6 @@ int getLongestSubString(const std::string& s)  //bottom2top
         }
     }
     return dp[0][sz-1];
-
 }
 
 int main()

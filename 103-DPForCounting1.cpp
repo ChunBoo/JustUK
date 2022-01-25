@@ -54,12 +54,20 @@ int getCountOf12(int n)
     return ans;
 }
 
+int getCountOf13(int n)  //top2bottom method
+{
+    if(n==0||n==1)
+        return n;
+    if(n<0)
+        return 0;
+    return getCountOf13(n&(n-1))+1;
+}
 
 int main()
 {
-    int val=15;
+    int val=16;
         // std::vector<int> dp(val+1);
-    int cnt=getCountOf12(val);
+    int cnt=getCountOf13(val);
     std::cout<<val<<" has: "<<cnt<<"x one.\n";
     // std::map<int,int> dp{};
 
