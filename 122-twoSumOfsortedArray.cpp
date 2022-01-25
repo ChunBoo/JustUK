@@ -8,7 +8,7 @@ int bs(const std::vector<int>& nums,int left,int right,int target)
     if(left>right)
         return 0;
 
-    while(left<=right)
+    while(left<=right)  //the boundary is important 
     {
         int mid=(left+right)/2;
         if(nums[mid]==target)
