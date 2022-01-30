@@ -10,25 +10,23 @@ bool isCompletedBT(TreeNode* root)
 
     std::deque<TreeNode*> nb;
     nb.push_back(root);
-
-    bool Hole=false;
-
+    bool isHole=false;
     while(!nb.empty())
     {
         TreeNode* curNode=nb.front();
         nb.pop_front();
         if(!curNode)
-            Hole=true;
+            isHole=true;
         else
         {
-            if(Hole) return false;
+            if(isHole)
+                return false;
             nb.push_back(curNode->left);
             nb.push_back(curNode->right);
         }
     }
     return true;
 }
-
 
 bool isCompletedBT2(TreeNode* root)
 {
@@ -74,7 +72,7 @@ int main()
     l1right->right=l22right;
 
     root->left=l1Left;
-    root->right=l1right; 
+    // root->right=l1right; 
 
     bool res=isCompletedBT(root);
     std::cout<<res<<'\n';
