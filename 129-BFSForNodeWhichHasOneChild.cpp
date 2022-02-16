@@ -2,29 +2,57 @@
 #include<deque>
 #include<iostream>
 #include<vector>
-void getChildNode(TreeNode* root)
+
+
+using PAIR_TYPE=std::pair<TreeNode*,int>;
+void getNodesWithOneChild(TreeNode* root)
 {
     if(!root)
         return ;
-    std::vector<TreeNode*> nodes;
-    std::deque<TreeNode*> nb;
+    
+    std::deque<PAIR_TYPE> nb{};
+
+    nb.push_back(PAIR_TYPE(root,0));
+    int ans=0;
+    while(!nb.empty())
+    {
+        TreeNode* curNode=nb.front().first;
+        int curCnt=nb.front().second;
+        nb.pop_front();
+        if(curCnt==1)
+           ans+=1;
+        int x=0;
+        if(curNode->left)
+            x+=1;
+        if(curNode->right)
+            x+=1;
+        if(curNode->left)
+            nb.push_back(PAIR_TYPE(curNode->left,x));
+        if(curNode->right)
+            nb.push_back(PAIR_TYPE(curNode->right,x));
+
+    }
+    std::cout<<ans<<'\n';
+
+}
+
+void getChildNode(TreeNode* root)
+{
+    if(!root)
+        return;
+    std::deque<TreeNode*> nb{};
     nb.push_back(root);
+
     while(!nb.empty())
     {
         TreeNode* curNode=nb.front();
-        
         nb.pop_front();
-        if((curNode->left && !curNode->right)||(curNode->right&&!curNode->left))
-            nodes.push_back(curNode);
-
+        if((curNode->left&&!curNode->right)||(curNode->right&&!curNode->left))
+            std::cout<<curNode->m_val<<',';
         if(curNode->left)
             nb.push_back(curNode->left);
         if(curNode->right)
-            nb.push_back(curNode->right);   
-    }
-    for(auto n:nodes)
-    {
-        std::cout<<n->m_val<<",";
+            nb.push_back(curNode->right);
     }
 }
 
@@ -44,9 +72,9 @@ int main()
     l1right->left=l22left;
     // l1right->right=l22right;
 
-    // root->left=l1Left;
+    root->left=l1Left;
     root->right=l1right;
 
-    getChildNode(root);
+    getNodesWithOneChild(root);
     return 0;
 }

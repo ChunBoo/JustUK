@@ -2,13 +2,13 @@
 
 #include<iostream>
 
-int reverseValue(int n)
+int reverseValue(unsigned int n)
 {
-    int ans=0;
+    unsigned int ans=0;
     int p=31;
-    while(n>0)
+    while(n)
     {
-        ans|=((n&1)<<p);
+        ans|=(n&1)<<p;
         p-=1;
         n>>=1;
     }
@@ -18,7 +18,7 @@ int reverseValue(int n)
 int main()
 {
     int value=1;
-    int res=reverseValue(value);
+    unsigned int res=reverseValue(value);
     std::cout<<"reversed result is: "<<res<<'\n';
 
     return 0;
