@@ -1,14 +1,15 @@
 //given a BST, find the successor of target node
 
+
 #include "treeNode.h"
 #include<iostream>
 
 
 int inorderSuccessor(TreeNode* root,int target)
 {
-    int ans=0;
     if(!root)
-        return ans;
+        return -1;
+    int ans=0;
     while(root)
     {
         if(target<root->m_val)
@@ -42,8 +43,7 @@ int main()
     TreeNode* root=new TreeNode(2);
     root->addLeftChild(1);
     root->addRightChild(3);
-    int res;
-    inorderSuccessor(root,2);
+    int res=inorderSuccessor(root,2);
     std::cout<<res<<'\n';
     return 0;
 }

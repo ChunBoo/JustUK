@@ -8,7 +8,6 @@ int getCountOfNodesWithOneChild(TreeNode* root,std::vector<TreeNode*>& nodes)
 {
     if(!root)
         return 0;
-    
     int ans=0;
     if((root->left&&!root->right)||(root->right&&!root->left))
     {
@@ -19,6 +18,7 @@ int getCountOfNodesWithOneChild(TreeNode* root,std::vector<TreeNode*>& nodes)
         ans+=getCountOfNodesWithOneChild(root->left,nodes);
     if(root->right)
         ans+=getCountOfNodesWithOneChild(root->right,nodes);
+    
     return ans;
 }
 

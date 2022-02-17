@@ -6,38 +6,10 @@
 
 int getMaxLevel(TreeNode* root)
 {
+    if(!root)
+        return 0;
     int ans=0;
     
-    if(!root)
-        return ans;
-
-    std::deque<TreeNode*> q;
-    q.push_back(root);
-
-    int maxSum=0;
-    int curLevel=0;
-    while(!q.empty())
-    {
-        int curSZ=q.size();
-        int curSum=0;
-        for(int i=0;i<curSZ;++i)
-        {
-            TreeNode* curNode=q.front();
-            q.pop_front();
-            curSum+=curNode->m_val;
-            if(curNode->left)
-                q.push_back(curNode->left);
-            if(curNode->right)
-                q.push_back(curNode->right);
-        }
-        if(maxSum<curSum)
-        {
-            maxSum=curSum;
-            ans=curLevel;
-        }
-        curLevel+=1;
-    }   
-    return ans;
 }
 
 

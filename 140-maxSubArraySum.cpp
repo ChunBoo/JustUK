@@ -1,14 +1,20 @@
 #include<vector>
 #include<iostream>
-#include<cmath>
+#include<cmath>  //for std::max()
+
+
+
+
 int DPForMaxSubArraySum(const std::vector<int>& nums)
 {
-    int ans=nums[0];
-    int sum=nums[0];
-    int sz=nums.size();
-    for(int i=1;i<sz;++i)
+    //if currentValue+sum is larger than current value,then use currentValue+Sum,otherwise,we should use current value
+    if(nums.empty())
+        return -1;
+    int ans=0;
+    int sum=0;
+    for(auto i:nums)
     {
-        sum=std::max(nums[i],nums[i]+sum);
+        sum=std::max(sum+i,i);
         ans=std::max(sum,ans);
     }
     return ans;
@@ -16,14 +22,19 @@ int DPForMaxSubArraySum(const std::vector<int>& nums)
 
 int GreedyForMaxSubArraySum(const std::vector<int>& nums)
 {
+    //if current sum is negative,then used the new value
+    if(nums.empty())
+        return -1;
+    
     int ans=0;
     int sum=0;
     for(auto i:nums)
     {
+        //sum+=i;  //this step is wrong,should check current sum value firstly.
         if(sum<0)
             sum=i;
         else
-            sum=i+sum;
+            sum+=i;
         ans=std::max(ans,sum);
     }
     return ans;
@@ -32,7 +43,7 @@ int GreedyForMaxSubArraySum(const std::vector<int>& nums)
 
 int main()
 {
-    std::vector<int> nums{1,2,-1,4,3};
+    std::vector<int> nums{1,2,-2,1,-3};
     int dpRes=DPForMaxSubArraySum(nums);
     int greedyRes=GreedyForMaxSubArraySum(nums);
     std::cout<<dpRes<<'\n';

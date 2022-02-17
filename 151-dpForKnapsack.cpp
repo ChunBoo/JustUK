@@ -28,9 +28,10 @@ int getMethod2(const std::vector<int>& nums,int Target)   //bottom2top
 
 int getMethods(const std::vector<int>& nums,int n,std::vector<int>& r)  //top2bottom
 {
+    std::cout<<"n= "<<n<<'\n';
     int ans=0;
-    if(n<0)
-        return 0;
+    // if(n<0)
+    //     return 0;
     if(n==0)
     {
         r.push_back(9);
@@ -39,10 +40,11 @@ int getMethods(const std::vector<int>& nums,int n,std::vector<int>& r)  //top2bo
 
     for(auto i:nums)
     {   
-        if(i>2)
-            break;
+        // if(i>2)
+        //     break;
         r.push_back(i);
-        ans+=getMethods(nums,n-i,r);
+        if(i<=n)
+            ans+=getMethods(nums,n-i,r);
     }
     return ans;  
 }
@@ -56,8 +58,8 @@ int main()
     int target=4;
     
     int res=0;
-    // res=getMethods(nums,target,rVector);
-    res=getMethod2(nums,target);
+    res=getMethods(nums,target,rVector);
+    // res=getMethod2(nums,target);
     std::cout<<res<<'\n';
     for(auto i:rVector)
     {
