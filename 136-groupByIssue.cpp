@@ -2,33 +2,33 @@
 
 #include<iostream>
 #include<vector>
-
-void GroupByNumbers(const std::vector<int>& nums,std::vector<std::vector<int>>& ret)
+#include<algorithm>
+void GroupByNumbers(std::vector<int>& nums,std::vector<std::vector<int>>& ret)
 {
     if(nums.empty())
         return ;
-
-    std::vector<int> curBox;
-    int previous=nums[0];
-    for(auto i:nums)
+    std::sort(nums.begin(),nums.end(),std::greater<int>());  //decreased order with std::greater
+    std::vector<int> tempVec{};
+    int preValue=nums[0];
+    for(auto curVal:nums)
     {
-        if(i!=previous)
+        if(curVal!=preValue)
         {
-            ret.push_back(curBox);
-            previous=i;
-            curBox.clear();
+            ret.push_back(tempVec);
+            preValue=curVal;
+            tempVec.clear();
         }
-        curBox.push_back(i);
+        tempVec.push_back(curVal);
     }
-    if(!curBox.empty())
-        ret.push_back(curBox);
+    if(!tempVec.empty())   //this step is important!!!!
+        ret.push_back(tempVec);
 }
 
 
 int main()
 {
     std::vector<std::vector<int>> res;
-    std::vector<int> nums={1,1,1,2,2,3,4,4};
+    std::vector<int> nums={1,3,1,2,4,3,4,4};
     GroupByNumbers(nums,res);
     if(!res.empty())
     {

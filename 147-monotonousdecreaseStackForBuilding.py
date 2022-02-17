@@ -2,12 +2,12 @@
 
 
 def  getBuildings(nums):
-    if nums is None:
-        return []
-    
-    ans=[nums[0]]
-    for i,h in enumerate(nums):
-        while(ans and nums[ans[-1]]<=h):
+    ans=[]
+    if(nums is None):
+        return ans
+    ans.append(nums[0])
+    for i,v in enumerate(nums):
+        while(ans and nums[ans[-1]]<=v):
             ans.pop(-1)
         ans.append(i)
 

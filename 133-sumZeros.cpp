@@ -1,5 +1,8 @@
+//create one array which it's sum is zero
+
 #include<iostream>
 #include<vector>
+
 std::vector<int> sumZero2(int n)
 {
     int i=1;
@@ -20,7 +23,7 @@ std::vector<int> sumZero2(int n)
 std::vector<int> sumZero(int n)
 {
     int i=1;
-    std::vector<int> ans;
+    std::vector<int> ans{};
     while(n>=2)
     {
         ans.push_back(i);

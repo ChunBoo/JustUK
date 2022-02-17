@@ -3,17 +3,17 @@
 #include<vector>
 std::list<int> getBuilding(const std::vector<int>& nums)
 {
-    std::list<int> ans{};
-    if(nums.empty())
-        return ans;
+    std::list<int> ans;
     int sz=nums.size();
-    ans.push_back(nums[0]);
+    if(sz==0)
+        return ans;
+
     for(int i=0;i<sz;++i)
     {
         int cur=nums[i];
-        while(!ans.empty()&& nums[ans.back()]<=cur)
+        while(!ans.empty()&&nums[ans.back()]<=cur)
         {
-                ans.pop_back();
+            ans.pop_back();
         }
         ans.push_back(i);
     }

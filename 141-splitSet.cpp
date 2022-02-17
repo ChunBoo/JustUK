@@ -4,7 +4,7 @@
 #include<numeric>
 bool isCanSplitSet(std::vector<int>& s)
 {
-    std::sort(s.begin(),s.end());
+    std::sort(s.begin(),s.end());  //why needs this step?? for what?
     int c=0;
 
     int sum=std::accumulate(s.begin(),s.end(),0);

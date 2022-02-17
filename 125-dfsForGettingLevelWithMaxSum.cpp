@@ -3,27 +3,26 @@
 #include<iostream>
 
 
-int getLevelValue(TreeNode* root,std::map<int,int>& nb,int curLevel)
+int getLevelNumberWithMaximumSum(TreeNode* root,std::map<int,int>& nb,int curLevel)
 {
     if(!root)
         return 0;
-    
-    nb[curLevel]+=root->m_val;
-    if(root->left)
-        getLevelValue(root->left,nb,curLevel+1);
-    if(root->right)
-        getLevelValue(root->right,nb,curLevel+1);
-    
     int ans=0;
     int maxSum=0;
-    for(auto i:nb)
+    nb[curLevel]+=root->m_val;
+    if(root->left)
+        getLevelNumberWithMaximumSum(root->left,nb,curLevel+1);
+    if(root->right)
+        getLevelNumberWithMaximumSum(root->right,nb,curLevel+1);
+    for(auto level:nb)
     {
-        if(maxSum<i.second)
+        if(maxSum<level.second)
         {
-            maxSum=i.second;
-            ans=i.first;
+            maxSum=level.second;    
+            ans=level.first;
         }
     }
+    std::cout<<ans<<" With sum is: "<<maxSum<<'\n';
     return ans;
 }
 
@@ -47,7 +46,7 @@ int main()
     root->right=l1right; 
     std::map<int,int> nb{};
 
-    int res=getLevelValue(root,nb,0);
+    int res=getLevelNumberWithMaximumSum(root,nb,0);
     std::cout<<res<<'\n';
     return 0;
 }

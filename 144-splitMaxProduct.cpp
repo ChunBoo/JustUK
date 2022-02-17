@@ -7,7 +7,7 @@ int greedyForSplitMaxProduct(int n)
     //used the mathematics method to reduce the loops
     if(n==1)
         return 0;
-    if(n<3)
+    if(n==2)
         return 1;   //1==1
     if(n==3)
         return 2;   //3==1+2
@@ -38,6 +38,10 @@ int b2tDPForSplitMaxProduct(int n) //bottom 2 top DP,we need the nb to save the 
 int t2bDPForSplitMaxProduct(int n)
 {
     int ans=0;
+    if(n<=2)
+        return 1;
+    if(n==3)
+        return 2;  //added above if-statements for speedup 
     for(int i=1;i<n+1;++i)
     {    
         int temp=std::max(i*(n-i),i*t2bDPForSplitMaxProduct(n-i));
