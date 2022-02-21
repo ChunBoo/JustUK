@@ -1,14 +1,13 @@
-//given  the hours and minutes,to calculate the angles 
+//given  the hours and minutes,to calculate the angles difference
 
 #include<iostream>
 #include<cmath>
-int getAngles(int hrs,float minuts)
+float getAngles(int hrs,float minuts)
 {
-    int hr=hrs%24;
-    int h=(hr+minuts/60)*30;
-    int m=minuts*360/60;
-
-    int ans=std::abs(h-m);
+    int hr=hrs%12;
+    float h=(hr+minuts/60)*30;
+    float m=minuts*6;
+    float ans=std::abs(h-m);
     return std::min(ans,360-ans);
 }
 

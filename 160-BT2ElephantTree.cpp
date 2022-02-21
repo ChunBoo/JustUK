@@ -6,18 +6,15 @@
 
 int dfs(TreeNode* root)
 {
-    if(!root)
-        return 0;
-    
-    int ans=root->m_val;
+  int ans=root->m_val;
 
-    if(root->left)
-        ans+=dfs(root->left);
-    if(root->right)
-        ans+=dfs(root->right);
-    
-    root->m_val=ans;
-    return ans;
+  if(root->left)
+    ans+=dfs(root->left);
+
+  if(root->right)
+    ans+=dfs(root->right);
+  root->m_val=ans;
+  return ans;
 }
 
 void BT2ElephantTree(TreeNode* root)

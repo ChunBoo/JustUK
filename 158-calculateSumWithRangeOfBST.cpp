@@ -1,28 +1,31 @@
+//given a BST and the range of nodes value,to calculate the sum of nodes in this range
+
 #include "treeNode.h"
 #include<iostream>
 #include<stack>
 
-int sumOfRange2(TreeNode* root,int L,int R)
+int sumOfRange2(TreeNode* root,int L,int R)  //
 {
     if(!root)
         return 0;
+    int ans=0;
     std::stack<TreeNode*> s;
     s.push(root);
-    int ans=0;
     while(!s.empty())
     {
-        TreeNode* cur=s.top();
+        TreeNode* curNode=s.top();
         s.pop();
-        if(cur)
+        if(curNode)
         {
-            if(cur->m_val>=L && cur->m_val<=R)
-            {
-                ans+=cur->m_val;
-            }
-            if(cur->m_val>L)
-                s.push(cur->left);
-            if(cur->m_val<R)
-                s.push(cur->right);
+            if(curNode->m_val>=L && curNode->m_val<=R)
+                ans+=curNode->m_val;
+            // s.pop();
+
+            if(curNode->m_val>L)
+                s.push(curNode->left);
+            
+            if(curNode->m_val<R)
+                s.push(curNode->right);
         }
     }
     return ans;
@@ -35,12 +38,12 @@ int sumOfRange(TreeNode* root, int L,int R)  //recursion version
         return 0;
     
     int ans=0;
+    
     if(root->m_val>=L && root->m_val<=R)
         ans+=root->m_val;
-
-    if(root->m_val>L)   //here is no equal maker
+    
+    if(root->m_val>L)
         ans+=sumOfRange(root->left,L,R);
-
     if(root->m_val<R)
         ans+=sumOfRange(root->right,L,R);
     

@@ -11,7 +11,7 @@ std::string groupeStrings(const std::string& inString)
     if(sz==0)
         return retString;
     
-    // char  preChar;
+    // char  preChar;   //skip this additional variable 
     int cnt=0;
     for(int i=0;i<sz;++i)
     {   cnt+=1;
