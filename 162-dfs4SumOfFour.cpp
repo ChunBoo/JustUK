@@ -10,7 +10,7 @@ bool sumOfFour(const std::vector<int>& nums,int left,int count,int target)
 
     if(count==4)
         return target==0;
-    if(left>nums.size()-1)
+    if(left>nums.size()-1)   //this step is important
         return false;
     
 
