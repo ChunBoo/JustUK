@@ -2,24 +2,24 @@
 #include"treeNode.h"
 #include<iostream>
 
-void dfs(TreeNode* root)
+TreeNode* dfs(TreeNode* root)
 {
     if(!root)
-        return ;
+        return nullptr;
     
     if(root->left)
-        dfs(root->left);
+        root->left=dfs(root->left);
     if(root->right)
-        dfs(root->right);
+        root->right=dfs(root->right);
     
     if(!root->left&&!root->right)
     {
         if(root->m_val%2==0)
         {
-            delete root;
-            root=nullptr;
+            return nullptr;
         }
     }
+    return root;
 }
 
 int main()
@@ -30,8 +30,8 @@ int main()
     r1->left=l1;
     r1->right=r11;
     r1->printTreeInOrder(r1);
-
-    dfs(r1);
-    r1->printTreeInOrder(r1);
+    std::cout<<'\n';
+    TreeNode* r2=dfs(r1);
+    r2->printTreeInOrder(r2);
     return 0;
 }
