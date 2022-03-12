@@ -15,7 +15,6 @@ bool isPangram2(const std::string& words)
 
 bool isPangram(const std::string& words)
 {
-    std::set<char> s;
     for(int i=0;i<26;++i)
     {
         char curChar=97+i;
