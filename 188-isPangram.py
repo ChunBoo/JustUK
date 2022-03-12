@@ -1,8 +1,8 @@
 from collections import Counter
-from pydoc import ispackage
+
 def isPangram(words):
     c=Counter(words)
-    return len(c)==27
+    return len(c)==27  #contains the space
 
 s="the quick brown fox jump over the lazy dogs"
 print(isPangram(s))
