@@ -5,25 +5,25 @@ using DT=std::vector<std::vector<int>>;
 
 DT getIntervalsIntersection(DT& A,DT& B)
 {
-    DT ans;
-    int i=0,j=0;
-    int lenA=A.size(),lenB=B.size();
-
-    while(i<lenA&&j<lenB)
-    {
-        int start=std::max(A[i][0],B[j][0]);
-        int end=std::min(A[i][1],B[j][1]);
-        if(start<=end)
-        {
-            std::vector<int> temp{start,end};
-            ans.push_back(temp);
-        }
-        if(A[i][1]<B[j][1])
-            i+=1;
-        else
-            j+=1;
-    }
-    return ans;
+   DT ans{};
+   size_t la=A.size(), lb=B.size();
+   size_t i=0,j=0;
+   while(i<la&&j<lb)
+   {
+       int start=std::max(A[i][0],B[j][0]);
+       int end=std::min(A[i][1],B[j][1]);
+       if(start<=end)
+       {
+        //    std::vector<int> tmp{start,end};
+        //    ans.push_back(tmp);
+           ans.push_back({start,end});
+       }
+       if(A[i][1]<B[j][1])
+         i+=1;
+       else
+         j+=1;
+   }
+   return ans;
 }
 
 int main()
