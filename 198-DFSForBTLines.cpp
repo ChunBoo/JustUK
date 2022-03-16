@@ -13,10 +13,9 @@ void dfs(TreeNode* root,int x ,std::set<int>& s)
 }
 size_t getLinesBTSet(TreeNode* root)
 {
-    std::set<int> s;
     if(!root)
         return 0;
-    int x=0;
+    std::set<int> s{};
     dfs(root,0,s);
     return s.size();
 }
@@ -24,8 +23,10 @@ size_t getLinesBTSet(TreeNode* root)
 int main()
 {
     TreeNode* root=new TreeNode(2);
-    root->addLeftChild(1);
+    TreeNode* left=new TreeNode(1);
+    left->addLeftChild(0);
     root->addRightChild(3);
+    root->left=left;
     std::cout<<getLinesBTSet(root);
     return 0;
 }
