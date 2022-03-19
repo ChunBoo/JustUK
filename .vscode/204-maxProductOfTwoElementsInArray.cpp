@@ -8,30 +8,33 @@ using DT=std::vector<int>;
 
 int maxProduct2(DT& list)
 {
-    int biggest=INT_MIN, sBig=INT_MIN;
-    int smallest=0,sSmall=0;
+    if(list.empty())
+        return 0;
+    int B1=INT_MIN,B2=INT_MIN;
+    int S1=INT_MAX,S2=INT_MAX;
+
     for(auto i:list)
     {
-        if(i>biggest)
+        if(i>B1)
         {
-            sBig=biggest;
-            biggest=i;
+            B2=B1;
+            B1=i;
         }
-        else if (i>sBig)
+        else if(i>B2)
         {
-            sBig=i;
+            B2=i;
         }
-        if (i<smallest)   //NOTE here is not else if
+        if(i<S1)
         {
-            sSmall=smallest;
-            smallest=i;
+            S2=S1;
+            S1=i;
         }
-        else if(i<sSmall&&i>smallest)
+        else if(i<S2)
         {
-           sSmall=i; 
+            S2=i;
         }
     }
-    return std::max(biggest*sBig,smallest*sSmall);
+    return std::max(S1*S2,B1*B2);
 }
 
 
@@ -47,7 +50,7 @@ int maxProduct(DT& list)
 
 int main()
 {
-    DT l={-100,-3,-1,4,55};
+    DT l={-100,-2,-1,4,55};
     std::cout<<maxProduct2(l);
     return 0;
 }
