@@ -8,9 +8,14 @@ long int f(int num)
     return ans;
 }
 
+long int f1(int num)
+{
+    return num==0?1:f1(num-1)*num;
+}
+
 int main()
 {
-    long res=f(5);
+    long res=f1(5);
     std::cout<<res;
     return 0;
 }
