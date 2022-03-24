@@ -1,3 +1,7 @@
+//given a Binary Tree,return the maximum width
+//       1-0
+//    2-0     3-1      //3-2+1=2
+//  4-0         5(2*1+1)    //3-0+1=4
 #include"treeNode.h"
 #include<deque>
 #include<iostream>
@@ -6,11 +10,12 @@ using DT=std::deque<std::pair<TreeNode*,int>>;
 using PAIR=std::pair<TreeNode*,int>;
 int maxWidthWithBFS(TreeNode* root)
 {
-    int ans=0;
     if(!root)
-        return ans;
-
-    DT q{PAIR(root,0)};
+        return 0;
+    
+    int ans=0;
+    DT q;
+    q.push_back(PAIR(root,0));
     while(!q.empty())
     {
         int sz=q.size();
