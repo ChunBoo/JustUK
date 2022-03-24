@@ -11,12 +11,12 @@ DT inOrderBTWithIteration(TreeNode* root)
     DT ans{};
     if(!root)
         return ans;
-    
     std::stack<TreeNode*> s{};
+    // s.push(root);
     TreeNode* curNode=root;
     while(curNode||!s.empty())
     {
-        //findout the last left node
+        //push the left
         while(curNode)
         {
             s.push(curNode);
@@ -25,7 +25,8 @@ DT inOrderBTWithIteration(TreeNode* root)
         curNode=s.top();
         s.pop();
         ans.push_back(curNode->m_val);
-        curNode=curNode->right;
+        // if(curNode->right)  //add this line will trigger the infinity loops
+            curNode=curNode->right;
     }
     return ans;
 }
