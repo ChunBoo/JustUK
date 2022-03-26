@@ -21,7 +21,7 @@ bool dfs(TreeNode* root)
     }
     if(root->left||root->right)
         if(sum!=root->m_val)    
-            ans=false;
+            return false;
     return ans;
 }
 

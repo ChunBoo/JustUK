@@ -12,3 +12,4 @@ def maxAnagramGroup(words):
 
 words=["abc","acb","ab","bcd"]
 print(maxAnagramGroup(words))
+print(sorted("acb"))

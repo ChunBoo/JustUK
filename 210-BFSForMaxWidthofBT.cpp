@@ -43,7 +43,7 @@ int main()
     TreeNode* left=new TreeNode(2);
     TreeNode* right=new TreeNode(3);
     left->addLeftChild(4);
-    right->addLeftChild(5);
+    right->addRightChild(5);
     root->left=left;
     root->right=right;
     std::cout<<maxWidthWithBFS(root);
