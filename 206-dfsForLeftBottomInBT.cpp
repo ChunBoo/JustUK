@@ -2,6 +2,9 @@
 #include<iostream>
 #include<map>
 using DT=std::map<int,TreeNode*>;
+
+void dfs2(TreeNode*)
+
 void dfs(TreeNode* root,int level,DT& m)
 {
 

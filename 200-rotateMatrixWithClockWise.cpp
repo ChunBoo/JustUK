@@ -5,6 +5,9 @@
 
 using DT=std::vector<std::vector<int>>;
 
+
+
+
 DT transpose(DT& M)
 {
     int R=M.size(),C=M[0].size();
