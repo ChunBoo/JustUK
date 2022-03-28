@@ -9,7 +9,7 @@ def maxWidth(root):
     
     def dfs(root,v,level):
         if(root==None):
-            return ;
+            return 
 
         if level in data:
             data[level][0]=min(data[level][0],v)

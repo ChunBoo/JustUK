@@ -17,10 +17,9 @@ void dfs(TreeNode* root,DT& vec)
 }
 DT inorderOfBT(TreeNode* root)
 {
-    DT ans;
+    DT ans{};
     if(!root)
         return ans;
-
     dfs(root,ans);
     return ans;
 }

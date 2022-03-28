@@ -11,8 +11,9 @@ Constraints:
 1 <= x, y <= 1000
 */
 #include<iostream>
-#include<deque>
+// #include<deque>
 #include<set>
+#include<queue>
 
 //BFS version
 /*
@@ -31,33 +32,29 @@ int BFSMethod(int start,int end)
 {
     if(start==end)
         return 0;
-    
-    std::deque<Node> q;
-    std::set<int> visited;
-    Node f{start,0}; 
-    q.push_back(f);
-    while(!q.empty())
+    int ans=INT_FAST32_MAX;
+    std::queue<Node> nb{};
+    Node x{start,0};
+    nb.push(x);
+    std::set<int> visited{};
+    while(!nb.empty())
     {
-        Node curNode=q.front();
-        q.pop_front();
-        if(curNode.val==end)
+        Node curNode=nb.front();
+        nb.pop();
+        std::cout<<"curValue= "<<curNode.val<<'\n';
+        int curValue=curNode.val;
+        visited.insert(curValue);
+        if(curValue==end)
             return curNode.level;
-        if(((curNode.val*2)==end)||((curNode.val-1)==end))
+        if((curValue-1==end)&&(curValue*2==end))
             return curNode.level+1;
-        visited.insert(curNode.val);
-        //add the curNode.val*2 into queue
-        if(visited.find(curNode.val*2)==visited.end())
-        {
-            Node newNode{curNode.val*2,curNode.level+1};
-            q.push_back(newNode);
-        }
-        //add the curNode.val-1 into queue
-        if(visited.find(curNode.val-1)==visited.end())
-        {
-            Node newNode{curNode.val-1,curNode.level+1};
-            q.push_back(newNode);
-        }
+        //push the curValue*2 to queue
+        if(visited.find(curValue*2)==visited.end())
+            nb.push({curValue*2,curNode.level+1});
+        if((curValue-1>0)&&visited.find(curValue-1)==visited.end())
+            nb.push({curValue-1,curNode.level+1});
     }
+    return ans;
 }
 
 
@@ -83,7 +80,7 @@ int minimumStepsToConvert(int start,int end)
 
 int main()
 {
-    // std::cout<<minimumStepsToConvert(2,5);
-    std::cout<<BFSMethod(2,5)<<'\n';
+    std::cout<<minimumStepsToConvert(1,60);
+    // std::cout<<BFSMethod(1,60)<<'\n';
     return 0;
 }

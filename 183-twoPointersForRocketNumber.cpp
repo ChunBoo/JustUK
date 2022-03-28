@@ -9,20 +9,17 @@ int twoPointersForMinCountOfRocketNumber(std::vector<int>& nums, int limit)
 {
     if(nums.empty())
         return 0;
-    
+    //sort the list with ascending order
     std::sort(nums.begin(),nums.end());
     int sz=nums.size();
     int start=0,end=sz-1;
     int ans=0;
-    while (start<=end)
+    while(start<=end)
     {
         int w=nums[end];
         end-=1;
         if(w+nums[start]<=limit)
-        {   
-           std::cout<<w<<","<<nums[start]<<'\n';
-           start+=1;        
-        }
+            start+=1;
         ans+=1;
     }
     return ans;

@@ -6,14 +6,13 @@
 
 bool check(const std::string& s0, const std::string& s1)
 {
-    size_t l0=s0.size(),l1=s1.size();
-    if(l1+1!=l0)
+    if(s0.size()!=s1.size()+1)
         return false;
-    
-    int i=0, j=0;
+    int l0=s0.size(),l1=s1.size();
+    int i=0,j=0;
     while(i<l0&&j<l1)
     {
-        if(s1[j]==s0[i])
+        if(s0[i]==s1[j])
             j+=1;
         i+=1;
     }
@@ -22,7 +21,7 @@ bool check(const std::string& s0, const std::string& s1)
 
 int main()
 {
-    std::string s0="abcde",s1="abde";
+    std::string s0="abcce",s1="abde";
     std::cout<<check(s0,s1);
     return 0;
 }

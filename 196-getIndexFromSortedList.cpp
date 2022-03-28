@@ -1,3 +1,6 @@
+//given  a list of sorted numbers, return the index of a new value 
+//[1,2,3,4,4,5], insert 4, then return 5
+//used binary search method
 #include<iostream>
 #include<vector>
 int getIndexForInsertedNumberInASortedList(std::vector<int>& list,int T)
@@ -11,7 +14,9 @@ int getIndexForInsertedNumberInASortedList(std::vector<int>& list,int T)
     {
         int mid=(L+R)/2;
         if(T<list[mid])
+        {
             R=mid-1;
+        }
         else
             L=mid+1;
     }

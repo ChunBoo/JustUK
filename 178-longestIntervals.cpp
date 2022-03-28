@@ -7,11 +7,10 @@ int longestIntervals(MATRIX& nums)
 {
     if(nums.empty())
         return 0;
-    
     std::sort(nums.begin(),nums.end());
 
-    int start=nums[0][0],end=nums[0][1];
     int sz=nums.size();
+    int start=nums[0][0],end=nums[0][1];
     int ans=0;
     for(int i=1;i<sz;++i)
     {
@@ -20,14 +19,14 @@ int longestIntervals(MATRIX& nums)
         if(newStart>start)
             start=newStart;
         end=std::max(end,newEnd);
-        ans=std::max(ans,end-start+1);
+        ans=std::max(ans,end-start);
     }
     return ans;
 }
 
 int main()
 {
-    MATRIX nums{{1,3},{2,4},{5,10}};
+    MATRIX nums{{1,3},{2,5},{4,5}};
     std::cout<<longestIntervals(nums)<<'\n';
     return 0;
 }
