@@ -8,12 +8,13 @@ int dfs(int r,int c,int R,int C, DT& m)
 {
     if(r<0||c<0||r>=R||c>=C)
         return 0;
+    
     if(m[r][c]==0)
         return 0;
     
-    int ans=1;
     m[r][c]=0;
-    ans+=dfs(r-1,c,R,C,m)+dfs(r+1,c,R,C,m)+dfs(r,c-1,R,C,m)+dfs(r,c+1,R,C,m);
+    int ans=1;
+    ans+=dfs(r,c-1,R,C,m)+dfs(r,c+1,R,C,m)+dfs(r-1,c,R,C,m)+dfs(r+1,c,R,C,m);
     return ans;
 }
 
@@ -24,6 +25,7 @@ int maxIslands( DT& m)
     if(R==0||C==0)
         return 0;
     int ans=0;
+
     for(int r=0;r<R;++r)
     {
         for(int c=0;c<C;++c)
@@ -38,7 +40,7 @@ int main()
 {
     DT M={{0,0,1,0},\
           {0,0,0,0},\
-          {0,0,1,1},\
+          {0,1,1,1},\
           {1,0,0,0}};
     std::cout<<maxIslands(M);
     return 0;
