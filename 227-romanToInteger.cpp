@@ -30,9 +30,29 @@ int romanToInteger(const std::string& s)
     return ans;
 }
 
+    std::string intToRoman(int num) {
+        // table表存储十进制数上每个位所表示的罗马数字
+        // 例如， 365 中 百位上的 3 大小为 table[2][3] = CCC
+        std::string table[4][10] = {
+            {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"},
+            {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"},
+            {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"},
+            {"", "M", "MM", "MMM", "", "", "", "", "", ""}
+        };
+        std::string roman_numeral = "";
+        roman_numeral += table[3][num / 1000];
+        num %= 1000;
+        roman_numeral += table[2][num / 100];
+        num %= 100;
+        roman_numeral += table[1][num / 10];
+        num %= 10;
+        roman_numeral += table[0][num];
+        return roman_numeral;
+    }
 int main()
 {
     std::string s="XL";
-    std::cout<<romanToInteger(s);
+    // std::cout<<romanToInteger(s);
+    std::cout<<intToRoman(40);
     return 0;
 }
