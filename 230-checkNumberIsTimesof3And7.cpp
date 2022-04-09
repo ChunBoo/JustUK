@@ -2,23 +2,22 @@
 
 #include<iostream>
 
-bool checkTimes(int n)
+bool checkMultiple(int n)
 {
-    if(n<=0)
-        return false;
+    if(n<0)
+      return false;
     if(n%3==0)
-        return true;
+      return true;
     if(n%7==0)
-        return true;
-    return checkTimes(n-3)||checkTimes(n-7);  //dp for top-down
+      return true;
+    return checkMultiple(n-3) || checkMultiple(n-7);
 }
 
-bool f(int n)
+bool f(int n)   //iterator method
 {
-    int sz=n/3+1;
-    for(int i=0;i<sz;++i)
+    for(int i=0;i<n/7+1;++i)
     {
-        if((n-3*i)%7==0)
+        if((n-7*i)%3==0)
             return true;
     }
     return false;
@@ -26,7 +25,7 @@ bool f(int n)
 
 int main()
 {
-    // std::cout<<checkTimes(11);
-    std::cout<<f(10);
+    std::cout<<checkMultiple(10);
+    std::cout<<'\n'<<f(10);
     return 0;
 }
