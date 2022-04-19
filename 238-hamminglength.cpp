@@ -13,8 +13,19 @@ int hammingLen(int n)
     return ans;
 }
 
+int hammingLength(int n)
+{
+    int ans=0;
+    while (n)
+    {
+        ans+=n&1;
+        n>>=1;
+    }
+    return ans;    
+}
+
 int main()
 {
-    std::cout<<hammingLen(11);
+    std::cout<<hammingLength(11);
     return 0;
 }
