@@ -1,32 +1,33 @@
+//given a list of strings,return true if we can rearrange each string to make them same 
+
 #include<string>
 #include<iostream>
 #include<vector>
 #include<map>
 bool check(std::vector<std::string>& strs)
 {
-    int sz=strs.size();
-    if(sz==0)
+    if(strs.empty())
         return true;
-    
-    std::map<char,int> count;
+    //iterate each sub string
+    int sz=strs.size();
+    std::map<char,int> m{};
     for(auto s:strs)
     {
         for(auto c:s)
-        {
-            count[c]+=1;
-        }
+            m[c]+=1;
     }
-    for(auto i:count)
+    for(auto i:m)
     {
         if(i.second%sz!=0)
             return false;
     }
     return true;
+    
 }
 
 int main()
 {
-    std::vector<std::string> s{"adc","dcd","aacd"};
+    std::vector<std::string> s{"adc","dc","aacd"};
     std::cout<<check(s);
     return 0;
 }
