@@ -1,10 +1,10 @@
 #include "linkNode.h"
 #include<iostream>
+//delete the specific node from a linked list, this node can not be the last one
 
-
-void deleteNode(LinkNode* node)
-{
-    LinkNode* prev=nullptr;
+void deleteNodeWhileLoop(LinkNode* node)
+{     
+    LinkNode* prev=node;
     while(node->next)
     {
         node->m_val=node->next->m_val;
@@ -13,12 +13,11 @@ void deleteNode(LinkNode* node)
     }
     prev->next=nullptr;
     delete node;
-    node=nullptr;
 }
 
 void delNode(LinkNode* node)
 {
-    LinkNode* next=node->next;
+    LinkNode* next =node->next;
     node->m_val=next->m_val;
     node->next=next->next;
     delete next;
@@ -35,8 +34,9 @@ int main()
     second->next=third;
     third->next=fourth;
     first->printNode();
-    delNode(second);
-    // deleteNode(second);
+    // deleteNodeWhileLoop(second);
+    // deleteNodeWhileLoop(fourth);
+    delNode(fourth);
     first->printNode();
 
 }
