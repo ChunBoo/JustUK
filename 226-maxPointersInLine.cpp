@@ -9,7 +9,7 @@ int getMaxPointers(DT& cords)
         return 2;
     std::map<float,int> m{};
     int ans=0;
-    for(int i=0;i<cords.size();++i)
+    for(int i=1;i<cords.size();++i)
     {
         int x1=cords[i][0],y1=cords[i][1];
         for(int j=0;j<i;++j)
@@ -17,7 +17,8 @@ int getMaxPointers(DT& cords)
             int x2=cords[j][0],y2=cords[j][1];
             if(x1!=x2)
             {
-                float s=static_cast<float>(y2-y1)/(x2-x1);
+                float s=static_cast<float>(y2-y1)/(x2-x1);  //DT c{{1,2},{2,3},{3,5},{1,3}};
+                
                 m[s]+=1;
             }
         }

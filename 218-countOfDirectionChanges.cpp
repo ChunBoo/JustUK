@@ -16,7 +16,9 @@ int countOfDirectionsChange(const DT& nums)
     {
         int curSlope=nums[i]-nums[i-1];
         if(curSlope*slope<0)
+        {
             ans+=1;
+        }
         slope=curSlope;
     }
     return ans;
