@@ -3,6 +3,18 @@
 #include<vector>
 #include<iostream>
 
+bool isArithmeticSequence2(std::vector<int>& nums)//without set
+{
+    std::sort(nums.begin(),nums.end());
+    int sz=nums.size();
+    for(int i=1;i<sz;++i)
+    {
+        if((nums[i]-nums[i-1])!=(nums[1]-nums[0]))
+            return false;
+    }
+    return true;
+}
+
 
 bool isArithmeticSequence(std::vector<int>& nums)
 {
@@ -18,7 +30,7 @@ bool isArithmeticSequence(std::vector<int>& nums)
 
 int main()
 {
-    std::vector<int> nums{1,5,7,3,2};
-    std::cout<<isArithmeticSequence(nums);
+    std::vector<int> nums{1,5,7,3};
+    std::cout<<isArithmeticSequence2(nums);
     return 0;
 }
