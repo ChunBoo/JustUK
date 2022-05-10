@@ -1,12 +1,13 @@
+// given a binary search tree and one target value ,if there are two nodes sum is equal to target,return true,
+//or return false
 #include"treeNode.h"
 #include<vector>
 #include<iostream>
 
-void getNodesInOrder(std::vector<int>& nodes,TreeNode* head)
+void getNodesInOrder(std::vector<int>& nodes,TreeNode* head)  //inorder method to get all ones in BST
 {
     if(!head)
         return ;
-    
     getNodesInOrder(nodes,head->left);
     nodes.push_back(head->m_val);
     getNodesInOrder(nodes,head->right);
@@ -14,17 +15,20 @@ void getNodesInOrder(std::vector<int>& nodes,TreeNode* head)
 
 bool isHasTarget(TreeNode* head,int target)
 {
-    std::vector<int> nodes;
+    if(!head)
+        return false;
+    std::vector<int> nodes{};
     getNodesInOrder(nodes,head);
-    int L=0,R=nodes.size()-1;
+
+    int L=0,R=nodes.size()-1;  //two pointers
     while(L<R)
     {
-        if((nodes[L]+nodes[R])==target)
+        if(nodes[L]+nodes[R]==target)
             return true;
-        if(target>(nodes[L]+nodes[R]))
-            L+=1;
-        else
+        if(nodes[L]+nodes[R]>target)
             R-=1;
+        else
+            L+=1;
     }
     return false;
 }
