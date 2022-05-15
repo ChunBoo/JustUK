@@ -7,5 +7,5 @@ def EdgesPathExisted(edges,start,to):
         ds.merge(s,e)
     return ds.sameGroup(start,to)
 
-edgeslist=[[1,2],[2,3],[4,5]]
-print(EdgesPathExisted(edgeslist,1,3))
+edgeslist=[[1,2],[2,3],[3,4]]
+print(EdgesPathExisted(edgeslist,1,5))
