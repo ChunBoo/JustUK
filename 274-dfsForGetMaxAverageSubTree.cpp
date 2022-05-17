@@ -1,6 +1,7 @@
+//given a Binary tree,return the subtree which it is the maximum average
+
 #include"treeNode.h"
 #include<iostream>
-
 #include<cmath>
 using DT=std::pair<int,int>;
 
@@ -17,16 +18,17 @@ DT dfs(TreeNode* root,int& maxVal)
 
     int S=sumLeft+sumRight+root->m_val;
     int C=countLeft+countRight+1;
-    maxVal=std::max(S/C,maxVal);
+
+    maxVal=std::max(maxVal,S/C);
     return DT(S,C);
 }
 
 
 int main()
 {
-    TreeNode* root=new TreeNode(5);
-    root->addLeftChild(4);
-    root->addRightChild(1);
+    TreeNode* root=new TreeNode(3);
+    root->addLeftChild(5);
+    root->addRightChild(6);
     int max=-1;
     dfs(root,max);
     std::cout<<max<<'\n';
