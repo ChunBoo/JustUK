@@ -1,3 +1,4 @@
+
 #include<iostream>
 #include<vector>
 #include "arithmeticOperationsOfMatrix.h"
@@ -6,21 +7,23 @@ using DT=std::vector<std::vector<int>>;
 DT pow(DT& a,int n)
 {
     int R=a.size(),C=a[0].size();
-
-    DT ret(R,std::vector<int>(C,0));
-
+    if(R<1||R!=C)
+        return DT{};
+    
+    DT ans(R,std::vector<int>(C,0));
     for(int i=0;i<R;++i)
-        ret[i][i]=1;
+        ans[i][i]=1;
 
     while(n>0)
     {
-        if(n&1) //n is odd number
-            ret=multiplyMatrix(ret,a);
+        if(n&1)
+        {
+            ans=multiplyMatrix(ans,a);
+        }
         n>>=1;
         a=multiplyMatrix(a,a);
-
     }
-    return ret;
+    return ans;
 }
 
 int main()
