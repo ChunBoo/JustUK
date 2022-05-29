@@ -20,6 +20,22 @@ struct Comparator
         bool m_g;
 };
 
+class CComparator
+{
+    private:
+        bool m_g;
+    public:
+        CComparator(bool isLarger):m_g{isLarger}{}
+        bool operator()(int x,int y) const
+        {
+            if(m_g)
+            {
+                return x>y;
+            }
+            else
+                return x<y;
+        }
+};
 // int main(int argc, char** argv)
 // {
 //     Comparator l(false);
@@ -42,8 +58,8 @@ DT arrayRanking( DT nums)
 {
     std::vector<int> ans{};
     std::map<int,int> m{};
-    Comparator larger(true);
-    std::set<int,Comparator> s(larger);
+    CComparator larger(true);
+    std::set<int,CComparator> s(larger);
 
     for(int i:nums)
     {
