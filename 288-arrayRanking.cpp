@@ -130,16 +130,13 @@ DT arrayRanking( DT nums)
 
 int main()
 {
-<<<<<<< HEAD
     DT nums{50,60,90,100,100};
     DT res=arrayRanking(nums);
     for(auto &v:res)
         std::cout<<v<<',';
-=======
-    DT nums={60,100,100,90,50};
-    DT ret=arrayRanking(nums);
+    DT nums2={60,100,100,90,50};
+    DT ret=arrayRanking(nums2);
     for(auto &i:ret)
         std::cout<<i<<',';
->>>>>>> 3dd4373daa99570a7454d15769850eb038463612
     return 0;
 }
