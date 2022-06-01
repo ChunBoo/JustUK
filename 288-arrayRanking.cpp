@@ -29,11 +29,8 @@ class CComparator
         bool operator()(int x,int y) const
         {
             if(m_g)
-            {
                 return x>y;
-            }
-            else
-                return x<y;
+            return x<y;
         }
 };
 // int main(int argc, char** argv)
@@ -54,7 +51,7 @@ class CComparator
 //     //     std::cout<<i<<',';
 //     return 0;
 // }
-DT arrayRanking( DT nums)
+DT arrayRanking( DT& nums)
 {
     std::vector<int> ans{};
     std::map<int,int> m{};
