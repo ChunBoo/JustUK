@@ -4,15 +4,15 @@
 using DT=std::vector<int>;
 bool dfs(const DT& nums,int cur)
 {
-    if(cur>=nums.size()-1)
+    int len=nums.size()-1;
+    if(cur>=len)
         return true;
-
     for(int i=1;i<nums[cur]+1;++i)
     {
-        if(cur+i>=nums.size())
-            break;
-        if(dfs(nums,i+cur))
+        if((i+cur>=len)||(dfs(nums,i+cur)))
             return true;
+        // if(dfs(nums,i+cur))
+        //     return true;
     }
     return false;
 }
@@ -23,7 +23,7 @@ bool canJump(const DT& nums)
 
 int main()
 {
-    DT nums{1,0,1,2};
+    DT nums{1,1,8,2};
     std::cout<<canJump(nums);
     return 0;
 }
