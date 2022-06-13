@@ -5,17 +5,15 @@ using DT=std::vector<int>;
 
 bool canJump(const DT& nums)
 {
-    int n=nums.size();
-    DT dp(n,0);
-    dp[n-1]=1;
-    for(int i=n-2;i>=0;--i)
+    int sz=nums.size();
+    DT dp(sz,0);
+    dp[sz-1]=1;
+    for(int i=sz-2;i>=0;--i)
     {
-        int reach=std::min(n-1,i+nums[i]);
+        int reach=std::min(sz-1,i+nums[i]);  //here is std::min(sz-1,i+nums[i])
         for(int j=i;j<=reach;++j)
-        {
             if(dp[j])
                 dp[i]=1;
-        }
     }
     return dp[0];
 }
