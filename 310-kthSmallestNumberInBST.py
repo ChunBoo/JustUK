@@ -1,27 +1,40 @@
 
 from treeNode import TreeNode
 
-def kthSmallest(root,k):#iterator
-    s=[]
-    if not root:
-        return 
-    cnt=0
-    # s.append(root)
+def kthSmallest_iterator(root,k):#iterator method uses stack to implement
+    stack=[]   # pop(),append()
+    if(not root):
+        return
     p=root
-    while len(s) or p:
-        if p:
-            s.append(p)
+    while(stack or p):
+        while(p):
+            stack.append(p)
             p=p.left
-        
+        p=stack.pop()
+        k-=1
+        if k==0:
+            return p.val
+        p=p.right        
+
+def kthSmallest_iterator2(root,k):#iterator method uses stack to implement
+    stack=[]   # pop(),append()
+    if(not root):
+        return
+    p=root
+    cnt=0
+    while(stack or p):
+        if(p):
+            stack.append(p)
+            p=p.left
         else:
-            p=s.pop()
+            p=stack.pop()
             cnt+=1
             if k==cnt:
                 return p.val
-            p=p.right
+            p=p.right       
         
     
-def kthSmallest2(root,k):
+def kthSmallest_dfs(root,k):
     data=[]
     def dfs(root):
         if not root:
@@ -29,8 +42,17 @@ def kthSmallest2(root,k):
         dfs(root.left)
         data.append(root.val)
         dfs(root.right)
-    
     dfs(root)
+    return data[k-1]
+
+def kthSmallest_dfs2(root,k):
+    # data=[]
+    def dfs(root):
+        if not root:
+            return []
+        return dfs(root.left)+[root.val]+dfs(root.right)
+        # data.append(root.val)
+    data=dfs(root)
     return data[k-1]
 
 
@@ -50,4 +72,7 @@ left.right=right2
 right.left=rleft
 right.right=rright
 
-print(kthSmallest(root, 3))
+# print(kthSmallest(root, 3))
+# print(kthSmallest_dfs(root, 3))
+print(kthSmallest_dfs2(root, 3))
+print(kthSmallest_iterator2(root, 3))
