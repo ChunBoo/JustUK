@@ -1,3 +1,7 @@
+//given some rules to get the words
+//likes "C>H","H>U","U>N" --> "CHUN"
+//Will use the set to get the unique chars
+//use the map to get the sequence of the final word
 #include<iostream>
 #include<string>
 #include<vector>
@@ -8,44 +12,46 @@ using DT=std::vector<std::string>;
 
 std::string constructWord(const DT& rules)
 {
-    std::set<char> s{};
-    std::map<char,char> m{};
-    std::string ans{};
-    char cur{};
+     std::set<char> s{};
+     std::map<char,char> m{};
 
-    for(auto &r:rules)
-    {
-        int n{};
-        n=r.find('>');
-        s.insert(r[n-1]);  //start
-        s.insert(r[n+1]);  //end
-    }
+     for(auto &rule:rules)
+     {
+          int pos=rule.find('>');
+          s.insert(rule[pos-1]);
+          s.insert(rule[pos+1]);
+     }
 
-    for(auto&r:rules)
-    {
-        int n{};
-        n=r.find('>');
-        s.erase(r[n+1]);
-        m[r[n-1]]=r[n+1];
-    }
+     for(auto &rule:rules)
+     {
+          int pos=rule.find('>');
+          s.erase(rule[pos+1]);
+          m[rule[pos-1]]=rule[pos+1];
+     }
 
-    std::set<char>::iterator iter=s.begin();
-    ans+=*iter;
-    char tmp=*iter;
-    auto pos=m.find(tmp);
-    while(pos!=m.end())
-    {
-        tmp=m[pos->first];
-        ans+=tmp;
-        pos=m.find(tmp);
-    }
-    
-    return ans;
+     //get the first char now
+
+     std::string ans{};
+     std::set<char>::iterator iter=s.begin();
+
+     char cur=*iter;
+
+     ans+=cur;
+     auto find=m.find(cur);
+     while(find!=m.end())
+     {
+          cur=find->second;
+          ans+=cur;
+          find=m.find(cur);
+     }
+     return ans;
+   //get the first char from set now
 }
 
 int main()
 {
-    DT rules{"E>R","R>I","I>C"}; //rules=["E>R","R>I","I>C"]
+//     DT rules{"E>R","R>I","I>C"}; //rules=["E>R","R>I","I>C"]
+    DT rules{"C>H","H>U","U>N"}; //rules=["E>R","R>I","I>C"]
     std::cout<<constructWord(rules);
     return 0;
 }
