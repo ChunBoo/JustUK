@@ -5,7 +5,7 @@
 using DT=std::vector<std::vector<int>>;
 using PAIR=std::pair<int,int>;
 using QUEUE=std::queue<PAIR>;
-
+//reference link:https://helloacm.com/the-image-flood-fill-algorithm-c/
 void bfs(DT& image,int sr,int sc,int newColor)
 {
     int R=image.size(),C=image[0].size();
@@ -13,7 +13,7 @@ void bfs(DT& image,int sr,int sc,int newColor)
         return;
     QUEUE q{};
 
-    q.push(std::make_pair(sr,sc));
+    q.push(PAIR(sr,sc));   //std::make_pair(sr,sc) also worked
     while(!q.empty())
     {
         auto curPos=q.front();
