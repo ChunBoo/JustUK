@@ -17,7 +17,8 @@ DT runLength(const DT& s)
 
     for(char i:s)
     {
-        if(i>='0'&&i<='9')
+        // if(i>='0'&&i<='9')
+        if(std::isdigit(i))
             c=c*10+i-'0';
         else
         {
@@ -29,7 +30,7 @@ DT runLength(const DT& s)
     std::map<char,int>::iterator iter=data.begin();
     for(;iter!=data.end();++iter)
     {
-        DT tmp(iter->second,iter->first);
+        DT tmp(iter->second,iter->first);  //std::string(number,character)
         ans+=tmp;
     }
     return ans;    
