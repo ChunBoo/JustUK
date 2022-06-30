@@ -12,7 +12,7 @@ void bfs(DT& image,int sr,int sc,int newColor)
     if(!R||!C||sc>=C||sr>=R)
         return;
     QUEUE q{};
-
+    std::set<PAIR> seen{};  //added the seen to avoid duplicated checks
     q.push(std::make_pair(sr,sc));
     while(!q.empty())
     {
@@ -22,6 +22,9 @@ void bfs(DT& image,int sr,int sc,int newColor)
         int color=image[r][c];
         if(color==newColor)
             continue;
+        if(seen.find(PAIR(r,c))!=seen.end())
+            continue;
+        seen.insert(PAIR(r,c));
         image[r][c]=newColor;
         if(r>0&&image[r-1][c]==color) q.push(PAIR(r-1,c));
         if(c>0&&image[r][c-1]==color) q.push(PAIR(r,c-1));
