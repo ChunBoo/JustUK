@@ -20,7 +20,11 @@ class Solution
             for(int i=0;i<len;++i)
                 m_blocks[i/m_group]+=nums[i];
         }
-
+        void updateBlock(int idx,int val)
+        {
+            m_blocks[idx/m_group]+=(val-m_nums[idx]);
+            m_nums[idx]=val;
+        }
         int rangeOfSum(int start,int end)
         {
             
@@ -50,6 +54,7 @@ int main()
 {
     DT nums{1,2,3,4,5,6,7,8,9};
     Solution s{nums};
+    s.updateBlock(1,3);
     int res=s.rangeOfSum(1,3);
     std::cout<<res;
     return 0;
