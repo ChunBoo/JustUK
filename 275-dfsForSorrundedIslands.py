@@ -6,11 +6,12 @@ def countIsland(M):
     def dfs(r,c):
         if r<0 or c<0 or r>=rows or c>=cols:
             return 
-        M[r][c]=0
-        dfs(r,c-1)
-        dfs(r,c+1)
-        dfs(r-1,c)
-        dfs(r+1,c)
+        if(M[r][c]):
+            M[r][c]=0
+            dfs(r,c-1)
+            dfs(r,c+1)
+            dfs(r-1,c)
+            dfs(r+1,c)
         
         # for dx,dy in ((0,-1),(0,1),(-1,0),(1,0)):
         #     m[r+dx][c+dy]=0
@@ -40,6 +41,9 @@ def countIsland(M):
             
     return ans
 
+m=[[1,1,0,0,1],
+   [0,0,0,1,0],
+   [0,1,0,0,0],
+   [1,0,0,0,1]]
 
-m=[[1,1,0,0,1],[0,0,0,1,0,1],[0,0,0,0,0],[1,0,0,0,1]]
 print(countIsland(m))

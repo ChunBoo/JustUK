@@ -3,10 +3,10 @@
 
 int longestValidParentheses(std::string& s)
 {
-    if(s.empty())
+    int sz=s.size();
+    if(sz==0)
         return 0;
-    
-    int bal=0,ans=0;
+    int ans=0,bal=0;
     for(auto c:s)
     {
         if(c=='(')
@@ -25,7 +25,7 @@ int longestValidParentheses(std::string& s)
 
 int main()
 {
-    std::string s="))(())";
+    std::string s="))(((((()";
     std::cout<<longestValidParentheses(s);
     return 0;
 }

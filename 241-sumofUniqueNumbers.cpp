@@ -1,22 +1,21 @@
-#include<map>
+#include<map>  //to record the count of unique numbers
 #include<vector>
 #include<iostream>
 
 
 int sumOfUniqueNumbers(std::vector<int>& nums)
 {
-    if(nums.empty())
+    int sz=nums.size();
+    if(sz==0)
         return 0;
     int ans=0;
     std::map<int,int> m{};
     for(auto i:nums)
-    {
         m[i]+=1;
-    }
-    for(auto v:m)
+    for(auto i:m)
     {
-        if(v.second==1)
-            ans+=v.first;
+        if(i.second==1)
+            ans+=i.first;
     }
     return ans;
 }

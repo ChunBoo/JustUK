@@ -26,9 +26,11 @@ class TreeNode
         {
             if(!root)
                 return ;
-            printTreeInOrder(root->left);
+            if(root->left)
+                printTreeInOrder(root->left);
             std::cout<<root->m_val<<'-';
-            printTreeInOrder(root->right);
+            if(root->right)
+                printTreeInOrder(root->right);
         }
         void printTreeNodePreOrder(TreeNode* root)
         {

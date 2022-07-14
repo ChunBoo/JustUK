@@ -14,13 +14,19 @@
         "cwchar": "cpp",
         "cwctype": "cpp",
         "deque": "cpp",
+        "list": "cpp",
         "unordered_map": "cpp",
         "vector": "cpp",
         "exception": "cpp",
         "algorithm": "cpp",
+        "functional": "cpp",
+        "iterator": "cpp",
+        "map": "cpp",
         "memory": "cpp",
         "memory_resource": "cpp",
+        "numeric": "cpp",
         "optional": "cpp",
+        "random": "cpp",
         "set": "cpp",
         "string": "cpp",
         "string_view": "cpp",
@@ -40,11 +46,6 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp",
-        "functional": "cpp",
-        "iterator": "cpp",
-        "map": "cpp",
-        "list": "cpp",
-        "numeric": "cpp",
-        "random": "cpp"
+        "thread": "cpp"
     }
 }

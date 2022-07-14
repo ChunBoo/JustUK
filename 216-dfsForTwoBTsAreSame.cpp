@@ -2,16 +2,15 @@
 #include<iostream>
 
 
-bool isSameOfTwoBTs(TreeNode* s,TreeNode* t)
+bool isSameOfTwoBTs2(TreeNode* s,TreeNode* t)
 {
     if(!s&&!t)
         return true;
-    if(!s||!t)
+    if(!s||!t)   //those two if-statements have sequences?
         return false;
     if(s->m_val!=t->m_val)
         return false;
-
-    return isSameOfTwoBTs(s->left,t->left) && isSameOfTwoBTs(s->right,t->right);
+    return isSameOfTwoBTs2(s->left,t->left)&&isSameOfTwoBTs2(s->right,t->right);
 }
 
 int main()

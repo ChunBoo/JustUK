@@ -42,5 +42,4 @@ int main()
     std::cout<<largestSubSquareMatrix(M);
     std::cout<<std::min({1,2,3,-1},comp);
     std::cout<<std::max({1,2,3,-1});
-
 }

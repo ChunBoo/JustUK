@@ -1,17 +1,18 @@
 //given a binary search tree,return the kth smallest nodes value
+//solution:use the dfs or iterator to get all the nodes of binary search tree
 
 #include"treeNode.h"
 #include<stack>
 #include<iostream>
 #include<vector>
-int kthSamllestNode_iterator(const TreeNode* root,int k)
+int kthSamllestNode_iterator(const TreeNode* root,int k)  //will use the std::stack 
 {
-    std::stack<const TreeNode*> s{};
     if(!root)
-        return 0;
-    
+        return 0 ;
+
+    std::stack<const TreeNode*> s{};
     const TreeNode* p=root;
-    while(!s.empty() ||p)
+    while(!s.empty()||p)
     {
         if(p)
         {
@@ -23,7 +24,8 @@ int kthSamllestNode_iterator(const TreeNode* root,int k)
             p=s.top();
             s.pop();
             k-=1;
-            if(!k)
+
+            if(k==0)
                 return p->m_val;
             p=p->right;
         }
@@ -36,9 +38,11 @@ void dfs(const TreeNode* root,std::vector<int>& list)
 {
     if(!root)
         return;
-    dfs(root->left,list);
+    // if(root->left)
+        dfs(root->left,list);
     list.push_back(root->m_val);
-    dfs(root->right,list);
+    // if(root->right)
+        dfs(root->right,list);
 }
 
 int kthSmallestNodes_dfs(const TreeNode* root,int k)
@@ -69,5 +73,6 @@ int main()
     right->left=rleft;
     right->right=rright;
     std::cout<<kthSamllestNode_iterator(root,3);
+    std::cout<<kthSmallestNodes_dfs(root,3);
     return 0;
 }

@@ -9,11 +9,9 @@ void dfs(TreeNode* root,DT& vec)
 {
     if(!root)
         return;
-    if(root->left)
-        dfs(root->left,vec);
+    dfs(root->left,vec);
     vec.push_back(root->m_val);
-    if(root->right)
-        dfs(root->right,vec);
+    dfs(root->right,vec);
 }
 DT inorderOfBT(TreeNode* root)
 {

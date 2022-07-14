@@ -1,9 +1,9 @@
 
 
-def G(n): #TOP2Down
-    if n==0 or n==1:
-        return 1
-    return sum(G(i)*G(n-i-1) for i in range(n))
+# def G(n): #TOP2Down
+#     if n==0 or n==1:
+#         return 1
+#     return sum(G(i)*G(n-i-1) for i in range(n))
 
 def B2TG(n):
     G=[0]*(n+1)

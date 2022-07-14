@@ -12,12 +12,11 @@ class solution:
         for i in range(n):
             self.blocks[i//self.m]+=nums[i]
             
-
     def updateBlocks(self,idx,val):
         self.blocks[idx//self.m]+=val-self.nums[idx]
         self.nums[idx]=val
     
-    def  sumRange(self,i,j):
+    def sumRange(self,i,j):
         ans=0
         p=i
         while p<=j:

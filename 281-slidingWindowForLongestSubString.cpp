@@ -13,7 +13,7 @@ int longestSubString(const std::string& str)
     while(R<n)
     {
         win[str[R]]+=1;
-        while(L<=R&&(win.size()>2))
+        while(L<=R&&(win.size()>3))
         {
             win[str[L]]-=1;
             if(win[str[L]]==0)
@@ -31,7 +31,7 @@ int longestSubString(const std::string& str)
 
 int main()
 {
-    std::string s{"abccbb"};
+    std::string s{"abccbbb"};
     std::cout<<longestSubString(s);
     return 0;
 }

@@ -7,8 +7,8 @@ def canJump(nums):#dfs method
         if cur>=n-1:
             return True
         for i in range(1,nums[cur]+1):
-            # if i+cur>=n:
-            #     break
+            if i+cur>=n:
+                break
             if(dfs(i+cur)):
                 return True
         return False
@@ -25,7 +25,7 @@ def canJumpDP(nums):  #bottom-up of dp
                 dp[i]=True
     return dp[0]
         
-def canJumpGreedy(nums):  #Greedy method
+def canJumpGreedy(nums):  #Greedy method,
     i,n=0,len(nums)
     reach=0
     while i<n and i<=reach:

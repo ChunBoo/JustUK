@@ -1,5 +1,5 @@
-
-
+#given a set of chars in our keyboard and one string which want to get the length
+#used dictionary to record each chars index
 def getTime(keys,s):
     d={}
     for i,c in enumerate(keys):

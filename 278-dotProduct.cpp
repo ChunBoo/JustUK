@@ -10,15 +10,14 @@ int dotProduct(const DT& a, const DT& b)
     int n=a.size();
     if(n!=b.size())
     {
-        std::cout<<"Error of lenth of two lists.\n";
         return -1;
     }
-    int s=0;
+    int ans=0;
     for(int i=0;i<n;++i)
     {
-        s+=a[i]*b[i];
+        ans+=a[i]*b[i];
     }
-    return s;
+    return ans;
 }
 
 int main()

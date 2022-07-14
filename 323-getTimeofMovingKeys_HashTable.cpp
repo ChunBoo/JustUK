@@ -32,4 +32,5 @@ int main()
     STR keyboard = "abcdefghijklmnopqrstuvwxyz";
     STR word = "cba";
     std::cout<<getCount(keyboard,word);
+    return 0;
 }
