@@ -15,9 +15,9 @@ def shortestDistance(G,n):
                 
     return dis
 
-G=[(1,2,100),(1,3,10),(3,2,20)]
+G=[(1,2,100),(1,3,10),(3,2,20),(3,4,100)]
 
-res=shortestDistance(G,4)
+res=shortestDistance(G,5)
 for i in range(3):
     print(res[i])
         

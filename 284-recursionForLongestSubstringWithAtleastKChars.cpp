@@ -3,15 +3,17 @@
 #include<map>
 #include<algorithm>
 #include <bits/stdc++.h>
+#include<vector>
 // using namespace std;
 
-std::string tokenize(std::string& s, const std::string& del = " ")
+void tokenize(std::string& s, const std::string& token,std::vector<std::string>& vec)
 {
 	int start = 0;
 	int end = s.find(del);
 	while (end != -1) 
     {
-		std::cout << s.substr(start, end - start) << '\n';
+		// std::cout << s.substr(start, end - start) << '\n';
+        vec.push_back(s.substr(start,end-start));
 		start = end + del.size();
 		end = s.find(del, start);
 	}
@@ -48,11 +50,11 @@ std::string getLargestSubString(const std::string& s,int k)
     for(;iter!=C.end();++iter)
     {
         if(iter->second<k)
-        {
-            char splitChar=iter->first;
-            int start=0;
-            
+        {   
+            std::vector<std::string> vec{};
+            tokenize(s,iter->first,vec);
             // std::string s1=s.substr(0,iter->)
+            
             return std::max(getLargestSubString(s.substr(0,iter->first),k),getLargestSubString(s.substr(k,sz-1),k));
         }
     }

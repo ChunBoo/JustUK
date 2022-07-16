@@ -58,4 +58,4 @@ def bisect_left(a,x,lo=0,hi=None):
 arr=[1,2,2,3,3,3,4,4,5]
 # print(bisec_right(arr, 0))
 print(bisect_right(arr, 3,0,6))  #return the right-most pos 
-print(bisect_left(arr, 3,0,6))   #return the left-most position
+print(bisect_left(arr, 3,0,1))   #return the left-most position

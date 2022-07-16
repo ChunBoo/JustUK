@@ -17,7 +17,7 @@ int mostFrequency(const DT& intervals)
     }
     int ans=0,most=0;
     std::map<int,int>::iterator iter=d.begin();
-    for(;iter!=d.end();++iter)
+    for(;iter!=d.end();++iter)  //std::map<> already sorted by keys with ascending sequence
     {
         if(most<iter->second)
         {

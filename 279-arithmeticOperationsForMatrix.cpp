@@ -1,7 +1,7 @@
 #include<iostream>
 #include<vector>
+#include "arithmeticOperationsOfMatrix.h"
 
-using DT=std::vector<std::vector<int>>;  //多维数组初始化
 
 DT multiplyMatrix(const DT& a, const DT& b)
 {

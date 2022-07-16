@@ -43,7 +43,7 @@ int removeDuplicatedValuesWithoutSet(DT& a)
 int main()
 {
     DT arr{1,2,2,3,4,4,5,6};
-    int res=removeDuplicatedValues(arr);
+    int res=removeDuplicatedValues(arr);  //this step will change the original array
     std::cout<<res<<'\n';
     for(auto i:arr)
         std::cout<<i<<',';

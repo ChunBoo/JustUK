@@ -9,7 +9,7 @@ def  pathExists(start,end,edges):
     while q:
         c=q.popleft()
         if c==end:
-                return True
+            return True
         if c in seen:
             continue
         seen.add(c)
@@ -17,4 +17,7 @@ def  pathExists(start,end,edges):
             q.append(i)
     return False
 
-print(pathExists(1,3,[(1,2),[2,3],[2,4]]))
+# print(pathExists(1,5,[(1,2),[2,3],[2,4]]))
+q=deque([3,2])
+print(q.popleft())
+print(q)

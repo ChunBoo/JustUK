@@ -1,21 +1,23 @@
 def constructWord(rules):
-    data=set()
-    for rule in rules:
-        a,b=rule.split(">")
-        data.add(a)
-        data.add(b)
-    
+    s=set()
     m={}
+    ans=""
     for rule in rules:
         a,b=rule.split(">")
+        s.add(a)
+        s.add(b)
+        
+    for rule in rules:
+        a,b=rule.split(">")
+        s.remove(b)
         m[a]=b
-        data.remove(b)
     
-    cur=list(data)[0]
-    ans=cur
+    cur=list(s)[0]
+    ans+=cur
     while cur in m:
         ans+=m[cur]
         cur=m[cur]
+    
     return ans
 
 rules=["E>R","R>I","I>C"]

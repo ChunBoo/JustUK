@@ -9,7 +9,6 @@ DT dfs(TreeNode* root,int& maxVal)
 {
     if(!root)
         return DT(0,0);
-    
     int sumLeft=dfs(root->left,maxVal).first;
     int countLeft=dfs(root->left,maxVal).second;
 
@@ -18,8 +17,7 @@ DT dfs(TreeNode* root,int& maxVal)
 
     int S=sumLeft+sumRight+root->m_val;
     int C=countLeft+countRight+1;
-
-    maxVal=std::max(maxVal,S/C);
+    maxVal=std::max(S/C,maxVal);
     return DT(S,C);
 }
 

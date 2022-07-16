@@ -1,3 +1,6 @@
+'''
+   sliding windows example: used slide window to get the longest substring which has at most two unique chars
+'''
 from collections import defaultdict
 def longest(s):
     n=len(s)
@@ -5,7 +8,7 @@ def longest(s):
     win=defaultdict(int)
     while(R<n):
         win[s[R]]+=1
-        while(L<=R and len(win.keys())>2):
+        while(L<=R and len(win.keys())>2):#update the sliding window now
             win[s[L]]-=1
             if(win[s[L]]==0):
                 del win[s[L]]
