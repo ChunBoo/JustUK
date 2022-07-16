@@ -4,4 +4,4 @@ def nextExample(nums,T):
 
 nums=[20,30,10,5,7]
 
-print(nextExample(nums,25))
+print(nextExample(nums,45))

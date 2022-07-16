@@ -1,10 +1,13 @@
+from cProfile import label
+
+
 def evalRPN(arr):
     st=[]
     opers={
-        "+":lambda a,b:a+b,
-        "-":lambda a,b:a-b,
-        "*":lambda a,b:a*b,
-        "/":lambda a,b:a//b,
+        "+": lambda a,b:a+b,
+        '-':lambda a,b:a-b,
+        '*':lambda a,b:a*b,
+        '/':lambda a,b:a//b,
     }
     for e in arr:
         if e in opers:

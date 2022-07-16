@@ -1,3 +1,4 @@
+#绝对差值为K的数组对
 from collections import defaultdict
 from typing import Counter
 

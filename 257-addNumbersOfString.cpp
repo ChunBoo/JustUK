@@ -3,11 +3,11 @@
 #include<stack>
 std::string addNumbers(std::string& a, std::string& b)
 {
-    int n1=a.size()-1, n2=b.size()-1;
     std::string ans{};
+    int n1=a.size()-1,n2=b.size()-1;
     int c=0;
     std::stack<int> s{};
-    while(n1>=0 || n2>=0||c>0)
+    while(n1>=0||n2>=0||c>0)
     {
         int x=c;
         if(n1>=0)
@@ -20,13 +20,12 @@ std::string addNumbers(std::string& a, std::string& b)
             x+=b[n2]-'0';
             n2-=1;
         }
-        // ans+=((x%10)+'0');
         s.push(x%10);
         c=x/10;
     }
     while(!s.empty())
     {
-        ans+=s.top()+'0';
+        ans+=(s.top()+'0');
         s.pop();
     }
     return ans;

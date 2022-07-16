@@ -7,4 +7,4 @@ def minKDiff2(nums,k):
     return min(nums[i]-nums[i-k+1] for i in range(k-1,len(nums)))
 
 nums=[1,2,3,10,20]
-print(minKDiff2(nums,2))
+print(minKDiff2(nums,4))

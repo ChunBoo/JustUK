@@ -3,7 +3,7 @@
 # Merges two subarrays of arr[].
 # First subarray is arr[l..m]
 # Second subarray is arr[m+1..r]
-
+#https://www.geeksforgeeks.org/python-program-for-merge-sort/#:~:text=Merge%20Sort%20is%20a%20Divide,assumes%20that%20arr%5Bl..
 
 def merge(arr, l, m, r):
 	n1 = m - l + 1

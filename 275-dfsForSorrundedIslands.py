@@ -1,3 +1,6 @@
+# from cv2 import accumulate
+import numpy
+
 def countIsland(M):
     if not M:
         return 0
@@ -42,4 +45,8 @@ def countIsland(M):
 
 
 m=[[1,1,0,0,1],[0,0,0,1,0,1],[0,0,0,0,0],[1,0,0,0,1]]
-print(countIsland(m))
+# print(countIsland(m))
+
+a=[1,2,3,4,5,6]
+s=list(numpy.add.accumulate(a))
+print(s)
