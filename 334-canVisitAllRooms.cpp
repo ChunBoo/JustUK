@@ -30,6 +30,8 @@ The number of keys in all rooms combined is at most 3000.
 //https://helloacm.com/depth-first-search-and-breadth-first-search-algorithm-to-open-the-doors-to-the-rooms-with-keys/
 #include<vector>
 #include<unordered_set>
+#include<stack>
+#include<queue>
 #include<iostream>
 using DT=std::vector<std::vector<int>>;
 class Solution
@@ -40,7 +42,36 @@ class Solution
             dfs(0,rooms);
             return seen.size()==rooms.size();
         }
-
+        bool canVisitAllRooms_Stack(const DT& rooms)
+        {
+            std::stack<int> st;
+            st.push(0);
+            while(!st.empty())
+            {
+                int room=st.top();
+                st.pop();
+                if(seen.count(room)) continue;
+                seen.insert(room);  //this line is important for terminate the while loop
+                for(auto &r:rooms[room])
+                    st.push(r);
+            }
+            return seen.size()==rooms.size();
+        }
+        bool canVisitAllRooms_BFS(const DT& rooms)
+        {
+            std::queue<int> q;
+            q.push(0);
+            while(!q.empty())
+            {
+                int room=q.front();
+                q.pop();
+                if(seen.count(room)) continue;
+                seen.insert(room);  //this line is important for terminate the while loop
+                for(auto &r:rooms[room])
+                    q.push(r);
+            }
+            return seen.size()==rooms.size();
+        }
     private:
         std::unordered_set<int> seen{};
         void dfs(int room,const DT& rooms)
@@ -58,6 +89,6 @@ int main()
 {
     DT rooms{{1},{1},{3},{}};
     Solution s;
-    std::cout<<s.canVisitAllRooms(rooms);
+    std::cout<<s.canVisitAllRooms_BFS(rooms);
     return 0;
 }
