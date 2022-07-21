@@ -37,26 +37,30 @@ using DT=std::vector<std::vector<int>>;
 class Solution
 {
     public:
-        bool canVisitAllRooms(const DT& rooms)
+        bool canVisitAllRooms_D(const DT& rooms)
         {
             dfs(0,rooms);
             return seen.size()==rooms.size();
         }
         bool canVisitAllRooms_Stack(const DT& rooms)
         {
-            std::stack<int> st;
-            st.push(0);
-            while(!st.empty())
+            std::stack<int> s;
+            s.push(0);
+            while(!s.empty())
             {
-                int room=st.top();
-                st.pop();
-                if(seen.count(room)) continue;
-                seen.insert(room);  //this line is important for terminate the while loop
+                int room=s.top();
+                s.pop();
+                if(seen.count(room))
+                    continue;
+                seen.insert(room);
                 for(auto &r:rooms[room])
-                    st.push(r);
+                {
+                    s.push(r);
+                }
             }
             return seen.size()==rooms.size();
         }
+
         bool canVisitAllRooms_BFS(const DT& rooms)
         {
             std::queue<int> q;
@@ -65,30 +69,35 @@ class Solution
             {
                 int room=q.front();
                 q.pop();
-                if(seen.count(room)) continue;
-                seen.insert(room);  //this line is important for terminate the while loop
+                if(seen.count(room))
+                    continue;
+                seen.insert(room);
                 for(auto &r:rooms[room])
                     q.push(r);
             }
             return seen.size()==rooms.size();
         }
+
     private:
-        std::unordered_set<int> seen{};
+        std::unordered_set<int> seen{};  //operations: insert,count
         void dfs(int room,const DT& rooms)
         {
             if(seen.count(room))
-                return ;
+                return;
             seen.insert(room);
             for(auto &r:rooms[room])
-                dfs(r, rooms);
+                dfs(r,rooms);
         }
 };
 
 
 int main()
 {
-    DT rooms{{1},{1},{3},{}};
+    DT rooms{{1},{1,3},{3},{2}};
     Solution s;
-    std::cout<<s.canVisitAllRooms_BFS(rooms);
+    std::cout<<s.canVisitAllRooms_D(rooms)<<'\n';
+    std::cout<<s.canVisitAllRooms_BFS(rooms)<<'\n';
+    std::cout<<s.canVisitAllRooms_Stack(rooms)<<'\n';
+
     return 0;
 }
