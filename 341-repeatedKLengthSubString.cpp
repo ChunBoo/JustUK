@@ -1,8 +1,7 @@
 /*
 341-repeatedKLengthSubString
-
+given a string, return the count of the substrings which occurred more than once
 */
-
 #include<iostream>
 #include<string>
 #include<unordered_map>
@@ -11,21 +10,24 @@ using namespace std;
 
 int repeatedKLenSubString(const string& s,int k)
 {
-    unordered_map<string,int> data;
+    int ans=0;
+    if(s.empty())
+        return ans;
 
+    unordered_map<string,int> data{};
     string cur{};
 
-    for(int i=0;i<s.size();++i)
+    for(auto &c:s)
     {
-        cur+=s[i];
+        cur+=c;
         if(cur.size()>k)
-            cur=cur.substr(1);
-        data[cur]++;
-        
+        {
+            cur=cur.substr(1);  //substr will create a new copy of string 
+        }
+        data[cur]+=1;
     }
 
-    int ans=0;
-    for(auto &[a,b] : data)
+    for(auto &[a,b] :data)
     {
         if(b>1)
             ans++;
@@ -35,8 +37,9 @@ int repeatedKLenSubString(const string& s,int k)
 
 int main()
 {
-    string s{"abcdabc"};
-    int res=repeatedKLenSubString(s,3);
+    string s{"aaabbb"};
+    // string s{"abcdabc"};
+    int res=repeatedKLenSubString(s,2);
     std::cout<<res<<'\n';
     return 0;
 }
