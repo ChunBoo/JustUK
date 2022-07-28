@@ -22,6 +22,13 @@ Constraints:
 date.length == 10
 date[4] == date[7] == ‘-‘, and all other date[i]’s are digits
 date represents a calendar date between Jan 1st, 1900 and Dec 31, 2019.
+
+A year is a leap year if the following conditions are satisfied: 
+
+The year is multiple of 400. year%400==0 
+The year is multiple of 4 and not multiple of 100. year%4==0 && year%100!=0
+
+
 """
 #        isLeap = lambda year: year % 400 == 0 or (year % 100 != 0 and year % 4 == 0)
 

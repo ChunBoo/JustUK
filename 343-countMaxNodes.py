@@ -1,3 +1,24 @@
+"""_summary_
+Given a binary tree root, count and return the number of nodes where its value is greater than or
+equal to the values of all of its descendants.
+
+Constraints
+n ≤ 100,000 where n is the number of nodes in root
+Example 1
+image.png
+Input
+binary-tree-max-value Teaching Kids Programming - Counting Maximal Value Roots in Binary Tree (Recursive Post-Order Traversal - DFS Algorithm) algorithms DFS python recursive teaching kids programming youtube video 
+Output
+4
+Explanation
+Since all nodes except for 2 meet the criteria.
+
+Hint:
+what if at every moment we have maximum from left and right sub-tree and then transfer maximum of {root,left,right} upwards? recursion?
+Returns:
+    _type_: _description_
+"""
+
 from treeNode import TreeNode
 import math
 def countMaxNodes(root):

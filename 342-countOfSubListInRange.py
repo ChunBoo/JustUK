@@ -25,7 +25,7 @@ and we also count the number of sublists with max less or equal than L-1 i.e. f(
 
 def foo(nums,L,R):
     def f(upperBound):
-        cur=ans=0
+        ans=cur=0
         for i in nums:
             if i<=upperBound:
                 cur+=1
@@ -33,8 +33,6 @@ def foo(nums,L,R):
                 cur=0
             ans+=cur
         return ans
-    h=f(R)
-    l=f(L-1)
     return f(R)-f(L-1)
 
 
@@ -44,7 +42,8 @@ def f(nums,L,R):
     for i in range(n):
         for j in range(i,n):
             s=nums[i:j+1]
-            if L<=max(s) and R>=max(s):
+            # if L<=max(s) and R>=max(s):
+            if L<=max(s)<=R:
                 print(s)
                 ans+=1
     return ans

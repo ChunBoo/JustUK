@@ -6,17 +6,15 @@
 int dfs_postorder(const TreeNode* root,int &res)
 {
     if(!root)
-        return INT_MIN;
+        return 0;
     
-    int left=0,right=0;
-    if(root->left)
-        left=dfs_postorder(root->left,res);
-    if(root->right)
-        right=dfs_postorder(root->right,res);
+    int left=dfs_postorder(root->left, res);
+    int right=dfs_postorder(root->right,res);
     int tempMax=std::max(left,right);
+
     if(root->m_val>=tempMax)
-        res+=1;
-    return std::max(root->m_val,tempMax);
+        res++;
+    return std::max(tempMax,root->m_val);
 }
 
 int countOfMaxNodes(const TreeNode* root)
