@@ -23,12 +23,15 @@ date.length == 10
 date[4] == date[7] == ‘-‘, and all other date[i]’s are digits
 date represents a calendar date between Jan 1st, 1900 and Dec 31, 2019.
 """
+#        isLeap = lambda year: year % 400 == 0 or (year % 100 != 0 and year % 4 == 0)
 
 def daysInYear(year):
     year,month,date=year.split("-")
-    isLeapYear= 1 if (int(year))%4==0 else 0
-    daysOfFeb=29 if isLeapYear else 28
+    # isLeapYear= 1 if (int(year))%4==0 else 0
+    isLeapYear=lambda year: year%400==0 or (year %100!=0 and year%4==0)
+    daysOfFeb=29 if isLeapYear(int(year)) else 28
     dayDict={1:31,2:daysOfFeb,3:31,4:30,5:31,6:30,7:31,8:31,9:30,10:31,11:30,12:31}
+    
     days=0
     for k,v in dayDict.items():
         if(k<int(month)):
