@@ -6,17 +6,23 @@
 using STR=std::string;
 using SEEN=std::set<STR>;
 using VEC=std::vector<STR>;
-
-void dfs(SEEN &dna, STR s, SEEN& seen)
+// values ['ACGT', 'GCGT', 'TCGT', 'CCGT', 'AAGT', 'AGGT', 'AGGT', 'GGGT', 'TGGT', 'CGGT', 'AAGT', 'AGGT', 'ATGT', 'ACGT', 'AGAT', 'AGGT', 'AGTT', 'AGCT', 'AGGA', 'AGGG', 'AGGT', 'AGGC',//
+//         'ATGT', 'ACGT', 'ACAT', 'ACGT', 'ACTT', 'ACCT', 'ACCT', 'GCCT', 'TCCT', 'CCCT', 'AACT', 'AGCT', 'ATCT', 'ACCT', 'ACAT', 'ACGT', 'ACTT', 'ACCT', 'ACCA', 'ACCG', 'ACCT', 'ACCC', 
+//          'ACGA', 'ACGG', 'ACGT', 'ACGC', 'ATTT', 'GTTT', 'TTTT', 'CTTT', 'TATT', 'TGTT', 'TTTT', 'TCTT', 'TTAT', 'TTGT', 
+//         'TTTT', 'TTCT', 'TTTA', 'TTTG', 'ATTG', 'GTTG', 'TTTG', 'CTTG', 'TATG', 'TGTG', 'TTTG', 'TCTG', 'TTAG', 'TTGG', 'TTTG', 'TTCG', 'TTTA', 'TTTG', 'TTTT', 'TTTC', 'TTTT', 'TTTC']
+void dfs(SEEN &dna, STR& s, SEEN& seen)
 {
-    seen.insert(s);
-    STR tmp{"AGCT"};
+    if(seen.find(s)==seen.end())
+        seen.insert(s);
+    std::vector<char> CHARS{'A','G','C','T'};
     for(int i=0;i<s.size();++i)
     {
-        for(char c:tmp)
+        STR str=STR(s.data());
+
+        for(char c:CHARS)
         {
-            STR newGene=s.replace(i,1,1,c);
-            // std::cout<<newGene<<',';
+            STR newGene=str.replace(i,1,1,c);
+            std::cout<<newGene<<',';
             // std::seen<STR>::iterator iter=std::find(dna.begin(),dna.end(),newGene);
             if(seen.find(newGene)==seen.end() && dna.find(newGene)!=dna.end())
             {
