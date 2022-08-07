@@ -46,8 +46,9 @@ def  geneMutationGroups(genes):
     for i in g:
         for j in range(len(i)):
             for k in ("A","G","C","T"):
-                n=i[j:]+k+i[j+1:]
-                uf.union(i,n)
+                n=i[:j]+k+i[j+1:]
+                if n in g:
+                    uf.union(i,n)
                 
     return uf.count
 
