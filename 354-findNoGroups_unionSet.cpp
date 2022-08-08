@@ -24,22 +24,15 @@ class CUnionSet
 
 STR CUnionSet::find(STR s)  //return the parent node in the set
 {
-    STR ans="";
-    std::map<STR,STR>::iterator iter=parent.begin();
-    for(;iter!=parent.end();++iter)
-    {
-        if(iter->first==s)
-        {
-            ans=iter->second;
-            return ans;
-        }
-    }
-    if(ans.empty())
+    if(parent.find(s)!=parent.end())
+        return parent[s];
+    if(parent.find(s)==parent.end())
     {
         parent[s]=s;
+        sizes[s]=1;
         return s;
     }
-    if(ans!=s)
+    if(s!=parent[s])
     {
         parent[s]=find(parent[s]);
     }
@@ -61,7 +54,7 @@ bool CUnionSet::unionNode(STR a,STR b)  //merge two nodes
         parB=tmp;
     }
 
-    parent[b]=parA;
+    parent[parB]=parA;
     sizes[parA]+=countB;
 
     return true;
@@ -70,14 +63,14 @@ bool CUnionSet::unionNode(STR a,STR b)  //merge two nodes
 int CUnionSet::curCount()
 {
     std::map<STR,STR>::iterator iter=parent.begin();
-    STR preParent=iter->first;
+    STR preParent=iter->second;
     int ans=1;
     for(;iter!=parent.end();++iter)
     {
-        if(iter->first!=preParent)
+        if(iter->second!=preParent)
         {
             ans+=1;
-            preParent=iter->first;
+            preParent=iter->second;
         }
     }
     return ans;
@@ -90,17 +83,17 @@ int main()
     SEEN g{gs.begin(),gs.end()};
 
     CUnionSet us{};
-    for(auto &gene:gs)
+    for(auto &gene:g)
     {
+        std::vector<char> tmp{'A','C','G','T'};            
 
-        std::vector<char> tmp{'A','C','G','T'};
         for(int i=0;i<gene.size();++i)
         {
-            STR cpyGene=gene.data();
+            STR cpyGene=STR(gene.data());
             for(auto c:tmp)
             {
                 STR tmp=cpyGene.replace(i,1,1,c);
-                if(g.count(tmp)==0)
+                if(g.count(tmp)>0)
                 {
                     us.unionNode(gene,tmp);
                 }
