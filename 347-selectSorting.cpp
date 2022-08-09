@@ -1,6 +1,6 @@
 #include<iostream>
 #include<vector>
-
+#include<algorithm>
 
 using DT=std::vector<int>;
 
@@ -8,8 +8,7 @@ using DT=std::vector<int>;
 void selectSorting(DT& nums)
 {
     if(nums.empty())
-        return ;
-
+        return;
     int sz=nums.size();
 
     for(int i=0;i<sz;++i)
@@ -17,12 +16,10 @@ void selectSorting(DT& nums)
         int minIdx=i;
         for(int j=i+1;j<sz;++j)
         {
-            if(nums[j]<nums[minIdx])
+            if(nums[minIdx]>nums[j])
                 minIdx=j;
         }
-        int tmp=nums[i];
-        nums[i]=nums[minIdx];
-        nums[minIdx]=tmp;
+        std::swap(nums[minIdx],nums[i]);
     }
 }
 

@@ -4,22 +4,24 @@
 using DT=std::vector<int>;
 
 
-void insertionSorting(DT& nums)
+void insertionSorting(DT& nums)  //insert the largest/smallest value into the selected section
 {
-    int sz=nums.size();
-    if(sz==0)
-        return;
+    if(nums.empty())
+        return ;
     
+    int sz=nums.size();
     for(int i=1;i<sz;++i)
     {
-        int key=nums[i],j=i-1;
-        while((j>=0) && (key>nums[j]))
+        int minIdx=i-1,key=nums[i];  //we should save the nums[i] as one copy for following comparison, since it will be changed later
+    
+        while(minIdx>=0&&nums[minIdx]>=key)  //minIdx>=0&&nums[minIdx]>=nums[i] is wrong,should be minIdx>=0&&nums[minIdx]>=key
         {
-            nums[j+1]=nums[j];
-            j--;
+            nums[minIdx+1]=nums[minIdx];
+            minIdx--;
         }
-        nums[j+1]=key;
+        nums[minIdx+1]=key;
     }
+
 }
 
 int main()
