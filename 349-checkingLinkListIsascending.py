@@ -4,6 +4,19 @@ class LinkList:
         self.next=next
         
 
+def isAscendingLinkListTwoPointers(head):
+    if not head:
+        return True
+    
+    fast=head.next
+    slow=head
+    while(fast):
+        if slow.val>=fast.val:
+            return False
+        slow=fast
+        fast=fast.next
+        
+    return True
 def isAscendingLinkList(head):
     if not head:
         return True
@@ -21,9 +34,9 @@ def isAscendingLinkList(head):
 
 head=LinkList(1)
 first=LinkList(2)
-second=LinkList(2)
+second=LinkList(3)
 
 head.next=first
 first.next=second
 
-print(isAscendingLinkList(head))
+print(isAscendingLinkListTwoPointers(head))

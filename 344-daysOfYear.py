@@ -27,10 +27,19 @@ A year is a leap year if the following conditions are satisfied:
 
 The year is multiple of 400. year%400==0 
 The year is multiple of 4 and not multiple of 100. year%4==0 && year%100!=0
-
-
 """
 #        isLeap = lambda year: year % 400 == 0 or (year % 100 != 0 and year % 4 == 0)
+
+def daysOfYear(date):
+    
+    daysList=[31,28,31,30,31,30,31,31,30,31,30,31]
+    isLeapYear=lambda year: year%400==0 or(year%4==0 and year%100!=0)  #lambda function
+    y,m,d=list(map(int,date.split("-")))
+    if(isLeapYear(y)):
+        daysList[1]=29
+    
+    return sum(daysList[:m-1])+d
+
 
 def daysInYear(year):
     year,month,date=year.split("-")
@@ -50,4 +59,5 @@ def daysInYear(year):
 # date="2004-03-01"
 date="2003-03-01"
 print(daysInYear(date))
+print(daysOfYear(date))
     

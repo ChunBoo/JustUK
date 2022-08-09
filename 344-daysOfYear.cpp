@@ -8,7 +8,7 @@ using VEC=std::vector<int>;
 int daysOfYear(const STR& date)
 {
     // STR date=ddate;
-    int year=std::atoi(date.substr(0,4).data());
+    int year=std::atoi(date.substr(0,4).data()); // atoi(const char*) needs the param is one char*
     int month=std::atoi(date.substr(5,2).data());
     int _date=std::atoi(date.substr(8).data());
 

@@ -29,7 +29,7 @@ DT countSorting(const DT& nums)
         if(iter->second>0)
         {
             DT tmp(iter->second, iter->first);
-            ans.reserve(ans.size()+distance(tmp.begin(),tmp.end()));
+            ans.reserve(ans.size()+tmp.size());
             ans.insert(ans.end(),tmp.begin(),tmp.end());
         }
     }
