@@ -19,7 +19,7 @@ VEC largestSumOfKLengthSubsequence(const VEC& nums,int k)
         std::vector<int>::iterator minVal=std::min_element(ans.begin(),ans.end());
         if(nums[i]>*minVal)
         {
-            ans.erase(minVal);  //erase(iterator), python is remove(element)
+            ans.erase(minVal);              //erase(iterator), python is remove(element)
             ans.push_back(nums[i]);
         }
     }
