@@ -1,12 +1,10 @@
 
-
+# https:/partition-equal-subset-sum/
+#416
 def subSetSum(nums):
     total=sum(nums)
     if total&1:
-        return False
-    
-    half=total//2
-    
+        return False    
     #@cache
     def dp(i,s):
         if i==len(nums):
