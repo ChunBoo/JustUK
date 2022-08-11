@@ -10,14 +10,14 @@ using VEC=std::vector<int>;
 bool dfs(const VEC& nums,int left,int sum)
 {
     int total=std::accumulate(nums.begin(),nums.end(),0);
-    if(left==0)
+    if(left==nums.size())
     {
-        return sum==total;
+        return sum==0;
     }
     if(sum<0)
         return false;
 
-    return dfs(nums,left+1,sum-nums[left]) || dfs(nums,left+1,sum);
+    return (dfs(nums,left+1,sum-nums[left]) || dfs(nums,left+1,sum));
 }
 bool isCanPartitionSum(const VEC& nums)
 {
