@@ -2,6 +2,29 @@ from treeNode import TreeNode
 import math
 
 ans=-math.inf
+s=set()
+def dfsSet(root):
+    if not root:
+        return 0
+    
+    left=dfsSet(root.left)
+    right=dfsSet(root.right)
+    s.add(left)
+    s.add(right)
+    s.add(left+right+root.val)
+    
+    return left+right+root.val
+
+def maxValue(root):
+    global ans
+    T=sum(root)
+    dfsSet(root)
+    for i in s:
+        ans=max(ans,i*(T-i))
+        
+    return  ans
+
+
 
 def sum(root):
     if not root:
@@ -41,4 +64,4 @@ L1.right=LR2
 
 R1.left=RL2
 
-print(maxProduct(root))
+print(maxValue(root))
