@@ -1,14 +1,14 @@
 #include<iostream>
 #include<vector>
 using VEC=std::vector<int>;
-int dfs(int n,VEC& prices,int &ans)
+int dfs(int n,VEC& prices)
 {
     if(n<=0)
         return 0;
-
+    int ans=0;
     for(int i=0;i<n;++i)
     {
-        ans=std::max(ans,dfs(n-i-1,prices,ans)+prices[i]);
+        ans=std::max(ans,dfs(n-i-1,prices)+prices[i]);
     }
     return ans;
 }
@@ -16,8 +16,8 @@ int dfs(int n,VEC& prices,int &ans)
 int maxProfit(int n,VEC& prices)
 {
     int ans=0;
-    dfs(n,prices,ans);
-    return ans;
+    return dfs(n,prices);
+    // return ans;
 }
 
 int main()
