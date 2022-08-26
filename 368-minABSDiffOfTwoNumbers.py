@@ -1,5 +1,19 @@
 
 import math
+
+
+def minABSDiffOfTwoNumbers(nums):
+    nums.sort()
+    minDiff=math.inf
+    for i in range(1,len(nums)):
+        minDiff=min(nums[i]-nums[i-1],minDiff)
+    ans=[]
+    for i in range(1,len(nums)):
+        curDiff=nums[i]-nums[i-1]
+        if curDiff==minDiff:
+            ans+=[[nums[i-1],nums[i]]]
+    return ans
+
 def minAbsDiffOfTwoNumbers(nums):
     sz=len(nums)
     ans=[]
@@ -24,4 +38,4 @@ def minAbsDiffOfTwoNumbers(nums):
 
 
 nums=[3,4,100,30,20,19,21]
-print(minAbsDiffOfTwoNumbers(nums))
+print(minABSDiffOfTwoNumbers(nums))
