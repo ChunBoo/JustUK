@@ -1,20 +1,19 @@
-
+from functools import lru_cache
 # https:/partition-equal-subset-sum/
 #416
 def subSetSum(nums):
     total=sum(nums)
-    if total&1:
-        return False    
-    #@cache
-    def dp(i,s):
-        if i==len(nums):
-            return s==0
-        if s<0:
+    sz=len(nums)
+    if(total&1):
+        return False
+    half=total//2
+    @lru_cache()
+    def  dp(idx,left):
+        if(idx==sz):
+            return left==0
+        if left<0:
             return False
-        
-        return dp(i+1,s-nums[i]) or dp(i+1,s)
-    
-    return dp(0,total//2)
-
-nums=[1,5,5,11]
+        return dp(idx+1,left-nums[idx]) or dp(idx+1,left)
+    return dp(0,half)
+nums=[1,5,6,11]
 print(subSetSum(nums))
