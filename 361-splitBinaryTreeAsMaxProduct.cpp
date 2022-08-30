@@ -13,21 +13,18 @@ int dfs(TreeNode* root,int sum,int &ans)
 {
     if(!root)
         return 0;
-    
-    int cur=dfs(root->left,sum,ans)+dfs(root->right,sum,ans)+root->m_val;
-    ans=std::max(ans,cur*(sum-cur));
 
-    return cur;
+    int cur=dfs(root->left,sum,ans)+dfs(root->right,sum,ans)+root->m_val;
+    ans=std::max(cur*(sum-cur),ans);
+    return ans;
 }
 
 
 int maxProductOfSubtrees(TreeNode* root)
 {
-    if(!root)
-        return 0;
-    int S=sumOfTree(root);
-    int ans=0;
-    dfs(root,S,ans);
+    int ans=INT_MIN;
+    int sum=sumOfTree(root);
+    dfs(root,sum,ans);
     return ans;
 }
 
