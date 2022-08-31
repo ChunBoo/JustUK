@@ -1,6 +1,14 @@
 #include"treeNode.h"
 #include<iostream>
+/*
+Given a binary tree root, consider deleting an edge in the tree so that the tree becomes disjoint with two trees.
+ Then, take the sum of each subtree and multiply the two numbers. 
+ Return the largest such product we can get after deleting one edge.
 
+Given the root of a binary tree, split the binary tree into two subtrees by removing 
+
+one edge such that the product of the sums of the subtrees is maximized. 
+Return the maximum product of the sums of the two subtrees.*/
 
 int sumOfTree(TreeNode* root)
 {
@@ -16,7 +24,7 @@ int dfs(TreeNode* root,int sum,int &ans)
 
     int cur=dfs(root->left,sum,ans)+dfs(root->right,sum,ans)+root->m_val;
     ans=std::max(cur*(sum-cur),ans);
-    return ans;
+    return cur;
 }
 
 
