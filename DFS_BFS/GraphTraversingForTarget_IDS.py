@@ -8,6 +8,8 @@ def DFS(G,node,target,seen,depth,maxDepth):
     #     return
     if node in seen:
         return False
+    # if depth>maxDepth:
+    #     return  False
     seen.add(node)
     visit(node)
     if node==target:

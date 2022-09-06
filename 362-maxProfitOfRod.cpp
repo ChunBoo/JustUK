@@ -1,7 +1,7 @@
 #include<iostream>
 #include<vector>
-using VEC=std::vector<int>;
-int dfs(int n,VEC& prices)
+using VEC=std::vector<int>;  
+int dfs(int n,VEC& prices)  //top2bottom DP method
 {
     if(n<=0)
         return 0;
@@ -13,11 +13,23 @@ int dfs(int n,VEC& prices)
     return ans;
 }
 
+int maxProfitBottom2Top(int n,VEC& prices) //Bottom2Top
+{
+    if(n<=0)
+        return 0;
+
+    VEC dp(n,0);
+    dp[0]
+    for(int i=0;i<n;++i)
+    {
+        dp[i]
+    }
+}
+
+
 int maxProfit(int n,VEC& prices)
 {
-    int ans=0;
     return dfs(n,prices);
-    // return ans;
 }
 
 int main()

@@ -1,5 +1,5 @@
 
-def maxProfit(n,prices):
+def maxProfit(n,prices):#bottom2 top
     dp=[0]*(n+1)
     for i in range(n+1):
         for j in range(i):

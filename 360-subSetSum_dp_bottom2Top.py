@@ -21,3 +21,7 @@ def  subsetSum(nums):
 
 nums=[1,5,5,11]
 print(subsetSum(nums))
+# i=0
+# ival=i or i+2
+
+# print(ival)

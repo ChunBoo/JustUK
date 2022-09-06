@@ -25,6 +25,7 @@ int sumOfTree(TreeNode* root)
 
     return root->m_val+sumOfTree(root->left)+sumOfTree(root->right);
 }
+
 int maxProduct(TreeNode* root)
 {
     std::set<int> sum{};
@@ -43,7 +44,7 @@ int maxProduct(TreeNode* root)
 
 int main()
 {
-        TreeNode *root=new TreeNode(1);
+    TreeNode *root=new TreeNode(1);
     TreeNode *L1=new TreeNode(2);
     TreeNode *R1=new TreeNode(3);
     TreeNode *LL2=new TreeNode(4);
