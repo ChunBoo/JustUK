@@ -12,7 +12,7 @@ void visit(char Node)
 }
 
 
-void traversingGraphBFS( GRAPH& graph,char src)
+bool traversingGraphBFS( GRAPH& graph,char src,char target)
 {
     std::queue<char> q{};
     std::set<char> seen{};
@@ -23,7 +23,8 @@ void traversingGraphBFS( GRAPH& graph,char src)
         char curNode=q.front();
         q.pop();
         visit(curNode);
-
+        if(curNode==target)
+            return true;
         for(auto node:graph[curNode])
         {
             if(!seen.count(node))
@@ -51,6 +52,6 @@ int main()
     g['C']={};
     g['D']={'E'};
     g['E']={'B','D'};
-    traversingGraphBFS(g,'A');
+    traversingGraphBFS(g,'A','E');
 }
 

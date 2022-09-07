@@ -29,7 +29,7 @@ float dfs(int i, int target,VEC& p)
 {
     if(i==p.size())
         return target==0;
-
+    
     float choose=dfs(i+1,target-1,p)*p[i];
     float skip=dfs(i+1,target,p)*(1-p[i]);
     return choose+skip;

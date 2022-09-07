@@ -12,7 +12,7 @@ int maxProfit(const VEC& prices,int n)
             dp[i]=std::max(dp[i],dp[i-j-1]+prices[j]);
         }
     }
-    return dp[n];
+    return dp[n];  
 }
 
 int main()

@@ -3,6 +3,7 @@ import math
 
 ans=-math.inf
 s=set()
+
 def dfsSet(root):
     if not root:
         return 0
@@ -21,10 +22,7 @@ def maxValue(root):
     dfsSet(root)
     for i in s:
         ans=max(ans,i*(T-i))
-        
     return  ans
-
-
 
 def sum(root):
     if not root:
@@ -32,14 +30,12 @@ def sum(root):
     
     return root.val+sum(root.left)+sum(root.right)
 
-
 def dfs(root,T):
     if not root:
         return 0
     cur=root.val+dfs(root.left,T)+dfs(root.right,T)
     global ans
     ans=max(ans,T*(T-cur))
-    
     return cur
 
 def maxProduct(root):
