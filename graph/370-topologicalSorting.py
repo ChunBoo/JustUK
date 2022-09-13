@@ -1,7 +1,5 @@
-
-
 from collections import defaultdict, deque
-from re import S
+# from re import S
 
 class Node(object):
     def __init__(self) -> None:
@@ -9,33 +7,32 @@ class Node(object):
         self.outNodes=[]
         
 class Solution(object):
-    def solve(self,courses,numCourses):
-        graph=defaultdict(Node)
+    def solve(self,courses):
         totalDeps=0
-        for a,b in (courses):
+        graph=defaultdict(Node)
+        for a,b in courses:
             graph[a].inDegree+=1
             graph[b].outNodes.append(a)
             totalDeps+=1
-        
+            
         q=deque()
         for a,node in graph.items():
             if node.inDegree==0:
                 q.append(a)
-                
         r=0
         while q:
-            v=q.popleft()
-            for a in graph[v].outNodes:
-                graph[a].inDegree-=1
+            v=q.pop()
+            for node in graph[v].outNodes:
+                graph[node].inDegree-=1
                 r+=1
-                if graph[a].inDegree==0:
-                    q.append(a)  
-                    # r+=1
-        return r==totalDeps
+                if graph[node].inDegree==0:
+                    q.append(node)
+                    
+        return totalDeps==r     
     
 courses=[[1,0],[2,1]]
 s=Solution()
-res=s.solve(courses,3)
+res=s.solve(courses)
 print(res)
 
      
