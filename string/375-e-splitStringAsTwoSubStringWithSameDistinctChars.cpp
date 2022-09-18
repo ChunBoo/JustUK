@@ -1,3 +1,23 @@
+
+/*
+
+given a lowercase alphabet string s. 
+Return the number of ways to split the string into two strings such that the number of distinct characters in each string is the same.
+
+Constraints
+1 ≤ n ≤ 100,000 where n is the length of s
+Example 1
+Input
+s = “abaab”
+Output
+2
+Explanation
+We can split it by “ab” + “aab” and “aba” + “ab”
+
+for each index i split (0, i) and (i + 1, n – 1)
+add +1 if both split contain equal distinct character.
+try checking from left and based on that check from right
+*/
 #include<string>
 #include<iostream>
 #include<map>
@@ -37,6 +57,6 @@ int split2(STR& s)
 
 int main()
 {
-    STR s{"aabaa"};
+    STR s{"abaab"};
     std::cout<<split2(s);
 }
