@@ -8,7 +8,7 @@ int dfs(TreeNode* root,int &val)
     
     int l=dfs(root->left, val);
     int r=dfs(root->right,val);
-    if(root->m_val&1==0)  //even node
+    if((root->m_val&1)==0)  //here should add the brackets
     {
         val=std::max(val,l+r+1);
         return std::max(l,r)+1;
