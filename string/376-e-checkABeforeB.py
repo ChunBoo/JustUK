@@ -1,6 +1,7 @@
 from struct import iter_unpack
 
 
+# https://www.liaoxuefeng.com/wiki/1016959663602400/1017783145987360
 import itertools
 def check(s):
     if not s:
