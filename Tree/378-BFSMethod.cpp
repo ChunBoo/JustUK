@@ -37,7 +37,7 @@ int bfs(TreeNode* node,MAP& G)
         ans=std::max(ans,cur.second);
         for(auto v:G[cur.first])
         {
-            if((seen.find(v)==seen.end())&&((v->m_val&1)==0))
+            if((seen.find(v)==seen.end())&&((v->m_val&1)==0))  //opreator & is lower than ==
             {
                 seen.insert(v);
                 q.push_back(PAIR(v,cur.second+1));
