@@ -53,5 +53,5 @@ def split2Counter(s):
     return ans    
     
 print(split2("aabab"))
-print(split2Faster("aabab"))
+print(split2Faster("aabaa"))
 print(split2Counter("aabab"))

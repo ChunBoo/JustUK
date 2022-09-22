@@ -62,7 +62,6 @@ int getLongestEvenPathNodesCount(TreeNode* root)
     return ans;
 }
 
-
 int main()
 {
 TreeNode *root=new TreeNode(0);
