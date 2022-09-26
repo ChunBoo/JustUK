@@ -42,7 +42,7 @@ def check(M):
 
 def xorCheck(M):
     n=len(M)
-    x=1
+    x=0
     for i in range(1,n+1):
         x^=i
         
@@ -52,13 +52,13 @@ def xorCheck(M):
         for c in range(n):
             rr^=M[r][c]
             cc^=M[c][r]
-            if rr or cc:
-                return False
+        if rr or cc:
+          return False
     return True
 
 nums=[[1,2,3],\
       [3,1,2],\
-      [2,3,1]]
+      [2,3,2]]
 print(isNaturalNumberMatrix(nums))
 print(check(nums))
 print(xorCheck(nums))
