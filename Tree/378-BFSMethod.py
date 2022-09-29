@@ -1,4 +1,4 @@
-from collections import defaultdict
+from collections import defaultdict,deque
 class Tree:
     def __init__(self, val, left=None, right=None):
         self.val = val
@@ -44,4 +44,21 @@ class Solution:
                 ans=max(ans,bfs(i))
         return ans
     
-    
+root=Tree(0)
+left1=Tree(8)
+right1=Tree(2)
+
+rLeft2=Tree(6)
+rright2=Tree(0)
+rLeft3=Tree(4)
+
+root.left=left1
+root.right=right1
+
+right1.left=rLeft2
+right1.right=rright2
+
+rLeft2.left=rLeft3
+
+s=Solution()
+print(s.solve(root))
