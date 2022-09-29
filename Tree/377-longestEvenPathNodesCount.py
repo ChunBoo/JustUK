@@ -17,7 +17,7 @@ class Solution:
             return 0
         
         ans=0
-        
+        tmpList=[]
         def dfs(root):
             if not root:
                 return 0
@@ -26,10 +26,12 @@ class Solution:
             r=dfs(root.right)
             if  root.val&1==0:
                 ans=max(ans,l+r+1)
+                tmpList.append(root.val)
                 return 1+max(l,r)
             return 0
             
         dfs(root)
+        print(tmpList)
         return ans
     
     

@@ -15,8 +15,9 @@ class Trie():
         root.isWord=True
     
     
-    def dfs(self,word):
-        root=self
+    def dfs(self,word,root=None):
+        if not root:
+            root=self
         for i, w in enumerate(word):
             if w=="?":
                 for n in root.words:
