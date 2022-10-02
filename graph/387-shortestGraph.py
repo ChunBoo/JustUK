@@ -3,9 +3,10 @@ from collections import defaultdict
 
 from collections import defaultdict
 from heapq import heappop, heappush
+# from tkinter import E
 
 
-def shortestGraph(edges,s,e):
+def shortestGraph(edges,s,e):  #uniform cost search
     G=defaultdict(list)
     
     for a,b,c in edges:
@@ -20,6 +21,14 @@ def shortestGraph(edges,s,e):
         if cur in seen:
             continue
         for n,c in G[cur]:
-            heappush(q,(d+c),n)
+            heappush(q,(d+c,n))
             
     return -1
+
+edges=[
+    [0,1,3],
+    [1,2,2],
+    [0,2,9]
+]
+
+print(shortestGraph(edges,0,2))
