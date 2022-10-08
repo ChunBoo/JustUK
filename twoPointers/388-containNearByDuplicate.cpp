@@ -1,16 +1,21 @@
+//given one vector with integers and one distance k
+//check if there are two numbers are same and with distance is less than k?
+
 #include<iostream>
 #include<vector>
 #include<map>
 bool containNearByDuplicate(std::vector<int>& nums,int k)
 {
-    int j=0;
-    int n=nums.size();
+    if(nums.empty() || k<1)
+        return false;
+    
     std::map<int,int> seen{};
-    for(int i=0;i<n;++i )
+    int n=nums.size();
+    for(int i=0;i<n;++i)
     {
         if(seen.find(nums[i])!=seen.end())
         {
-            if((i-seen[nums[i]])<=k)  
+            if((i-seen[nums[i]])<=k)
                 return true;
         }
         seen[nums[i]]=i;
@@ -20,6 +25,6 @@ bool containNearByDuplicate(std::vector<int>& nums,int k)
 
 int main()
 {
-    std::vector<int> nums{1,0,1,1};
+    std::vector<int> nums{1,0,1,3};
     std::cout<<containNearByDuplicate(nums,1);
 }
