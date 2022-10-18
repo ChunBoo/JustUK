@@ -48,7 +48,9 @@ class Node(object):
     def __init__(self,val,neighbors) -> None:
         self.val=val
         self.neighbors=neighbors
-        
+    def printout(self):
+        for i in self.neighbors:
+            print(i.val)    
         
 class Solution(object):
     def cloneGraph(self,node):
@@ -61,9 +63,22 @@ class Solution(object):
             clone_node=Node(node.val,[])
             memo[node]=clone_node
             
-            clone_node.neighbors=[clone(kid) for kid in node.neibghbors]
+            clone_node.neighbors=[clone(kid) for kid in node.neighbors]
             return clone_node
         return clone(node)
     
     
-    
+# adjList = [[2,4],[1,3],[2,4],[1,3]]   
+_one=Node(1,[])
+_two=Node(2,[])
+_three=Node(3,[])
+_four=Node(4,[])
+one=Node(1,[_two,_four])
+two=Node(2,[_one,_three])
+three=Node(3,[_two,_four])
+four=Node(4,[_one,_three])
+
+
+s=Solution()
+ret=s.cloneGraph(one)
+ret.printout()
