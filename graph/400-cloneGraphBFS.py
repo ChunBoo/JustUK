@@ -7,15 +7,17 @@ class Node(object):
         self.val=val
         self.neighbors=neighbors
     def printout(self):
+        output=[]
         for i in self.neighbors:
-            print(i.val)  
-
+          output.append(i.val)
+        return output
+  
 class Solution(object):
     def cloneGraph(self,node):
         if not node:
             return node
-        q=deque([node])
         seen={}
+        q=deque([node])
         seen[node]=Node(node.val,[])
         while q:
             cur=q.popleft()
@@ -24,8 +26,7 @@ class Solution(object):
                     seen[n]=Node(n.val,[])
                     q.append(n)
                 seen[cur].neighbors.append(seen[n])
-        return seen[node]
-    
+        return seen[node]    
     
 _one=Node(1,[])
 _two=Node(2,[])
@@ -36,7 +37,13 @@ two=Node(2,[_one,_three])
 three=Node(3,[_two,_four])
 four=Node(4,[_one,_three])
 
+graph=[one,two,three,four]
+
 
 s=Solution()
-ret=s.cloneGraph(one)
-ret.printout()
+ans=[]
+for n in graph:
+    # ret=s.cloneGraph(n)
+    ans.extend([s.cloneGraph(n).printout()])
+    # ret.printout()
+print(ans)
