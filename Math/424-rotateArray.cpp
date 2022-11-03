@@ -1,6 +1,6 @@
 #include<vector>
 #include<iostream>
-
+#include<deque>
 using VEC=std::vector<int>;
 
 void reverse(VEC& nums, int l,int r)
@@ -24,12 +24,29 @@ void rota(VEC& nums,int k)
     reverse(nums,k,n-1);
 }
 
+void rotateArray(VEC& nums,int k)
+{
+    int n=nums.size();
+    k%=n;
+    VEC temp{nums.begin(),nums.end()};
+    for(int i=n-1;i>n-k-1;--i)
+    {
+        int v=temp[i];
+        nums.pop_back();
+        auto it=nums.begin();
+        nums.insert(it,v);
+    }
+}
+
+
 int main()
 {
     VEC nums{1,2,3,4,5,6};
     for(auto &v:nums)
         std::cout<<v<<',';
-    rota(nums,3);
+    // rota(nums,3);
+    std::cout<<'\n';
+    rotateArray(nums,3);
     for(auto &v:nums)
         std::cout<<v<<',';
 
