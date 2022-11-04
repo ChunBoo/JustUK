@@ -7,6 +7,11 @@ class TreeNode(object):
         self.val = val
         self.left = left
         self.right = right
+    def addLeft(self,node):
+        self.left=node
+    def addRight(self,node):
+        self.right=node
+        
 class Solution(object):
     def rightSideView(self, root):
         """
@@ -15,11 +20,11 @@ class Solution(object):
         """
         if not root:
             return root
-        ans=[]
         q=deque([root])
+        ans=[]
         while q:
-            n=len(q)
             ans.append(q[-1].val)
+            n=len(q)
             for _ in range(n):
                 x=q.popleft()
                 if x.left:
@@ -28,3 +33,17 @@ class Solution(object):
                     q.append(x.right)
                 
         return ans
+
+
+nodes=[1,2,3,4,5]
+root=TreeNode(1)
+l1=TreeNode(2)
+r1=TreeNode(3)
+l2=TreeNode(4)
+r2=TreeNode(5)
+root.addLeft(l1)
+root.addRight(r1)
+l1.addLeft(l2)
+l1.addRight(r2)
+print(Solution().rightSideView(root))
+    
