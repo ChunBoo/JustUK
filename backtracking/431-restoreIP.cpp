@@ -26,7 +26,7 @@ s consists of digits only.
 #include<algorithm>
 using STR=std::string;
 using VEC=std::vector<STR>;
-
+/*
 template <typename Iter>
 std::string join(Iter begin, Iter end, std::string const& separator)
 {
@@ -37,6 +37,17 @@ std::string join(Iter begin, Iter end, std::string const& separator)
     result << separator << *begin++;
   return result.str();
 }
+*/
+STR join(const VEC& ss, const STR& separator)
+{
+    STR ans{};
+    for(auto &s:ss)
+    {
+        ans+=(s+separator);
+    }
+    return ans;
+}
+
 
 void f(VEC& cur, VEC& ans,STR& s)
 {
@@ -47,18 +58,19 @@ void f(VEC& cur, VEC& ans,STR& s)
     if(cur.size()==4)
     {
         if(_sum==s.size())
-            ans.push_back(join(cur.begin(),cur.end(),"."));
+            ans.push_back(join(cur,"."));
         return;
     }
-    for(int i=_sum;i<std::min(_sum+3,(int)s.size());++i))
+    for(int i=_sum;i<std::min(_sum+3,(int)s.size());++i)
     {
-        STR x=s.substr(_sum,i-_sum);
+        STR x=s.substr(_sum,i-_sum+1);
+        
         int tmp=std::stoi(x);
         if( (tmp>=0 && tmp<=255 ) &&(x=="0" || (x.size()>0 && x[0]!='0')))
         {
             cur.push_back(x);
             f(cur,ans,s);
-            cur.pop();
+            cur.pop_back();
         }
     }
 }
@@ -77,7 +89,7 @@ VEC restoreAddress(STR& s)
 
 int main()
 {
-    STR s{"1234"};
+    STR s{"12345"};
     VEC res=restoreAddress(s);
     for(auto &v:res)
     {
