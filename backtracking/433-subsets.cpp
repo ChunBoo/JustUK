@@ -11,12 +11,14 @@ void f(const VEC& nums, MATRIX&  res,VEC& cur,int i)
     {
         VEC tmp=VEC{cur.begin(),cur.end()};
         res.push_back(tmp);
-        return ;
+        return ;  //this line can not be ignored
     }
-
-    f(nums,res,cur,i+1);
+    VEC tmp1=VEC{cur.begin(),cur.end()};
+    f(nums,res,tmp1,i+1);
     cur.push_back(nums[i]);
-    f(nums,res,cur,i+1);
+    VEC tmp2=VEC{cur.begin(),cur.end()};
+
+    f(nums,res,tmp2,i+1);
 }
 
 MATRIX subSets(const VEC& nums)
