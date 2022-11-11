@@ -4,19 +4,20 @@
 using VEC=std::vector<int>;
 
 using MATRIX=std::vector<std::vector<int>>;
-void f(const VEC& nums, MATRIX&  res,VEC& cur,int i)
+void f(const VEC& nums, MATRIX&  res,VEC cur,int i)
 {
     int n=nums.size();
     if(i==n)
     {
+            // VEC tmp{cur.begin(),cur.end()};
         res.push_back(cur);
         return;
     }
-    VEC tmp{cur.begin(),cur.end()};
-    f(nums,res,tmp,i+1);
+    // VEC tmp{cur.begin(),cur.end()};
+    f(nums,res,cur,i+1);
     cur.push_back(nums[i]);
-    VEC tmp2{cur.begin(),cur.end()};
-    f(nums,res,tmp2,i+1);
+    // VEC tmp2{cur.begin(),cur.end()};
+    f(nums,res,cur,i+1);
 }
 
 MATRIX subSets(const VEC& nums)
