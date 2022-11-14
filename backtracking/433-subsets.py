@@ -8,7 +8,7 @@ class Solution(object):
         ans=[]
         def dfs(cur,i):
             if i==n:
-                ans.append(cur)
+                ans.append(cur[:])
                 return
             
             dfs(cur,i+1)
