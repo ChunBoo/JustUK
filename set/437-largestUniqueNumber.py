@@ -21,7 +21,8 @@ Use an array or a hash table to do that.
 Look for the largest value with number of occurrences = 1.
 """
 from collections import Counter
-# from collections import Groupby
+from itertools import groupby
+
 def largestNumber(nums):
     n=len(nums)
     if n==0:
@@ -35,7 +36,7 @@ def largestNumber(nums):
     return ans
 def lnumber(nums):
     nums.sort()
-    return max((k for k,v in groupby(nums) if len(list(v)==1)),default=-1 )
+    return max((k for k,v in groupby(nums) if len(list(v))==1),default=-1 )
 
 def buketMethod(nums):
     b=[0]*1001
@@ -49,3 +50,4 @@ def buketMethod(nums):
 nums=[9,9,8,8]
 print(largestNumber(nums))
 print(buketMethod(nums))
+print(lnumber(nums))
