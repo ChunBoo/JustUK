@@ -1,3 +1,10 @@
+
+'''
+As the Python uses Object-References when passing parameters,
+the list (mutable) is passed by References, 
+we need to make a deep copy (using copy.deepcopy(cur) or cur[:]) to copy the current subset e.g. cur to answer (list of all subsets).
+'''
+
 class Solution(object):
     def subsets(self, nums):
         """
@@ -16,7 +23,17 @@ class Solution(object):
             
         dfs([],0)
         return ans
+    def subsets2(self, nums):
+        n = len(nums)
+        ans = []        
+        for i in range(1 << n):
+            cur = []
+            for j in range(n):
+                if i & (1 << j):
+                    cur.append(nums[j])
+            ans.append(cur)
+        return ans   
 
 
 s=Solution()
-print(s.subsets([1,2,3]))
+print(s.subsets2([1,2,3]))
