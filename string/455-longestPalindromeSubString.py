@@ -2,7 +2,7 @@ from functools import lru_cache
 
 @lru_cache
 def f(i,j,s):
-    if i>j:
+    if i>j or i>=len(s) or j>=len(s):
         return 
     if i==j:
         return True
