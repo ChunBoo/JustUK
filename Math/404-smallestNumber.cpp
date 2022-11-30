@@ -6,37 +6,35 @@ using STR=std::string;
 
 int smallest(int n)
 {
-    if(n==0)
-        return 0;
+   if(n==0)
+    return 0;
 
-    if(n<0)
+   if(n<0)
+   {
+    STR s=std::to_string(n);
+    std::sort(s.begin(),s.end(),std::greater<char>());  //sorted with decreasing 
+    return (-1)*std::stoi(s);
+   } 
+   else
+   {
+    STR s=std::to_string(n);
+    std::sort(s.begin(),s.end());
+    //get the index of first number is not zero
+    int sp=0;
+    for(int i=0;i<s.size();++i)
     {
-        STR s=std::to_string(n);
-        std::sort(s.begin(),s.end(),std::greater<char>());
-        return (-1)*std::stoi(s);
-    }
-    else
-    {
-        STR s=std::to_string(n);
-        std::sort(s.begin(),s.end());
-        //find the first element of not zero
-        size_t sp=0;
-        for(int i=0;i<s.size();++i)
+        if(s[i]!='0')
         {
-            if(s[i]!='0')
-            {
-                sp=i;
-                break;
-            }
+            sp=i;
+            break;
         }
-        STR temp=s[sp]+STR(s.begin(),s.begin()+sp)+STR(s.begin()+sp+1,s.end());
-        return std::stoi(temp);
-
     }
+    return std::stoi(s[sp]+STR(s.begin(),s.begin()+sp)+STR(s.begin()+sp+1,s.end()));
+   }
 }
 
 int main()
 {
-    int n=309;
+    int n=-319;
     std::cout<<smallest(n);
 }

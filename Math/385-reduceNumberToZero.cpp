@@ -3,10 +3,6 @@
 #include<iostream>
 #include<bitset>
 #include<string>
-<<<<<<< HEAD
-=======
-
->>>>>>> b81ec9123428abe111cd33a928508e41c57e4797
 int minStepsToReduce(int val)
 {
     int ans=0;
