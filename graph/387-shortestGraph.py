@@ -25,10 +25,18 @@ def shortestGraph(edges,s,e):  #uniform cost search
             
     return -1
 
+def heapSort(iterable):
+    h=[]
+    for val in iterable:
+        heappush(h,val)
+    return [heappop(h) for i in range(len(h))]
+
 edges=[
+    
     [0,1,3],
     [1,2,2],
     [0,2,9]
 ]
 
-print(shortestGraph(edges,0,2))
+# print(shortestGraph(edges,0,2))
+print(heapSort([1,3,5,7,9,2,4,6,8,0]))

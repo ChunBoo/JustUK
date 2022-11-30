@@ -24,18 +24,22 @@ int getLongestSubString(const std::string& s)  //bottom2top
         return 1;
     
     std::vector<std::vector<int>> dp(sz,std::vector<int>(sz,0));
-
+    std::string ans;
     for(int i=sz-1;i>=0;--i)
     {
         dp[i][i]=1;
         for(int j=i+1;j<sz;++j)
         {
             if(s[i]==s[j])
+            {
                 dp[i][j]=dp[i+1][j-1]+2;
+                ans=s.substr(i,j-i+1);
+            }
             else
                 dp[i][j]=std::max(dp[i][j-1],dp[i+1][j]);
         }
     }
+    std::cout<<ans;
     return dp[0][sz-1];
 }
 

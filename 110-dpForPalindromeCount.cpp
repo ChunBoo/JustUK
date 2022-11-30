@@ -14,7 +14,11 @@ int countOfPalindromes(const std::string& s, int start,int end)
         return true;
     
     if(s[start]==s[end])
+    {
+        // ans.insert(0,1,s[start]);
+        // ans.push_back(s[end]);
         return countOfPalindromes(s,start+1,end-1);
+    }
 }
 
 
@@ -24,15 +28,22 @@ int getCountOfPalindromes(const std::string& s)
     if(sz==0||sz==1)
         return sz;
     int ans=0;
+    std::string res;
     for(int i=0;i<sz;++i)
     {
         for(int j=i;j<sz;++j)
         {
             if(countOfPalindromes(s,i,j))
+            {
                 ans+=1;
+                res.insert(0,1,s[i]);
+                res.push_back(s[j]);
+            }
         }
     }
+    std::cout<<res<<'\n';
     return ans;
+
 }
 
 int main()

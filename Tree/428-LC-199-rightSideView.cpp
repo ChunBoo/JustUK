@@ -23,21 +23,23 @@ VEC rightSide(TreeNode* root)
     VEC ans{};
     if(!root)
         return ans;
+
     std::queue<TreeNode*> q{};
     q.push(root);
-
     while(!q.empty())
     {
         ans.push_back(q.back()->getVal());
         int n=q.size();
         for(int i=0;i<n;++i)
         {
-            TreeNode* cur=q.front();
+            TreeNode* curNode=q.front();
             q.pop();
-            if(cur->getLeft())
-                q.push(cur->getLeft());
-            if(cur->getRight())
-                q.push(cur->getRight());
+
+            if(curNode->getLeft())
+                q.push(curNode->getLeft());
+            if(curNode->getRight())
+                q.push(curNode->getRight());
+
         }
     }
     return ans;
