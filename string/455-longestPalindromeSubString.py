@@ -9,7 +9,7 @@ def f(i,j,s):   #top2bottom
     if i+1==j:
         return s[i]==s[j]
     return s[i]==s[j] and f(i+1,j-1,s)
-def longestPalindromeDP(s):
+def longestPalindromeDP(s):  #bottom to up
     n=len(s)
     F=[[True for _ in range(n)] for _ in range(n)]
     for i in range(n-2,-1,-1):
