@@ -15,12 +15,17 @@ STR findSubString(const STR& s,int i,int j)
 STR findSubString2(const STR& s,int i,int j)
 {
     int n=s.size();
-    
+    int k=j-i;
+    // STR p(k+1,s.c_str());
+    STR p{};
+    for(int c=0;c<k+1;++c)
+        p+=s;
+    return p.substr(i,k);
 }
 
 int main()
 {
-    STR s{"hi"};//{"tiger"};
-    int i=2,j=6;
-    std::cout<<findSubString(s,i,j);
+    STR s{"tiger"};//s{"hi"};//{"tiger"};
+    int i=6,j=8;
+    std::cout<<findSubString2(s,i,j);
 }
