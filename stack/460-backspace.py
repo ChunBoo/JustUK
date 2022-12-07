@@ -20,12 +20,13 @@ Output
 def texteditor(s):
     ans=[]
     n=len(s)
-    
     for i in range(n):
         if i>0 and s[i]=='-' and s[i-1]=='<':
             ans.pop()
-            if ans:
+            if len(ans)>0:
                 ans.pop()
         else:
             ans.append(s[i])
     return "".join(ans)
+s = "abc<-z"
+print(texteditor(s))
