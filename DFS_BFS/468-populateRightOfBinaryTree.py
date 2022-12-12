@@ -1,4 +1,14 @@
 """
+given a binary tree:
+struct Node {
+  int val;
+  Node *left;
+  Node *right;
+  Node *next;
+}
+Populate each next pointer to point to its next right node. 
+If there is no next right node, the next pointer should be set to NULL. Initially, 
+all next pointers are set to NULL.
 # Definition for a Node.
 class Node(object):
     def __init__(self, val=0, left=None, right=None, next=None):
