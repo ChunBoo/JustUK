@@ -16,7 +16,7 @@ bool canAttend( const MATRIX& m)
     int sz=m.size();
     for(int i=0;i<sz;++i)
     {
-        for(int j=i;j<sz;++j)
+        for(int j=0;j<i;++j)
         {
             if(overlap(m[i],m[j]))
                 return false;
@@ -39,7 +39,7 @@ bool canAttendSort(MATRIX& m)  //can not pass const for std::sort?
 
 int main()
 {
-    MATRIX m{{7,10},{9,4}};
+    MATRIX m{{7,10},{9,11}};
     std::cout<<canAttend(m)<<'\n';
     std::cout<<canAttendSort(m);
 }
