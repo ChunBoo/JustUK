@@ -19,7 +19,7 @@ STR largestGoodInteger( STR nums)
     {
         char i=c+'0';   //char(9)=='\t'
         STR tmp(3,c+'0');
-        auto isFound=nums.find(tmp);  //find(),return std::string::size_t
+        auto isFound=nums.find(tmp);  //std::string::find(),return std::string::size_t
         // auto isFound=std::find(nums.begin(),nums.end(),tmp);// can not work,
         // as std::find() will return iterator
         if(isFound!=std::string::npos) //std::string::npos is -1
