@@ -5,7 +5,7 @@ def dp_bottom2Top(n):
     f0,f1=0,1
     for _ in range(n):
         f0,f1=f1,f0+f1
-    return f1
+    return f0   #here is not return f1
     
 
 def f_recurssion(n):
@@ -24,4 +24,4 @@ def f(n,nb={}):  #this is top2bottom method, f(n) should calculate the f(n-1) un
 
 
 print(f(6))
-print(f_recurssion(6))
+print(dp_bottom2Top(6))
