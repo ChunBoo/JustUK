@@ -25,14 +25,13 @@ int f(int n)
 */
 int top2Down(int n)
 {
-    if(n<0)
-        return 0;
     if(n==0)
         return 0;
     if(n==1)
         return 1;
     int res=top2Down(n-2)+top2Down(n-1);
     std::cout<<res<<'\n';
+    return res;   //here should return the result
 }
 int main()
 {

@@ -7,6 +7,16 @@ Output: [3,2]
 Explanation: The values that are present in at least two arrays are:
 - 3, in all three arrays.
 - 2, in nums1 and nums2.
+>>>x = set('runoob')
+>>> y = set('google')
+>>> x, y
+(set(['b', 'r', 'u', 'o', 'n']), set(['e', 'o', 'g', 'l']))   # 重复的被删除
+>>> x & y         # 交集
+set(['o'])
+>>> x | y         # 并集
+set(['b', 'e', 'g', 'l', 'o', 'n', 'r', 'u'])
+>>> x - y         # 差集
+set(['r', 'b', 'u', 'n'])
 '''
 from collections import Counter
 def twoOutOfThree(nums1,nums2,nums3):
