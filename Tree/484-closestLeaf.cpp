@@ -23,7 +23,7 @@ void foo(const TreeNode* root, const TreeNode* par,MAP& m,SET& s)
         return ;
     foo(root->left,root,m,s);
     foo(root->right,root,m,s);
-    if(par)
+    if(par)  //double direction 
     {
         m[par->m_val].push_back(root->m_val);
         m[root->m_val].push_back(par->m_val);
@@ -39,20 +39,20 @@ int getCloestLeaf(const TreeNode* root,int k)
     SET leaves{};
     foo(root,nullptr,G,leaves);
 
-    Q q{k};
+    Q q{k};  //for BFS to get the shortest leaf from given target k
     // q.push_back(k);
     SET seen{};
     while(!q.empty())
     {
         int cur=q.front();
         q.pop_front();
-        auto search=leaves.find(cur);
-        if(search!=leaves.end())
+        // auto search=leaves.find(cur);
+        if(leaves.find(cur)!=leaves.end())
             return cur;
         for(auto &n:G[cur])
         {
-            auto isAlreadyAccessed=seen.find(n);
-            if(isAlreadyAccessed==seen.end())
+            // auto isAlreadyAccessed=seen.find(n);
+            if(seen.find(n)==seen.end())
             {
                 seen.insert(n);
                 q.push_back(n);
@@ -75,7 +75,7 @@ int main()
     one->left=three;
     two->right=four;
 
-    int leaf=getCloestLeaf(root,2);
+    int leaf=getCloestLeaf(root,1);
     std::cout<<leaf;
 
 }
