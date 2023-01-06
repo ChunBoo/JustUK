@@ -13,4 +13,6 @@ def longestSubString(s):
         ans=max(ans,len(win))
         r+=1
     return ans
-            
+
+s="abcbbc"
+print(longestSubString(s))
