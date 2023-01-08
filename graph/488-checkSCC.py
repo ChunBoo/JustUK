@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-def checkSCC(n,edges):
+def checkSCC(n,edges): #strong connected componento
     
     def check(cur,G):
         seen=set()
