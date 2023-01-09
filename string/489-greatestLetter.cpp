@@ -1,8 +1,20 @@
 #include<string>
 #include<iostream>
 #include<algorithm>
-
+#include<set>
 using STR=std::string;
+
+char GreatestLetter(const STR& s)
+{
+    std::set<char> ss{s.begin(),s.end()};
+    for(int i=25;i>-1;--i)
+    {
+        char up='A'+i,lower='a'+i;
+        if(ss.find(up)!=ss.end() && ss.find(lower)!=ss.end())
+            return up;
+    }
+    return ' ';
+}
 
 char getGreatestLetter( STR s)
 {
@@ -23,5 +35,6 @@ char getGreatestLetter( STR s)
 int main()
 {
     STR s{"AbCdEkfGhIjBK"};
-    std::cout<<getGreatestLetter(s);
+    // std::cout<<getGreatestLetter(s);
+    std::cout<<GreatestLetter(s);
 }
