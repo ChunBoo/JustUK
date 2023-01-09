@@ -4,7 +4,7 @@
 
 using STR=std::string;
 
-STR getGreatestLetter( STR s)
+char getGreatestLetter( STR s)
 {
     // STR tmp=std::sort(s.begin(),s.end());
     std::sort(s.begin(),s.end());
@@ -15,9 +15,9 @@ STR getGreatestLetter( STR s)
         char lower=std::tolower(s[i]);
         
         if(s.find(upper)!=std::string::npos && s.find(lower)!=std::string::npos)
-            return STR(1,upper);
+            return upper;
     }
-    return "EMPTY";
+    return ' ';  //can not return '' which is empty character
 }
 
 int main()
