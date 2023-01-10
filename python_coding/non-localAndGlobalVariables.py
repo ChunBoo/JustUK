@@ -1,3 +1,13 @@
+#https://docs.python.org/3/reference/simple_stmts.html#the-nonlocal-statement
+'''
+With nonlocal x, inner() can access the non-local variable x in middle() 
+but not the non-local variable x in outer() or the global variable x outside outer() as shown below:
+With global x, inner() can access the global variable x outside outer()
+but not the non-local variable x in outer() or middle() as shown below:
+
+
+
+'''
 x = 0 # <- ✖ X
 def outer():
     x = 5 # <- ✖

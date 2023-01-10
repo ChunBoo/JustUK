@@ -12,7 +12,8 @@ int minDistance( STR& s,const STR& w1, const STR& w2)
     VEC strings{};
     STR tmpString{};
     std::stringstream ss(s);
-    while(std::getline(ss,tmpString,' '))
+    // while(std::getline(ss,tmpString,' '))
+    while(ss>>tmpString)
     {
         strings.push_back(tmpString);
     }
@@ -38,6 +39,6 @@ int minDistance( STR& s,const STR& w1, const STR& w2)
 
 int main()
 {
-    STR s{"a b b b c c d"};
+    STR s{"a b b b d c c d"};
     std::cout<<minDistance(s,"a","c");
 }
