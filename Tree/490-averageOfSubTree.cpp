@@ -13,13 +13,13 @@ class TreeNode
 };
 
 
-VEC dfs(TreeNode* root,int ans)
+VEC dfs(TreeNode* root,int& ans)
 {
     if(!root)
         return {0,0};
     VEC l{dfs(root->left,ans)};
     VEC r{dfs(root->right,ans)};
-    int cnt=l[0]+r[0],sum=root->val+l[1]+r[1];
+    int cnt=l[0]+r[0]+1,sum=root->val+l[1]+r[1];
     int average=sum/cnt;
     if(root->val==average)
         ans+=1;
