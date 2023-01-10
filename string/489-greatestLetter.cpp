@@ -7,13 +7,16 @@ using STR=std::string;
 char GreatestLetter(const STR& s)
 {
     std::set<char> ss{s.begin(),s.end()};
+    //use std::set() can be more faster when searching the elements
+    int n=s.size();
     for(int i=25;i>-1;--i)
     {
-        char up='A'+i,lower='a'+i;
-        if(ss.find(up)!=ss.end() && ss.find(lower)!=ss.end())
+        char up=i+'A',low=i+'a';
+        if(ss.find(up)!=ss.end() && ss.find(low)!=ss.end())
             return up;
     }
     return ' ';
+    
 }
 
 char getGreatestLetter( STR s)
