@@ -1,4 +1,4 @@
-import math
+
 class Solution(object):
     def maxScore(self, cardPoints, k):
         """

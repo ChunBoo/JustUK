@@ -39,6 +39,6 @@ int minEatingSpeed(const VEC& piles,int h)
 int main()
 {
     VEC piles{30,11,23,4,20};//{3,6,7,11};//{30,11,23,4,20};
-    int h=5;//8;//6;
+    int h=6;//8;//6;
     std::cout<<minEatingSpeed(piles,h);
 }
