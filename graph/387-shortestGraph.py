@@ -1,5 +1,5 @@
 
-from collections import defaultdict
+# from collections import defaultdict
 
 from collections import defaultdict
 from heapq import heappop, heappush
@@ -32,7 +32,6 @@ def heapSort(iterable):
     return [heappop(h) for i in range(len(h))]
 
 edges=[
-    
     [0,1,3],
     [1,2,2],
     [0,2,9]
