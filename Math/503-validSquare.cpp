@@ -3,7 +3,7 @@
 #include<map>
 #include<cmath>
 using VEC=std::vector<int>;
-using MATRIX=std::vector<VEC>;
+using MATRIX=std::vector<const VEC>;
 using MAP=std::map<double,int>;
 
 double dis(const VEC& a, const VEC& b)
@@ -13,7 +13,7 @@ double dis(const VEC& a, const VEC& b)
 
 bool validSquare(const VEC& p1, const VEC& p2, const VEC& p3, const VEC& p4)
 {
-    MATRIX arr{p1,p2,p3,p4};
+    MATRIX arr{p1,p2,p3,p4};  //https://stackoverflow.com/questions/39800847/c-vector-allocator-error
     MAP d{};
     for(int i=0;i<4;++i)
     {

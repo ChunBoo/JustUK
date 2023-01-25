@@ -12,7 +12,8 @@ def shortestDistance(distance,start,stop):
         start,stop=stop,start
     
     d1=sum(distance[start:stop])
-    d2=sum(distance)-d1
+    # d2=sum(distance)-d1
+    d2=sum(distance[:start])+sum(distance[stop:])
     return min(d1,d2)
 
 distance=[11,2,3,4]
