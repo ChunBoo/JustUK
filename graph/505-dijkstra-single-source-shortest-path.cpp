@@ -1,6 +1,6 @@
 #include<iostream>
 #include<vector>
-#include<queue>  //for std::priority_queue
+#include<queue>  //for std::priority_queue  https://www.geeksforgeeks.org/priority-queue-of-pairs-in-c-ordered-by-first/ https://www.geeksforgeeks.org/priority-queue-in-cpp-stl/
 #include<map>
 #include<set>
 using VEC=std::vector<int>;
@@ -15,8 +15,8 @@ int dijkstra(const MATRIX& edges,int start,int stop)
     MAP G{};
     for(auto &e:edges)
     {
-        VEC tmp{e[1],e[2]};
-        G[e[0]].push_back(tmp);
+        // VEC tmp{e[1],e[2]};   //this method is correct!!! https://stackoverflow.com/questions/42249303/how-can-i-push-back-data-in-a-2d-vector-of-type-int
+        G[e[0]].push_back(VEC{e[1],e[2]});  //here the G[e[0]].push_back(VEC(e[1],e[2])) is wrong,as VEC(n,v) will initialize the vector with n count of v
     }
     std::map<int,int> d{};
 
