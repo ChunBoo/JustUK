@@ -10,32 +10,50 @@ using PQ=std::priority_queue<PAIR>;
 using MATRIX=std::vector<VEC>;
 using MAP=std::map<int,MATRIX>;
 using SET=std::set<int>;
+
+
+template <typename K, typename V>
+V GetWithDef(const  std::map <K,V> & m, const K & key, const V & defval ) 
+{
+    typename std::map<K,V>::const_iterator it = m.find( key );
+    if ( it == m.end() ) 
+        return defval;
+    else 
+        return it->second;
+}
+
 int dijkstra(const MATRIX& edges,int start,int stop)
 {
+    //convert the edges to Graph
     MAP G{};
     for(auto &e:edges)
     {
-        // VEC tmp{e[1],e[2]};   //this method is correct!!! https://stackoverflow.com/questions/42249303/how-can-i-push-back-data-in-a-2d-vector-of-type-int
-        G[e[0]].push_back(VEC{e[1],e[2]});  //here the G[e[0]].push_back(VEC(e[1],e[2])) is wrong,as VEC(n,v) will initialize the vector with n count of v
+        G[e[0]].push_back(VEC{e[1],e[2]});
     }
-    std::map<int,int> d{};
-
-    d[start]=0;
+    // PQ pq{std::make_pair(0,start)};
+    // std::priority_queue<PAIR,std::vector<PAIR>,std::greater<PAIR>> pq;
     PQ pq{};
-    SET seen{};
     pq.push(std::make_pair(0,start));
+
+    SET seen{};
+    int V=G.size();
+    std::map<int,int> d{};  //this is map not vector
+    // VEC d(V,INT_MAX);
+    d[start]=0;
     while(!pq.empty())
     {
         PAIR top=pq.top();
         pq.pop();
-        int c=top.first, v=top.second;
+        int c=top.first,v=top.second;
         if(seen.find(v)!=seen.end())
             continue;
         seen.insert(v);
-        for(auto &vs:G[v])
+
+        for(auto &e:G[v])
         {
-            int w=vs[1],x=vs[0];
-            if((d[x]==0)||(w+c)<d[x])
+            int x=e[0],w=e[1];
+            int curCost=GetWithDef(d,x,INT_MAX);
+            if((w+c)<curCost)
             {
                 d[x]=c+w;
                 pq.push(std::make_pair(c+w,x));
@@ -49,8 +67,8 @@ int main()
 {
     MATRIX edges = {
     {0, 1, 3},
-    {1, 2, 2},
-    {0, 2, 9}};
+    {1, 2, 20},
+    {0, 2, 92}};
     int start = 0,end = 2;
     std::cout<<dijkstra(edges,start,end);
 }
