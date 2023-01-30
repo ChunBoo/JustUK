@@ -1,6 +1,6 @@
 
 
-#BFS/DFS can not be used in weighted graph, as iFloydWarshall 
+#BFS/DFS can not be used in weighted graph, as iFloydWarshall for the weighted undirected graph
 #https://stackoverflow.com/questions/30409493/using-bfs-for-weighted-graphs
 
 from math import inf
