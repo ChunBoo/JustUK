@@ -11,7 +11,7 @@ using MAP=std::map<int,VEC>;
 using SET=std::set<int>;
 using Q=std::deque<int>;
 
-int bfoo(int i, MAP& G,SET& seen)
+int bfoo(int i, const MAP& G,SET& seen)
 {
     if(seen.find(i)!=seen.end())
         return 0;
@@ -22,7 +22,7 @@ int bfoo(int i, MAP& G,SET& seen)
         ans+=1;
         int cur=q.front();
         q.pop_front();
-        for(auto v:G[cur])
+        for(auto &v:G.at(i))   //also can use at() to get the elements
         {
             if(seen.find(v)==seen.end())
             {

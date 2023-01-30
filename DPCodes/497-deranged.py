@@ -2,16 +2,17 @@
 
 """
 DERANGEMENT ALGORITHM VIA RECURSION
-Let’s use tex_2d43d32c647168e4f8be88dd46768880 Teaching Kids Programming - (!3+3)*!3=10 - Derangement Algorithms via Dynamic Programming Algorithm algorithms dynamic programming Dynamic Programming math python teaching kids programming youtube video  to denote the number of ways to put N items in such derangement order aka the i-th item cannot be put in index i. The base conditions are:
+Let’s - (!3+3)*!3=10 - Derangement Algorithms via Dynamic Programming Algorithm algorithms dynamic programming Dynamic Programming math python   youtube video  to denote the number of ways to put N items in such derangement order aka the i-th item cannot be put in index i. The base conditions are:
 
-tex_6398b0b40d7d71c62de8fad787239985 Teaching Kids Programming - (!3+3)*!3=10 - Derangement Algorithms via Dynamic Programming Algorithm algorithms dynamic programming Dynamic Programming math python teaching kids programming youtube video 
-tex_e05fefefa8d559dbd4453ad2798c0cb1 Teaching Kids Programming - (!3+3)*!3=10 - Derangement Algorithms via Dynamic Programming Algorithm algorithms dynamic programming Dynamic Programming math python teaching kids programming youtube video 
+tex_6398b0b40d7d71c62de8fad787239985   - (!3+3)*!3=10 - Derangement Algorithms via Dynamic Programming Algorithm algorithms dynamic programming Dynamic Programming math python   youtube video 
+tex_e05fefefa8d559dbd4453ad2798c0cb1   - (!3+3)*!3=10 - Derangement Algorithms via Dynamic Programming Algorithm algorithms dynamic programming Dynamic Programming math python   youtube video 
 
-Now, let’s take a look at the item N. We cannot place it in the last position but we can put it at position 1 to N-1 so N-1 choices. If we put it at K where K is not N, then we have two choices for K, we can swap it with N thus tex_42b0296b8359c0062b284e87b5d0d865 Teaching Kids Programming - (!3+3)*!3=10 - Derangement Algorithms via Dynamic Programming Algorithm algorithms dynamic programming Dynamic Programming math python teaching kids programming youtube video  or we don’t, thus tex_59c7454ce8f4b698ac032c4b8019eeb5 Teaching Kids Programming - (!3+3)*!3=10 - Derangement Algorithms via Dynamic Programming Algorithm algorithms dynamic programming Dynamic Programming math python teaching kids programming youtube video 
+Now, let’s take a look at the item N. We cannot place it in the last position but we can put it at position 1 to N-1 so N-1 choices.
+If we put it at K where K is not N, then we have two choices for K, we can swap it with N thus tex_42b0296b8359c0062b284e87b5d0d865   - (!3+3)*!3=10 - Derangement Algorithms via Dynamic Programming Algorithm algorithms dynamic programming Dynamic Programming math python   youtube video  or we don’t, thus tex_59c7454ce8f4b698ac032c4b8019eeb5   - (!3+3)*!3=10 - Derangement Algorithms via Dynamic Programming Algorithm algorithms dynamic programming Dynamic Programming math python   youtube video 
 
-tex_b3bbce5870f4cf5c2bf26e0a52479b51 Teaching Kids Programming - (!3+3)*!3=10 - Derangement Algorithms via Dynamic Programming Algorithm algorithms dynamic programming Dynamic Programming math python teaching kids programming youtube video 
+    - (!3+3)*!3=10 - Derangement Algorithms via Dynamic Programming Algorithm algorithms dynamic programming Dynamic Programming math python   youtube video 
 so further simplified to:
-tex_2608a59b4e3a25425bb419466b9d7c41 Teaching Kids Programming - (!3+3)*!3=10 - Derangement Algorithms via Dynamic Programming Algorithm algorithms dynamic programming Dynamic Programming math python teaching kids programming youtube video 
+tex_2608a59b4e3a25425bb419466b9d7c41   - (!3+3)*!3=10 - Derangement Algorithms via Dynamic Programming Algorithm algorithms dynamic programming Dynamic Programming math python   youtube video 
 
 Thus, recursive algorithm similar to Fibonacci numbers which can be done in simple Recursion:
 
@@ -96,5 +97,24 @@ def f(n):
         return 1
     return (n-1)*(f(n-1)+f(n-2))
 
+def derangment(n):
+    der=[0]*(n+1)
+    der[0]=0
+    der[1]=0
+    der[2]=1
+    for i in range(3,n+1):
+        der[i]=(i-1)*(der[i-1]+der[i-2])
+    return der[n]
 
+def derangment2(n):
+    if n in (0,1):
+        return 0
+    if n==2:
+        return 1
+    a,b=0,1
+    for i in range(3,n+1):
+        a,b=b,(i-1)*(a+b)
+    return b
 print(f(3))
+print(derangment(3))
+print(derangment2(3))

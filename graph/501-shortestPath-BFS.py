@@ -1,13 +1,19 @@
 #BFS only works for directed unweighted graph
-from collections import deque
+from collections import deque,defaultdict
 from math import inf
 def shortestPath(G,paths):
-    n=len(G)
-    d=[[0 if i==j else inf for i in range(n)] for j in range(n)]
+    #Below codes is unused now
+    # n=len(G)
+    # d=[[0 if i==j else inf for i in range(n)] for j in range(n)]
     
-    for i,v in enumerate(G):
-        for j in v:
-            d[i][j]=1
+    # for i,v in enumerate(G):
+    #     for j in v:
+    #         d[i][j]=1
+    # g=defaultdict(list)
+    # for i,v in enumerate(G):
+    #     for j in v:
+    #         g[i].append(j)
+    #Above codes are unused now
     def bfs(i,j):
         if i==j:
             return 0
@@ -36,6 +42,6 @@ ports = [
     []
 ]
 shipments = [
-    [2, 4]
+    [2, 3]
 ]
 print(shortestPath(ports,shipments))
