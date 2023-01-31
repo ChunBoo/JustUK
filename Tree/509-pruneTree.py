@@ -15,6 +15,8 @@ class TreeNode(object):
         self.val = val
         self.left = left
         self.right = right
+    # def printTree(self):
+    #     while 
 class Solution(object):
     def pruneTree(self, root):
         """
@@ -30,3 +32,14 @@ class Solution(object):
         if not root.left and not root.right and root.val!=1:
             return None
         return root
+    
+
+root=TreeNode(1)
+left=TreeNode(0)
+right=TreeNode(1)
+right2=TreeNode(1)
+root.left=left
+root.right=right
+right.right=right2
+
+Solution().pruneTree(root)
