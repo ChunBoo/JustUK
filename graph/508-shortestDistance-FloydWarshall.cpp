@@ -1,15 +1,18 @@
 #include<iostream>
 #include<vector>
-
+#include<limits>
 using VEC=std::vector<int>;
 using MATRIX=std::vector<VEC>;
+// const int inf=std::numeric_limits<int>::max();
 
+// https://www.geeksforgeeks.org/floyd-warshall-algorithm-dp-16/
 using std::cout;
 
 int shortestDistance(const VEC& d,int s,int e)
 {
+    const int INF=0X3F3F3F;
     int n=d.size();
-    MATRIX D(n,VEC(n,0x3f3f3f));  //can not set the default value as INT_MAX, as it will be overflow....
+    MATRIX D(n,VEC(n,INF));  //can not set the default value as INT_MAX, as it will be overflow....
 
     for(int i=0;i<n-1;++i)
     {
@@ -30,7 +33,7 @@ int shortestDistance(const VEC& d,int s,int e)
 
 int main()
 {
-    VEC distance={11,12,3,4};
+    VEC distance={111,12,3,4};
     int start=0,stop=1;
     cout<<shortestDistance(distance,start,stop);
 }
