@@ -1,9 +1,9 @@
 # Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+class TreeNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 
 class Solution(object):
     def lowestCommonAncestor(self, root, p, q):
@@ -25,7 +25,7 @@ class Solution(object):
                 break;
         return root
     def lowestCommonAncestor2(self, root, p, q):
-            """
+        """
         :type root: TreeNode
         :type p: TreeNode
         :type q: TreeNode
@@ -62,7 +62,9 @@ class Solution2:
             
         dfs(root, None)
         seen = set()
-        
+        for k,v in parent.items():
+            if k and v:
+                print(k.val,v.val)
         while p:      
             seen.add(p)            
             p = parent[p]
@@ -72,3 +74,25 @@ class Solution2:
                 return q
             q = parent[q]
         return None
+    
+    
+six=TreeNode(6)
+seven=TreeNode(7)
+four=TreeNode(4)
+five=TreeNode(5)
+three=TreeNode(3)
+two=TreeNode(2)
+one=TreeNode(1)
+eight=TreeNode(8)
+
+two.left=one
+two.right=three
+five.left=four
+five.right=six
+four.left=two
+seven.left=five
+
+seven.right=eight
+
+# print(Solution().lowestCommonAncestor(seven, one, three).val)
+print(Solution2().lowestCommonAncestor(seven, one, three).val)
