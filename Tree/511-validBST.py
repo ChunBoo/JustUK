@@ -20,3 +20,17 @@ class Solution:
                 st.append((root.right,root.val,R))
         
         return True
+    
+        def isValidBST2(self, root: Optional[TreeNode]) -> bool:   
+            prev = -inf
+            def dfs(root):
+                nonlocal prev
+                if not root:
+                    return True
+                if not dfs(root.left):
+                    return False
+                if root.val <= prev:
+                    return False
+                prev = root.val
+                return dfs(root.right)        
+            return dfs(root) 
