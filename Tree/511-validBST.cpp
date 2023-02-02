@@ -12,7 +12,8 @@ bool isValidBST(const TreeNode* root)
     if(!root)
         return true;
 
-    STACK st{PAIR(root,std::pair<int,int>(INT_MIN,INT_MAX))};
+    STACK st{};
+    st.push(PAIR(root,std::pair<int,int>(INT_MIN,INT_MAX)));
     while(!st.empty())
     {
         PAIR top=st.top();
@@ -31,6 +32,46 @@ bool isValidBST(const TreeNode* root)
     return true;
 }
 
+bool isValidBSTInorder(const TreeNode* root)
+{
+    std::stack<const TreeNode*> st{};
+    int prev=INT_MIN;
+    if(!root)
+        return true;
+    while(root ||!st.empty())
+    {
+        while(root)
+        {
+            st.push(root);
+            root=root->left;
+        }
+        root=st.top();
+        st.pop();
+        if(root->m_val<=prev)
+            return false;
+        prev=root->m_val;
+        root=root->right;
+    }
+    return true;
+}
+bool dfoo(const TreeNode* root,int& prev)
+{
+    if(!root)
+        return true;
+    if(!dfoo(root->left,prev))
+        return false;
+    if(root->m_val<=prev)
+        return false;
+    prev=root->m_val;
+    dfoo(root->right,prev);
+}
+bool isValidBSTDfs(const TreeNode* root)
+{
+    int prev=INT_MIN;
+    return dfoo(root,prev);
+    
+}
+
 int main()
 {
     TreeNode* seven=new TreeNode(7);
@@ -47,5 +88,7 @@ int main()
     two->left=one;
     two->right=three;
     seven->right=eight;
-    cout<<isValidBST(seven);
+    // cout<<isValidBST(seven)<<'\n';
+    // cout<<isValidBSTInorder(seven);
+    cout<<isValidBSTDfs(seven);
 }
