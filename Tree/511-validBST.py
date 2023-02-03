@@ -9,7 +9,6 @@ class Solution:
     def isValidBST(self, root):
         if not root:
             return True
-        # INF=pow(2,31)
         st=[(root,-inf,inf)]
         while st:
             root,L,R =st.pop()
@@ -19,7 +18,6 @@ class Solution:
                 st.append((root.left,L,root.val))
             if root.right:
                 st.append((root.right,root.val,R))
-        
         return True
     
     def isValidBST2(self, root):
