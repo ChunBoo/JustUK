@@ -5,12 +5,16 @@
 using std::cout;
 using STR=std::string;
 using VEC=std::vector<STR>;
-void permutations(STR s,int l,int r,VEC& sList)
+void permutations(STR &s,int l,int r,VEC& sList)
 {
     if(l==r)
         // return s;
+        {
+        cout<<s<<'\n';
         sList.push_back(s);
-    for(int i=l;i<r;++i)
+        // return ;
+        }
+    for(int i=l;i<=r;++i)  //i can be equal to r
     {
         std::swap(s[i],s[l]);
         permutations(s,l+1,r,sList);
@@ -22,6 +26,7 @@ bool reorderedPowerOf2(STR s)
 {
     VEC v{};
     permutations(s,0,s.size()-1,v);
+
     for(auto &ss:v)
     {
         int sv=std::stoll(ss);
@@ -33,7 +38,7 @@ bool reorderedPowerOf2(STR s)
 
 int main()
 {
-    STR s="254";
+    STR s{"254"};
     cout<<reorderedPowerOf2(s);
 }
 
