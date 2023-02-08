@@ -25,6 +25,31 @@ Hints:
 You cannot take two adjacent rows/cols. Does this sound familiar?
 Solve the problem for each single row and get maximum points for each row, then create a new array with these values and perform the same operation on the new array
 """
+def fBottom2Up(nums):
+    n=len(nums)
+    if not n:
+        return 0
+    if n==1:
+        return nums[0]
+    if n==2:
+        return max(nums)
+    dp=[nums[0],max(nums[0],nums[1])]
+    for i in range(2,n):
+        dp.append(max(dp[-1])+nums[i],dp[-1])
+    return dp[-1]
+
+def fTop2Down(nums):
+    n=len(nums)
+    if n==0:
+        return 0
+    def g(i):
+        if not i:
+            return nums[0]
+        if i==1:
+            return max(nums[0],nums[1])
+        return max(g(i-1)+nums[i],g(i-1))
+    return g(len(nums)-1)
+        
 def f(nums):
     n=len(nums)
     if n==0:
