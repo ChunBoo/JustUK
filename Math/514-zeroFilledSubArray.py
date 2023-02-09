@@ -17,7 +17,7 @@ There is no occurrence of a subarray with a size more than 2 filled with 0. Ther
 '''
 from itertools import groupby
 class Solution:
-    def zeroFilledSubarray(self, nums):
+    def zeroFilledSubarray(self, nums):  #sub array is continue,but sub sequence is not necessary
         ans=0
         for a,b in groupby(nums):
             if a==0:
