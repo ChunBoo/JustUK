@@ -1,4 +1,5 @@
 from functools import lru_cache
+from math import comb
 class Solution:
     def numberOfWays(self, startPos: int, endPos: int, k: int) -> int:    
         @lru_cache
@@ -16,8 +17,12 @@ class Solution:
             return f(s-1,e,kk-1)+f(s+1,e,kk-1)
         return f(startPos,endPos,k)%(10**9+7)
     
+def numberOfWays(s,e,k):
+    d=abs(e-s)
+    return comb(k,(d+k)//2)
     
 start=1
 end=2
 k=3
 print(Solution().numberOfWays(start,end,k))
+print(numberOfWays(start,end,k))
