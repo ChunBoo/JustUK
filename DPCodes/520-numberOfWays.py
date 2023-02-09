@@ -6,8 +6,8 @@ class Solution:
             d=abs(s-e)
             if d>kk:
                 return 0
-            # if d&1 !=kk&1:
-            #     return 0
+            if d&1 !=kk&1:  #for the reason of d and kk should be odd or even at same time
+                return 0
             if kk==0:
                 if s==e:
                     return 1
