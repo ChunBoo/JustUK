@@ -33,9 +33,9 @@ def fBottom2Up(nums):
         return nums[0]
     if n==2:
         return max(nums)
-    dp=[nums[0],max(nums[0],nums[1])]
+    dp=[max(nums[0],nums[1])]
     for i in range(2,n):
-        dp.append(max(dp[-1])+nums[i],dp[-1])
+        dp.append(max(dp[-1]+nums[i],dp[-1]))
     return dp[-1]
 
 def fTop2Down(nums):
@@ -61,8 +61,10 @@ def f(nums):
     for i in nums:
         a,b=b,max(a+i,b)
     return b
+
 def largestSumOfNonAdjacentNums(M):
-    return f([f(r) for r in M])
+    # return f([f(r) for r in M])
+    return fBottom2Up([fBottom2Up(r) for r in M])
 
 
 matrix = [
