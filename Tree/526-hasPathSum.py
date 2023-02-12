@@ -15,5 +15,14 @@ class Solution:
             if s==targetSum and not root.left and not root.right:
                 return True
             return f(root.left,s) or f(root.right,s)
-
         return f(root,0)
+    def hasPathSum2(self,root,target):
+        def f(root,remainding):
+            if not  root:
+                return False
+            remainding-=root.val
+            
+            if remainding==0 and not root.left and not root.right:
+                return True
+            return f(root.left,remainding) or f(root.right,remainding)
+        return f(root,target)
