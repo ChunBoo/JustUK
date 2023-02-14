@@ -15,7 +15,7 @@ int concatenateBin(int n)
             b+=1;
         ans<<=b;
         ans+=i;
-        // ans%=MOD;
+        ans%=MOD;
     }
     return ans;
 }
