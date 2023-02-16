@@ -8,32 +8,38 @@ using STR=std::string;
 using VEC=std::vector<char>;
 using MAP=std::map<char,VEC>;  //'1':2
 
-
-
-
-MAP groupBy(const STR& s)
+STR groupBy(const STR& s)
 {
-    MAP ans{};
-    if(s.empty())
-        return ans;
-    char pre=s[0];
-    int len=s.size();
-    for(int i=1;i<len;++i)
-    {
-        char cur=s[i];
-        if(pre)
-        ans[c].push_back(c)
-    }
+   STR ans{};
+   int n=s.size();
+   for(int i=0;i<n;)
+   {
+    int j=i+1;
+    while(s[i]==s[j])
+        j+=1;
+    int cnt=j-i;
+    ans+=('0'+cnt);
+    ans+=s[i];
+    i=j;
+   }
+   return ans;
 }
 
 STR f(int n)
 {
     if(n==1)
         return "1";
-    
+    STR a=f(n-1);
+    STR ans=groupBy(a);
+    return ans;
 }
 
 STR countAndSay(int n)
 {
+    return f(n);
+}
 
+int main()
+{
+    cout<<countAndSay(5);
 }
