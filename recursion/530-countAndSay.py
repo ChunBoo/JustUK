@@ -12,5 +12,9 @@ class Solution:
             return "".join(ans)
         return f(n)
     
-    
-print(Solution().countAndSay(5))
+
+
+s="1211"
+for i,j in groupby(s):
+    print("i=",type(i)," j= ",list(j))
+# print(Solution().countAndSay(5))
