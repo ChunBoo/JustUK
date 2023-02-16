@@ -28,6 +28,26 @@ a3b2c2dsa
 // #include "solution.h"
 using namespace std;
 
+using STR=std::string;
+
+STR stringCompression(const STR& s)
+{
+    STR ans{};
+    int n=s.size();
+    for(int start=0;start<n;)
+    {
+        int e=start+1;
+        while(s[e]==s[start])
+            e+=1;
+        int cnt=e-start;
+        ans+=('0'+cnt);  //should use '0'+number to convert the integer as character,but char(int) will not work
+        ans+=s[start];
+        start=e;
+    }
+    return ans;
+}
+
+
 void stringCompression(char input[]) {
     string ans="";
     
@@ -53,8 +73,11 @@ void stringCompression(char input[]) {
 
 
 int main() {
-    char input[1000];
-    cin.getline(input, 1000);
-    stringCompression(input);
-    cout << input << endl;
+    // char input[1000];
+    // cin.getline(input, 1000);
+    // stringCompression(input);
+    // cout << input << endl;
+
+    STR ts{"11211"};
+    cout<<stringCompression(ts);
 }
