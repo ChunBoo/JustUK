@@ -1,5 +1,5 @@
 class Solution:
-    def haveConflict(self, event1: List[str], event2: List[str]) -> bool:
+    def haveConflict(self, event1, event2):
         a1,a2=event1
         b1,b2=event2
         return max(a1,b1)<=min(a2,b2)
@@ -17,3 +17,8 @@ class Solution:
         #     return True
         # # elif sTime2H==endTime1H an
         # return False
+        
+        
+time1=["02:00","04:00"]
+time2=["04:10","05:00"]
+print(Solution().haveConflict(time1, time2))
