@@ -1,5 +1,6 @@
+from collections import deque
 class Solution:
-    def minMutation(self, startGene: str, endGene: str, bank: List[str]) -> int:
+    def minMutation(self, startGene, endGene, bank):
         q=deque([(startGene,0)])
         seen=set({startGene})
         while q:
@@ -14,6 +15,8 @@ class Solution:
                         q.append((n,d+1))
         return -1
     
-    "AACCGGTT"
-"AACCGGTA"
-["AACCGGTA"]
+s="AACCGGTT"
+e="AACCGGTA"
+bank=["AACCGGTA"]
+
+print(Solution().minMutation(s,e,bank))
