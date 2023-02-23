@@ -42,19 +42,20 @@ int nearestExit(const MATRIX& m,VEC_INT entry)
         {
             int nr=pos[0]+dir[0];
             int nc=pos[1]+dir[1];
-
-            if(seen.find(VEC_INT(nr,nc))!=seen.end()||nr<0 ||nc<0||nr==rows-1||nc==cols-1)
+            VEC_INT tmp{nr,nc};
+            if((seen.find(tmp)!=seen.end())||(nr<0) ||(nc<0)||(nr>=rows-1)||(nc>=cols-1))
                 continue;
             if(m[nr][nc]=='.')
             {
-                seen.insert(VEC_INT(nr,nc));
-                q.push_back(std::make_pair(VEC_INT(nr,nc),d+1));
+                seen.insert(tmp);
+                q.push_back(std::make_pair(tmp,d+1));  //seems make_pair can not work for anonymous object
             }
         }
         
     }
     return -1;
 }
+
 
 int main()
 {
