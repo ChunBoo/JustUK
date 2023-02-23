@@ -2,7 +2,7 @@
 from collections import deque
 from math import inf
 class Solution:
-    def nearestExit(self, maze: List[List[str]], entrance: List[int]) -> int:
+    def nearestExit(self, maze, entrance):
         rows=len(maze)
         cols=len(maze[0])
         def isExit(r,c):
@@ -11,16 +11,21 @@ class Solution:
             return False
         q=deque([(entrance,0)])
         seen=set()
-        ans =inf
+        
         while q:
             (r,c),d=q.popleft()
-            if (r,c)!=tuple(entrance) and isExit(r,c):
+            if (r,c)!=tuple(entrance) and isExit(r, c):
                 return d
             for dr,dc in ((0,1),(1,0),(0,-1),(-1,0)):
-                nr,nc=dr+r,dc+c
-                if (nr, nc) in seen or nr < 0 or nc < 0 or nr == rows or nc == cols:
+                nr,nc=r+dr,c+dc
+                if nr<0 or nc<0 or nr>=rows or nc>=cols or (nr,nc) in seen:
                     continue
-                if maze[nr][nc] == '.':
-                    q.append(((nr,nc),1+d))
+                if maze[nr][nc]=='.':
                     seen.add((nr,nc))
-        return -1 
+                    q.append(((nr,nc),d+1))
+        return -1
+    
+maze = [["+","+",".","+"],[".",".",".","+"],["+","+","+","."]]
+entrance = [1,2]
+
+print(Solution().nearestExit(maze, entrance))
