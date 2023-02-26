@@ -1,42 +1,43 @@
 
-# def nearestExit(m,entry):
-#     rows=len(m)
-#     cols=len(m[0])
+def nearestExit(m,entry):
+    rows=len(m)
+    cols=len(m[0])
     
-#     def isExit(r,c):
-#         if r==0 or c==0 or r==rows-1 or c==cols-1:
-#             return m[r][c]=='.'
-#         return False
+    def isExit(r,c):
+        if r==0 or c==0 or r==rows-1 or c==cols-1:
+            return m[r][c]=='.'
+        return False
     
-#     def DLS(pos,d):
-#         if isExit(pos[0],pos[0]) and pos!=tuple(entry):
-#             return True
-#         if pos in seen:
-#             return False
-#         if d<0:
-#             return False
-#         # seen.add(pos)
-#         r,c=pos
-#         m[r][c]='+'
-#         for dr,dc in ((0,1),(1,0),(-1,0),(0,-1)):
-#             nr,nc=dr+pos[0],dc+pos[1]
-#             # r,c=pos
-#             #nr,nc=dr+r,dc+c
-#             if 0<=nr<=rows-1 and 0<=nc<=cols-1 and m[nr][nc]=='.' :
-#                 if DLS((nr,nc),d-1):
-#                     return True
-#         # seen.remove(pos)
-#         m[r][c]='.'
-#         return False
+    def DLS(pos,d):
+        if isExit(pos[0],pos[1]) and pos!=tuple(entry):
+            return True
+        # if pos in seen:
+        #     return False
+        if d<=0:
+            return False
+        # seen.add(pos)
+        r,c=pos
+        m[r][c]='+'
+        for dr,dc in ((0,1),(1,0),(-1,0),(0,-1)):
+            nr,nc=dr+r,dc+c
+            # r,c=pos
+            #nr,nc=dr+r,dc+c
+            if 0<=nr<=rows-1 and 0<=nc<=cols-1 and m[nr][nc]=='.' :
+                if DLS((nr,nc),d-1):
+                    return True
+        # seen.remove(pos)
+        m[r][c]='.'
+        return False
             
-    # d=0
-    # D=rows*cols
-    # seen=set()
-    # while d<D:
-    #     if DLS(tuple(entry),d):
-    #         return d
-    #     d+=1
-    # return -1
+    d=0
+    D=rows*cols
+    seen=set()
+    while d<D:
+        if DLS(tuple(entry),d):
+            return d
+        d+=1
+    return -1
+'''    
 class Solution:
     def nearestExit(self, maze,entrance): 
         rows = len(maze)
@@ -72,7 +73,8 @@ class Solution:
             d += 1
         
         return -1
+'''
 maze = [["+","+",".","+"],[".",".",".","+"],["+","+","+","."]]
 entrance = [1,2]
 
-print(Solution().nearestExit(maze, entrance))
+print(nearestExit(maze, entrance))
