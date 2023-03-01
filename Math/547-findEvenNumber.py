@@ -1,5 +1,6 @@
+from collections import Counter
 class Solution:
-    def findEvenNumbers(self, digits: List[int]) -> List[int]:
+    def findEvenNumbers(self, digits):
         c=Counter(digits)
         ans=[]
         for n in range(100,999,2):
@@ -14,8 +15,8 @@ class Solution:
                 if isAllInDigits:
                     ans.append(n)
         return ans
-        def findEvenNumbers(self, digits: List[int]) -> List[int]:
-            C=Counter(digits)
+    def findEvenNumbers2(self, digits):
+        C=Counter(digits)
         ans=[]
         for n in range(100,999,2):
             a=n//100
@@ -24,4 +25,5 @@ class Solution:
             if Counter((a,b,c))<=C:
                 ans.append(n)
         return ans
-[2,1,3,0]
+nums=[2,1,3,0]
+print(Solution().findEvenNumbers(nums))
