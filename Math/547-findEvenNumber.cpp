@@ -37,8 +37,13 @@ VEC findEvenNumbers(const VEC& digits)
 
 int main()
 {
-    VEC nums{2,1,3,0};
-    VEC res=findEvenNumbers(nums);
-    for(auto &v:res)
-        cout<<v<<',';
+
+        // VEC nums{2,1,3,0};
+        // VEC res=findEvenNumbers(nums);
+        // for(auto &v:res)
+        //     cout<<v<<',';
+    MAP m{{0,1},{1,1},{3,1}};
+    MAP t{{0,1},{1,1},{3,1},{2,1}};
+    bool res=m<t;   //false
+    cout<<res;
 }
