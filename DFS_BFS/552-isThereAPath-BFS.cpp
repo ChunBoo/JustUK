@@ -23,7 +23,11 @@ bool isThereAPath(const MATRIX& m)
         q.pop_front();
         int r=cur.first[0],c=cur.first[1];
         int b=cur.second;
-        b+=(m[r][c]==1?1:-1);
+        // b+=(m[r][c]==1?1:-1);
+        if(m[r][c]==1)
+            b+=1;
+        else
+            b-=1;
         if((r==rows-1)&&(c==cols-1))
         {
             if(b==0)
