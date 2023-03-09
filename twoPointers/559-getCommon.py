@@ -1,5 +1,6 @@
+from bisect import bisect_left
 class Solution:
-    def getCommon(self, nums1: List[int], nums2: List[int]) -> int:
+    def getCommon(self, nums1, nums2) :
         l1=len(nums1)
         l2=len(nums2)
         if l1>l2:
@@ -27,4 +28,6 @@ class Solution:
         # s3.sort()
         # return s3[0] if len(s3)>0 else -1
         
-    nums1 = [1,2,3,6], nums2 = [2,3,4,5]
+nums1 = [1,2,3,6]
+nums2 = [2,3,4,5]
+print(Solution().getCommon(nums1, nums2))
