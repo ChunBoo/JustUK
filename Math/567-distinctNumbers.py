@@ -34,4 +34,8 @@ class Solution(object):
                     nums.add(i)
                     f(i)
         f(n)
+        print(nums)
         return len(nums)
+    
+    
+print(Solution().distinctIntegers(5))
