@@ -1,3 +1,5 @@
+from heapq import heapify,heappop,heappush
+from math import sqrt
 class Solution(object):
     def pickGifts(self, gifts, k):
         """
@@ -25,3 +27,5 @@ class Solution(object):
         
         # # print(gifts)
         # return sum(gifts)
+gifts=[10,1,5,2,9,7,4]
+print(Solution().pickGifts(gifts,3))
