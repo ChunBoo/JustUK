@@ -33,8 +33,13 @@ VEC separateDigits2(int n)
 
 int main()
 {
+    std::vector<VEC> m{{23},{24}};
+    VEC test{1,2,3,4,5,6};
+    std::reverse(test.begin(),test.end());
+    for(auto &i:test)
+        cout<<i<<',';
     VEC res=separateDigits2(19810303);
     // VEC res=separateDigits2();
-    for(auto i:res)
-        cout<<i<<',';
+    // for(auto i:res)
+        // cout<<i<<',';
 }
