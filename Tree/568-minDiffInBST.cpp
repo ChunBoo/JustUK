@@ -1,5 +1,11 @@
 #include<iostream>
 #include<cmath>
+#include<vector>
+
+using std::cout;
+using VEC=std::vector<int>;
+
+
 class TN
 {
     public:
@@ -29,7 +35,29 @@ int minDiff(const TN* root)
     dfoo(root,prev,ans);
     return ans;
 }
+void inorderTra(const TN* root,VEC& nums)
+{
+    if(!root)
+        return ;
+    inorderTra(root->left,nums);
+    nums.push_back(root->m_v);
+    inorderTra(root->right,nums);
+}
 
+int minDiff2(const TN* root)
+{
+    // TN* prev=nullptr;
+    int ans=INT_MAX;
+    // dfoo(root,prev,ans);
+    VEC nums{};
+    inorderTra(root,nums);
+    int n=nums.size();
+    for(int i=1;i<n;++i)
+    {
+        ans=std::min(ans,nums[i]-nums[i-1]);
+    }
+    return ans;
+}
 int main()
 {
     TN *root=new TN(10);
@@ -40,5 +68,5 @@ int main()
     root->left=one;
     // two->right=one;
     root->right=two;
-    std::cout<<minDiff(root);
+    std::cout<<minDiff2(root);
 }
