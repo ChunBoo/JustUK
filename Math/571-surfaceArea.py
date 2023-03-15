@@ -9,7 +9,7 @@ Note: The bottom face of each shape counts toward its surface area.
 '''
 
 class Solution:
-    def surfaceArea(self, grid: List[List[int]]) -> int:
+    def surfaceArea(self, grid) :
         n=len(grid)
         ans=0
         for r in range(n):
@@ -21,3 +21,6 @@ class Solution:
                 if c>0:
                     ans-=min(grid[r][c],grid[r][c-1])*2
         return ans
+    
+g=[[1,2],[3,4]]
+print(Solution().surfaceArea(g))
