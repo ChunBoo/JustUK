@@ -12,8 +12,16 @@ def preOrderStack(root):
         return []
     
     s=[]
+    ans=[]
     s.append(root)
     while s:
+        cur=s.pop()
+        ans.append(cur.val)
+        if cur.right:
+            s.append(cur.right)
+        if cur.left:
+            s.append(cur.left)
+    return ans
         
 
 
@@ -39,3 +47,4 @@ root.left=two
 root.right=three
 
 print(bfoo(root))
+print(preOrderStack(root))
