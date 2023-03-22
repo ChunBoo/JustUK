@@ -6,7 +6,7 @@ using MATRIX=std::vector<VEC>;
 using std::cout;
 
 
-MATRIX threeSum(const VEC& nums)
+MATRIX threeSum(VEC& nums)
 {
     std::sort(nums.begin(),nums.end());
     MATRIX ans{};
