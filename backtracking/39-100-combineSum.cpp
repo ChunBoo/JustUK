@@ -17,12 +17,12 @@ void test(MATRIX& ret,VEC& nums,int target,int idx,int sum,VEC cur)
 	}
 	for(int j=idx;j<nums.size();++j)
 	{
-		// if(sum+nums[j]>target)
-		// 	break;
-		// VEC tmp{cur};
-		// tmp.push_back(nums[j]);
-		cur.push_back(nums[j]);
-		test(ret,nums,target,idx+1,sum+nums[j],cur);
+		if(sum+nums[j]>target)
+			break;
+		VEC tmp{cur};
+		tmp.push_back(nums[j]);
+		// cur.push_back(nums[j]);
+		test(ret,nums,target,j,sum+nums[j],tmp);
 	}
 }
 
