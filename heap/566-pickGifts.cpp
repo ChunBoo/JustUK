@@ -38,6 +38,8 @@ int pickGifts(VEC& gifts,int k)
 int main()
 {
     VEC gifts{10,1,5,2,9,7,4};
-    // cout<<pickGifts(gifts,3)<<'\n';
-    cout<<pickGiftsHeap(gifts,3);
+    cout<<pickGifts(gifts,3)<<'\n';
+    VEC gifts2{10,1,5,2,9,7,4};
+
+    cout<<pickGiftsHeap(gifts2,3);
 }
