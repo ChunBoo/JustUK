@@ -1,5 +1,5 @@
 class Solution:
-    def searchRange(self, nums: List[int], target: int) -> List[int]:
+    def searchRange(self, nums, target):
         
         n=len(nums)
         s,e=-1,-1
@@ -21,3 +21,7 @@ class Solution:
             elif target>nums[mid]:l+=1
             else: r-=1;
         return [s,e]
+    
+
+nums=[0,1,2,3,3,5,6,3]
+print(Solution().searchRange(nums, 3))
