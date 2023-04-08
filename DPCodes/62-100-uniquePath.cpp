@@ -1,3 +1,7 @@
+#include<iostream>
+#include<vector>
+using std::cout;
+using std::vector;
 class Solution {
 public:
     int uniquePaths(int m, int n) {
@@ -10,3 +14,9 @@ public:
         return dp[m-1][n-1];
     }
 };
+
+int main()
+{
+    int res=Solution().uniquePaths(3,7);
+    cout<<res;
+}
