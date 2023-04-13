@@ -13,8 +13,9 @@ Example 3:
 Input: coins = [1], amount = 0
 Output: 0
 '''
+from math import inf
 class Solution:
-    def coinChange(self, coins: List[int], amount: int) -> int:
+    def coinChange(self, coins, amount):
         # ans=0
         # coins.sort(reverse=True)
         # for c in coins:
@@ -32,4 +33,9 @@ class Solution:
             for j in coins:
                 if j<=i:
                     dp[i]=min(dp[i-j]+1,dp[i])
+                else:
+                    break
         return dp[-1] if dp[-1]!=inf else -1
+coins = [1,5,10,11]
+amount = 12
+print(Solution().coinChange(coins, amount))
