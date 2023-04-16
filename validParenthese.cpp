@@ -42,7 +42,9 @@ bool isValidParentheseUsingStack(const std::string& s)
             std::string tempStr;
             tempStr+=st.top();
             tempStr+=i;
-            if(completedParenthese.find(tempStr)!=std::string::npos)
+            if(completedParenthese.find(tempStr)==std::string::npos)
+                return false;
+            else
                 st.pop();
         }
     }
@@ -51,7 +53,7 @@ bool isValidParentheseUsingStack(const std::string& s)
 
 int main()
 {
-    std::string test{"{}{}["};
+    std::string test{"(])"};
     bool isValid=isValidParentheseUsingStack(test);
     std::cout<<test<<" is valid parenthese? "<<(isValid?"True":"False")<<"\n";
     return 0;
