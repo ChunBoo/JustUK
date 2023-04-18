@@ -61,6 +61,8 @@ using std::vector;
 int main()
 {
     VEC nums{5,2,1};
+    VEC nums2{4,5,6};
+    // nums+=nums2;
     //VEC res=
     QuickSort(nums,0,2,3);
     for(auto &v:nums)
