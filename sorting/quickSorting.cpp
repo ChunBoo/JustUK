@@ -37,14 +37,15 @@ using std::vector;
 }
 */
     int partition(vector<int>& nums,int low,int high){
-        int pivot = nums[low];
-        while(low<high) {
-            while(low<high && nums[high]>=pivot)--high;
-            nums[low] = nums[high];
-            while(low<high && nums[low]<=pivot) ++low;
-            nums[high] = nums[low];
+        int pivot=nums[low];
+        while(low<high)
+        {
+            while(low<high&&nums[high]<=pivot) --high;  // <= is the descending order
+            nums[low]=nums[high];  //move the smaller to left side
+            while(low<high&&nums[low]>=pivot) ++low;    //>= is the ascending order
+            nums[low]=nums[high];  //move the larger to right side
         }
-        nums[low] = pivot;
+        nums[low]=pivot;
         return low;
             
     }
