@@ -1,3 +1,6 @@
+#include<iostream>
+#include<vector>
+using namespace std;
 class Solution {
 public:
 
@@ -14,3 +17,12 @@ public:
         return ans;
     }
 };
+
+int main()
+{
+    vector<int> nums{2,3,1,2,3,5,6};
+    // cout<<"t";
+    vector<int> res=Solution().findDisappearedNumbers(nums);
+    for(auto &v:res)
+        cout<<v<<',';
+}
