@@ -1,8 +1,11 @@
+#include<iostream>
+#include<algorithm>
+using std::cout;
 class Solution {
 public:
     int hammingDistance(int x, int y) {
         if(x<y)
-            swap(x,y);
+            std::swap(x,y);
         int ans=0;
         while(x)
         {
@@ -15,3 +18,10 @@ public:
         return ans;
     }
 };
+
+
+int main()
+{
+    int x=12,y=3;
+    cout<<Solution().hammingDistance(x,y);
+}
