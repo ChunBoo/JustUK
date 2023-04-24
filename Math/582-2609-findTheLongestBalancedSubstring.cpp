@@ -11,26 +11,33 @@ Input: s = "01000111"
 Output: 6
 Explanation: The longest balanced substring is "000111", which has length 6.
 */
+#include<iostream>
+#include<cmath>
+#include<string>
+
+using namespace std;
 class Solution {
 public:
     int findTheLongestBalancedSubstring(string s) {
-        int zeros=s[0]=='0',ones=s[0]=='1';
-        int n=s.size();
         int ans=0;
-        char prev='a';
-        for(int i=0;i<n;++i)
+        int ones=s[0]=='0',zeros=s[0]=='1';
+        int n=s.size(),prev=s[0];
+        for(int i=1;i<n;++i)
         {
             if(s[i]=='1')
             {
+                // zeros=0;
                 ones+=1;
                 if(zeros>=ones)
                     ans=max(ans,ones*2);
             }
-            else
+            else  //s[i]=='0'
             {
                 ones=0;
                 if(s[i]==prev)
+                {
                     zeros+=1;
+                }
                 else
                     zeros=1;
             }
@@ -39,3 +46,9 @@ public:
         return ans;
     }
 };
+
+int main()
+{
+    string s{"01000111001"};
+    cout<<Solution().findTheLongestBalancedSubstring(s);
+}
