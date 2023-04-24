@@ -1,11 +1,13 @@
 def nextPermutation(nums):
     n=len(nums)
     i=0
+    isFound=0
     for m in range(n-2,-1,-1):
         if nums[m]<nums[m+1]:
             i=m
+            isFound=1
             break
-    if i==-1:
+    if not isFound:
         nums.reverse()
     else:
         for j in range(n-1,i,-1):
@@ -19,6 +21,6 @@ def nextPermutation(nums):
     return nums
     
     
-nums=[1,2,3,4]
+nums=[1,1,5]
 print(nextPermutation(nums))
 # print(nums)
