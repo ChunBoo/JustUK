@@ -1,3 +1,10 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
+using VEC=std::vector<int>;
+
 class Solution {
 public:
     void sortColors(vector<int>& nums) {
@@ -15,3 +22,11 @@ public:
         }
     }
 };
+
+int main()
+{
+    VEC nums{2,2,0,1,1,0};
+    Solution().sortColors(nums);
+    for(auto &v:nums)
+        cout<<v<<',';
+}
