@@ -1,11 +1,11 @@
-from typing import DefaultDict
+from collections import defaultdict
 
 
 def maxAnagramGroup(words):
-    nb=DefaultDict(int)
+    nb=defaultdict(int)
     for w in words:
-            sorted(w)
-            nb[w]+=1
+            nw="".join(sorted(w))
+            nb[nw]+=1
     print(nb)
     return max(nb.values())
 
