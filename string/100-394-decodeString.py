@@ -20,7 +20,6 @@ class Solution:
         num=0
         res=""
         for c in s:
-
             if c.isdigit():
                 num=num*10+int(c)
             elif c=="[":
@@ -32,3 +31,6 @@ class Solution:
             else:
                 res+=c
         return res
+    
+s = "3[a]2[bc]"
+print(Solution().decodeString(s))
