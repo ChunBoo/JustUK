@@ -29,12 +29,11 @@ STR decodeString(STR s)
             PAIR top=st.top();
             st.pop();
             int cnt=top.first;
-            STR preRes=top.second;
+            STR preString=top.second;
             STR tmp{};
             for(int i=0;i<cnt;++i)
                 tmp+=ans;
-            preRes+=tmp;
-            ans=preRes;
+            ans=preString+tmp;
         }
         else
             ans+=c;

@@ -12,17 +12,22 @@ The substring with start index = 0 is "cba", which is an anagram of "abc".
 The substring with start index = 6 is "bac", which is an anagram of "abc".
 */
 
+#include<iostream>
+#include<unordered_map>
+#include<vector>
+#include<string>
+using namespace std;
 
 class Solution {
 public:
     vector<int> findAnagrams(string s, string p) {
    unordered_map<char, int> need, window;
     for (char c : p) need[c]++;
-
+    int ssize=s.size(),psize=p.size();
     int left = 0, right = 0;
     int valid = 0;
     vector<int> res; // 记录结果
-    while (right < s.size()) {
+    while (right < ssize) {
         char c = s[right];
         right++;
         // 进行窗口内数据的一系列更新
@@ -32,9 +37,9 @@ public:
                 valid++;
         }
         // 判断左侧窗口是否要收缩
-        while (right - left >= p.size()) {
+        while (right - left >= psize) {
             // 当窗口符合条件时，把起始索引加入 res
-            if (valid == need.size())
+            if (valid == int(need.size()))
                 res.push_back(left);
             char d = s[left];
             left++;
@@ -49,3 +54,11 @@ public:
     return res;
     }
 };
+
+int main()
+{
+    string s = "cbaebabacd", p = "abc";
+    vector<int> res=Solution().findAnagrams(s,p);
+    for(auto &v:res)
+        cout<<v<<',';
+}
