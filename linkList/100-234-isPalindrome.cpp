@@ -46,4 +46,22 @@ bool isPalindrome(ListNode* head)
     }
     return true;
 }
+int main()
+{
+    ListNode *first=new ListNode(1);
+    
+    ListNode *second=new ListNode(2);
+    ListNode *third=new ListNode(2);
+    ListNode *four=new ListNode(1);
+    third->next=four;
+    second->next=third;
+    first->next=second;
+    bool res=isPalindrome(first);
+    cout<<res;
 
+    // while(res)
+    // {
+    //     cout<<res->val;
+    //     res=res->next;
+    // }
+}
