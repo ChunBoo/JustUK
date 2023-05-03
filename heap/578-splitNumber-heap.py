@@ -10,5 +10,5 @@ def splitNum(n):
             s2=s2*10+int(heappop(d))
     return s1+s2
 
-print(splitNum(1234))
+print(splitNum(4321))
         
