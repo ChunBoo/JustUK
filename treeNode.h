@@ -22,7 +22,7 @@ class TreeNode
             return newNode;
         }
 
-        void printTreeInOrder(TreeNode* root)  //left-->root->right
+        static void printTreeInOrder(TreeNode* root)  //left-->root->right
         {
             if(!root)
                 return ;
@@ -32,7 +32,7 @@ class TreeNode
             if(root->right)
                 printTreeInOrder(root->right);
         }
-        void printTreeNodePreOrder(TreeNode* root)
+        static void printTreeNodePreOrder(TreeNode* root)
         {
             if(!root)
                 return;
