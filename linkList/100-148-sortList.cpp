@@ -1,31 +1,27 @@
 /**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
+ * Definition for singly-linked list.*/
+  struct ListNode {
+      int val;
+      ListNode *next;
+      ListNode() : val(0), next(nullptr) {}
+      ListNode(int x) : val(x), next(nullptr) {}
+      ListNode(int x, ListNode *next) : val(x), next(next) {}
+  };
+ 
 
 /*
-由于题目要求空间复杂度是 O(1)，因此不能使用递归。因此这里使用 bottom-to-up 的算法来解决。
-
-太晚了，明天讲解！
-
-ok，归来！
-
+空间复杂度是 O(1)，因此不能使用递归。因此这里使用 bottom-to-up 的算法来解决。
 bottom-to-up 的归并思路是这样的：先两个两个的 merge，完成一趟后，再 4 个4个的 merge，直到结束。举个简单的例子：[4,3,1,7,8,9,2,11,5,6].
 
 step=1: (3->4)->(1->7)->(8->9)->(2->11)->(5->6)
 step=2: (1->3->4->7)->(2->8->9->11)->(5->6)
 step=4: (1->2->3->4->7->8->9->11)->(5->6)
 step=8: (1->2->3->4->5->6->7->8->9->11)
+
 链表里操作最难掌握的应该就是各种断链啊，然后再挂接啊。在这里，我们主要用到链表操作的两个技术：
 
 merge(l1, l2)，双路归并，我相信这个操作大家已经非常熟练的，就不做介绍了。
-cut(l, n)，可能有些同学没有听说过，它其实就是一种 split 操作，即断链操作。不过我感觉使用 cut 更准确一些，它表示，将链表 l 切掉前 n 个节点，并返回后半部分的链表头。
+cut(l, n)，是一种 split 操作，即断链操作。使用 cut 更准确一些，它表示，将链表 l 切掉前 n 个节点，并返回后半部分的链表头。
 额外再补充一个 dummyHead 大法，已经讲过无数次了，仔细体会吧。
 ---
 
@@ -54,6 +50,9 @@ for (step = 1; step < length; step *= 2) {
 	}
 }
 */
+#include<iostream>
+using std::cout;
+
 class Solution {
 public:
 ListNode* sortList(ListNode* head) {
@@ -63,7 +62,7 @@ ListNode* sortList(ListNode* head) {
         int length = 0;
         while (p) {
             ++length;
-            p = p->next;
+            p = p->next;  //get the total length of linklist
         }
         
         for (int size = 1; size < length; size <<= 1) {
@@ -115,3 +114,21 @@ ListNode* sortList(ListNode* head) {
         return dummyHead.next;
     }
 };
+
+int main()
+{
+    ListNode *one=new ListNode(1);
+    ListNode *two=new ListNode(2);
+    ListNode *three=new ListNode(3);
+    ListNode *four=new ListNode(4);
+
+    one->next=four;  //1.4.3.2
+    four->next=three;
+    three->next=two;
+    ListNode *res=Solution().sortList(one);
+    while(res)
+    {
+        cout<<res->val<<'\n';
+        res=res->next;
+    }
+}
