@@ -35,19 +35,18 @@ class Solution:
         def preOrder(root):
             if not root:
                 return
-            nodes.append(root.val)    
+            nodes.append(root)    
             preOrder(root.left)
             preOrder(root.right)
         preOrder(root)
         n=len(nodes)
-        pre=TreeNode(nodes[0])
-        root.right=pre
-        root=root.right
+        # pre=TreeNode(nodes[0])
+        # root.right=pre
+        # root=root.right
         for i in range(1,n):
-            cur=nodes[i]
-            curNode=TreeNode(cur)
-            pre.right=curNode
-            pre=pre.right
+            pre,cur=nodes[i-1],nodes[i]
+            pre.right=cur
+            pre.left=None
             
 one=TreeNode(1)
 two=TreeNode(2)
