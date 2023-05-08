@@ -1,38 +1,56 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
+#include "treeNode.h"
+#include<iostream>
+#include<vector>
+#include<deque>
+using std::cout;
+using VEC=std::vector<int>;
+using MATRIX=std::vector<VEC>;
+using Q=std::deque<TreeNode*>;
 class Solution {
 public:
-    vector<vector<int>> levelOrder(TreeNode* root) {
-        vector <vector <int>> ret;
-        if (!root) {
-            return ret;
+    MATRIX levelOrder(TreeNode* root) {
+      MATRIX ans{};
+      if(!root)
+        return ans;
+      Q q{};
+      q.push_back(root);
+      while(!q.empty())
+      {
+        int sz=q.size();
+        VEC tmp{};
+        for(int i=0;i<sz;++i)
+        {
+            TreeNode* node=q.front();
+            q.pop_front();
+            tmp.push_back(node->m_val);
+            if(node->left)
+                q.push_back(node->left);
+            if(node->right)
+                q.push_back(node->right);
         }
-
-        queue <TreeNode*> q;
-        q.push(root);
-        while (!q.empty()) {
-            int currentLevelSize = q.size();
-            vector<int> tmp;
-            // ret.push_back(vector <int> ());
-            for (int i = 1; i <= currentLevelSize; ++i) {
-                auto node = q.front(); q.pop();
-                tmp.push_back(node->val);
-                // ret.back().push_back(node->val);
-                if (node->left) q.push(node->left);
-                if (node->right) q.push(node->right);
-            }
-            ret.push_back(tmp);
-        }
-        
-        return ret;
+        ans.push_back(tmp);
+      }
+      return ans;
     }
 };
+
+int main()
+{
+    TreeNode *root=new TreeNode(1);
+    TreeNode *two=new TreeNode(2);
+    TreeNode *three=new TreeNode(3);
+    TreeNode *four=new TreeNode(4);
+    TreeNode *five=new TreeNode(5);
+    root->left=two;
+    root->right=three;
+    two->right=four;
+    three->left=five;
+
+    MATRIX res=Solution().levelOrder(root);
+    for(auto &v:res)
+    {
+        cout<<"\n";
+        for(auto &d:v)
+            cout<<d<<',';
+    }
+}
