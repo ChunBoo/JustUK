@@ -1,7 +1,14 @@
+//given a integer, return the total count of binary search trees which can be created by values in range [1,n];
+#include<iostream>
+#include<vector>
+
+using VEC=std::vector<int>;
+using std::cout;
+
 class Solution {
 public:
     int numTrees(int n) {
-        vector<int> dp(n+1,0);
+        VEC dp(n+1,0);
         dp[0]=1;
         dp[1]=1;
 
@@ -14,3 +21,9 @@ public:
         
     }
 };
+
+int main()
+{
+    int res=Solution().numTrees(3);
+    cout<<res;
+}
