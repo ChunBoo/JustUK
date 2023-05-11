@@ -1,5 +1,5 @@
 class Solution:
-    def productExceptSelf(self, nums: List[int]) -> List[int]:
+    def productExceptSelf(self, nums):
         n=len(nums)
         ans=[0]*(n)
         k=1
@@ -13,3 +13,6 @@ class Solution:
             k*=nums[i]
         
         return ans
+
+nums=[1,2,3,4]
+print(Solution().productExceptSelf(nums))

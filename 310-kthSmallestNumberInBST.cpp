@@ -57,7 +57,7 @@ int kthSmallestNodes_dfs(const TreeNode* root,int k)
 
 int main()
 {
-   TreeNode  *root=new TreeNode(5);
+    TreeNode  *root=new TreeNode(5);
     TreeNode *left= new TreeNode(3);
     TreeNode *left2=new TreeNode(2);
     TreeNode *right2=new TreeNode(4);
