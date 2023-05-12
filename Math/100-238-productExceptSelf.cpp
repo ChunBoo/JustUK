@@ -16,7 +16,6 @@ VEC productExceptSelf(const VEC& nums)
         k*=nums[i];
     }
     k=1;
-
     for(int i=n-1;i>=0;--i)
     {
         ans[i]*=k;

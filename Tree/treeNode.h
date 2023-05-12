@@ -32,7 +32,7 @@ class TreeNode
             if(root->right)
                 printTreeInOrder(root->right);
         }
-        static void printTreeNodePreOrder(TreeNode* root)
+        void printTreeNodePreOrder(TreeNode* root)
         {
             if(!root)
                 return;
