@@ -1,3 +1,11 @@
+
+#include<vector>
+#include<iostream>
+#include<string>
+
+
+using namespace std;
+
 class Trie {
 private:
     vector<Trie*> children;
@@ -49,3 +57,17 @@ public:
  * bool param_2 = obj->search(word);
  * bool param_3 = obj->startsWith(prefix);
  */
+
+ int main()
+ {
+   Trie* obj = new Trie();
+   string word{"ab"};
+   string word1{"aa"};
+   string prefix{"ab"};
+   obj->insert(word);
+   obj->insert(word1);
+   bool param_2 = obj->search(word);
+   bool param_3 = obj->startsWith(prefix);
+   cout<<param_2<<'\n';
+   cout<<param_3<<'\n';
+ }
