@@ -1,18 +1,43 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+
+using VEC=std::vector<int>;
+using std::cout;
+using MATRIX=std::vector<VEC>;
+
 class Solution {
 public:
-    static bool cmp(vector<int>& a,const vector<int>& b)
+
+    static bool cmp(VEC& a, VEC& b)
     {
-        if(a[0]==b[0]) return a[1]<b[1];
+        if(a[0]==b[0])
+            return a[1]>b[1];
         return a[0]>b[0];
     }
-    vector<vector<int>> reconstructQueue(vector<vector<int>>& people) {
-        sort(people.begin(),people.end(),cmp);
-        vector<vector<int>> que;
-        for(int i=0;i<people.size();++i)
+    MATRIX reconstructQueue(MATRIX& people) {
+        std::sort(people.begin(),people.end(),cmp);
+        MATRIX ans{};
+        int n=people.size();
+        for(int i=0;i<n;++i)
         {
             int pos=people[i][1];
-            que.insert(que.begin()+pos,people[i]);
+            ans.insert(ans.begin()+pos, people[i]);
         }
-        return que;
+        return ans;
     }
 };
+
+
+int main()
+{
+   MATRIX people{{7,0},{4,4},{7,1},{5,0},{6,1},{5,2}};
+   MATRIX res=Solution().reconstructQueue(people);
+   for(auto &v:res)
+   {
+        cout<<'[';
+        for(auto &d:v)
+            cout<<d<<',';
+        cout<<']';
+   }
+}
