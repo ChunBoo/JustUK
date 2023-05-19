@@ -1,5 +1,6 @@
+from functools import cache
 class Solution:
-    def maxUncrossedLines(self, nums1: List[int], nums2: List[int]) -> int:
+    def maxUncrossedLines(self, nums1, nums2):
         @cache
         def f(i,j):
             if i<0 or j<0:
@@ -11,4 +12,7 @@ class Solution:
         return f(len(nums1)-1,len(nums2)-1)
     
     
-nums1 = [2,5,1,2,5], nums2 = [10,5,2,1,5,2]
+nums1 = [2,5,1,2,5]
+nums2 = [10,5,2,1,5,2]
+
+print(Solution().maxUncrossedLines(nums1, nums2))
