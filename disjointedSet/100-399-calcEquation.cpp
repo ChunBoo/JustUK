@@ -20,6 +20,12 @@ queries are: a / c = ?, b / a = ?, a / e = ?, a / a = ?, x / x = ?
 return: [6.0, 0.5, -1.0, 1.0, -1.0 ]
 
 */
+#include<iostream>
+#include<vector>
+#include<unordered_map>
+#include<string>
+
+using namespace std;
 
 class Union {
 public: 
@@ -62,18 +68,18 @@ public:
         vector<double> res;
         int idx = 0;
 
-        for(int i = 0; i < equations.size(); i++) {
+        for(size_t i = 0; i < equations.size(); i++) {
             if(!mapper.count(equations[i][0])) mapper[equations[i][0]] = idx++;
             if(!mapper.count(equations[i][1])) mapper[equations[i][1]] = idx++;
         }
 
         Union unions(equations.size() * 2);
 
-        for(int i = 0; i < equations.size(); i++) {
+        for(size_t i = 0; i < equations.size(); i++) {
             unions.merge(mapper[equations[i][0]] , mapper[equations[i][1]] , values[i]);
         }
 
-        for(int i = 0; i < queries.size(); i++) {
+        for(size_t i = 0; i < queries.size(); i++) {
             if(mapper.count(queries[i][0]) && mapper.count(queries[i][1])) {
                 res.push_back(unions.getDistance(mapper[queries[i][0]] , mapper[queries[i][1]]));
             }else res.push_back(-1);
@@ -82,3 +88,17 @@ public:
         return res;
     }
 };
+
+
+int main()
+{
+    using VEC=vector<vector<string>>;
+    using VAL=vector<double>;
+
+    VEC equations = {{"a","b"},{"b","c"}},queries = {{"a","c"},{"b","a"},{"a","e"},{"a","a"},{"x","x"}};
+    VAL values = {2.0,3.0};
+    VAL res=Solution().calcEquation(equations,values,queries);
+    for(auto &f:res)
+        cout<<f<<',';
+
+}
