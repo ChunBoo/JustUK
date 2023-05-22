@@ -29,8 +29,8 @@ using namespace std;
 
 class Union {
 public: 
-    vector<int> f;
-    vector<double> d;
+    vector<int> f;     //parents
+    vector<double> d;  //distance
 
     Union(int n) {
         f = vector<int> (n);
@@ -42,7 +42,8 @@ public:
         if(f[x] == x) return x;
         int root = find(f[x]);
         d[x] *= d[f[x]];
-        return f[x] = root;
+        f[x] = root;
+        return root;
     }
 
     void merge(int a , int b , double v) {
