@@ -10,11 +10,19 @@ Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).
 Total amount you can rob = 1 + 3 = 4.
 
 '''
+from functools import cache
+
 class Solution:
-    def rob(self, nums: List[int]) -> int:
+    def rob(self, nums): #List[int]) -> int:
+        n=len(nums)
+        if n==1:
+            return nums[0]
         @cache
         def dp(i):
-            if i<0:
+            if i<0:   #why not is i<=0
                 return 0
-            return max(nums[i]+dp(i-2), dp(i-1))
-        return dp(len(nums)-1)
+            return max(dp(i-2)+nums[i],dp(i-1))
+        return dp(n-1)
+
+nums = [1,2,3,1]
+print(Solution().rob(nums))
