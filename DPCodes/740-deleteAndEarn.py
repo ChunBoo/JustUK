@@ -16,7 +16,7 @@ Explanation: You can perform the following operations:
 You earn a total of 6 points.
 
 '''
-from functools import cache
+from functools import lru_cache
 from collections import defaultdict
     
 class Solution:
@@ -26,12 +26,12 @@ class Solution:
         for x in nums:
             houses[x]+=x
         
-        @cache
+        @lru_cache
         def dp(i):
             if i<0:
                 return 0
             return max(dp(i-2)+houses[i],dp(i-1))
-        return dp(len(nums)-1)
+        return dp(len(houses)-1)
     
 nums = [3,4,2]
 print(Solution().deleteAndEarn(nums))
