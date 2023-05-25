@@ -16,11 +16,13 @@ Explanation: You can perform the following operations:
 You earn a total of 6 points.
 
 '''
-
+from functools import cache
+from collections import defaultdict
+    
 class Solution:
-    def deleteAndEarn(self, nums: List[int]) -> int:
-        # houses=[0]*(10**4+1)
-        houses=defaultdict(int)
+    def deleteAndEarn(self, nums):# List[int]) -> int:
+        houses=[0]*(10**4+1)
+        # houses=defaultdict(int)
         for x in nums:
             houses[x]+=x
         
@@ -28,6 +30,8 @@ class Solution:
         def dp(i):
             if i<0:
                 return 0
-            
             return max(dp(i-2)+houses[i],dp(i-1))
         return dp(len(nums)-1)
+    
+nums = [3,4,2]
+print(Solution().deleteAndEarn(nums))
