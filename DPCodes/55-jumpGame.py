@@ -1,5 +1,6 @@
+from functools import cache
 class Solution:
-    def canJump(self, nums: List[int]) -> bool:
+    def canJump(self, nums):# List[int]) -> bool:
         n=len(nums)
         @cache
         def dp(i):
@@ -12,3 +13,6 @@ class Solution:
                     return True
             return False
         return dp(0)
+    
+nums=[3,2,1,1,4]
+print(Solution().canJump(nums))
