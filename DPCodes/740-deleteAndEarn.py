@@ -16,17 +16,20 @@ Explanation: You can perform the following operations:
 You earn a total of 6 points.
 
 '''
-from functools import cache
+from functools import lru_cache
 from collections import defaultdict
     
 class Solution:
     def deleteAndEarn(self, nums):# List[int]) -> int:
-        houses=[0]*(10**4+1)
         # houses=defaultdict(int)
-        for x in nums:
-            houses[x]+=x
+        l=min(nums)
+        r=max(nums)
+        houses=[0]*(r-l+1)
         
-        @cache
+        for x in nums:
+            houses[x-l]+=x
+        
+        @lru_cache()
         def dp(i):
             if i<0:
                 return 0

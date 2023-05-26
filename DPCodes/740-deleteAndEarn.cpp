@@ -19,7 +19,7 @@ public:
         return rob(points);
     }
 private:
-    // From LeetCode 198. House Robber
+    // Robber
     int rob(const vector<int>& nums) {
         int dp2 = 0;
         int dp1 = 0;
