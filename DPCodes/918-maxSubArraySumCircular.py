@@ -12,10 +12,9 @@ Input: nums = [1,-2,3,-2]
 Output: 3
 Explanation: Subarray [3] has maximum sum 3.
 '''
-
-
+from functools import cache
 class Solution:
-    def maxSubarraySumCircular(self, nums: List[int]) -> int:
+    def maxSubarraySumCircular(self, nums):# List[int]) -> int:
         n=len(nums)
         @cache
         def dp(i,s):
@@ -25,5 +24,8 @@ class Solution:
         
         max_p=max(dp(i,1) for i in range(n))
         max_n=max(dp(i,-1) for i in range(n))
-
-        return max_p if max_p<0 else max(max_p,sum(nums)+max_n)
+        
+        return max_p if max_p<0 else max(max_p,sum(nums)+max_p)
+                    
+nums = [1,-2,3,-2]
+print(Solution().maxSubarraySumCircular(nums))

@@ -16,7 +16,7 @@ Explanation: You can perform the following operations:
 You earn a total of 6 points.
 
 '''
-from functools import lru_cache
+from functools import cache
 from collections import defaultdict
     
 class Solution:
@@ -26,7 +26,7 @@ class Solution:
         for x in nums:
             houses[x]+=x
         
-        @lru_cache
+        @cache
         def dp(i):
             if i<0:
                 return 0

@@ -8,14 +8,20 @@ Output: 6
 Explanation: The subarray [4,-1,2,1] has the largest sum 6.
 
 '''
-
+from functools import cache
 class Solution:
-    def maxSubArray(self, nums: List[int]) -> int:
+    def maxSubArray(self, nums):#List[int]) -> int:
         n=len(nums)
         @cache
         def dp(i):
             if i==0:
-                return nums[i]
-            return max(nums[i],nums[i]+dp(i-1))
-        
+                return nums[0]
+            return max(0,dp(i-1))+nums[i]
         return max(dp(i) for i in range(n))
+    
+
+nums = [-2,1,-3,4,-1,2,1,-5,4]
+print(Solution().maxSubArray(nums))
+            
+
+        
