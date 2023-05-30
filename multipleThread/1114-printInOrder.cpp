@@ -65,12 +65,13 @@ class Foo {
 int main()
 {
     Foo foo;
-    thread t1(&Foo::first,foo);
-    thread t2(&Foo::second,foo);
-    thread t3(&Foo::third,foo);
+    // thread t1(&Foo::first,foo);  
+    thread t1([&foo]{ foo.first(); });
+    // thread t2(&Foo::second,foo);
+    // thread t3(&Foo::third,foo);
 
     t1.join();
-    t2.join();
-    t3.join();
+    // t2.join();
+    // t3.join();
 
 }
