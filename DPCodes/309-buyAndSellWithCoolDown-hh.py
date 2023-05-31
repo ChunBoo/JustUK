@@ -19,17 +19,17 @@ class Solution:
         '''
         return three values:
         1. maxProfit after selling all stocks ends with i-th day, can not buy and sell
-        2. maxprofit with current holding stocks, can sell
+        2. maxprofit with current holding stocks, can sell,can not buy
         3. maxProfit with cooldown state, can buy
         '''
         @cache
         def dp(i):
             if i<0:
                 return -10**9,-10**9,0
-            sell,hold,cooldown=dp(i-1)
-            return ( hold+prices[i],
+            sold,hold,cooldown=dp(i-1)
+            return (hold+prices[i],
                     max(hold,cooldown-prices[i]),
-                    max(sell,cooldown))
+                    max(cooldown,sold))
         return max(dp(len(prices)-1))
     
 prices=[1,2,3,0,2]
