@@ -14,16 +14,23 @@ Second day you can finish the last job, total difficulty = 1.
 The difficulty of the schedule = 6 + 1 = 7 
 
 */
+#include<iostream>
+#include<vector>
+#include<cmath>
+
+using std::cout;
+using VEC=std::vector<int>;
+using MATRIX=std::vector<VEC>;
 
 class Solution {
 public:
-    int minDifficulty(vector<int>& jobDifficulty, int d) {
-        const int n=jobDifficulty.size();
-        if(d>n)
+    int minDifficulty(VEC& jobs, int d) {
+        const int n=jobs.size();
+        if(n<d)
             return -1;
-        vector<vector<int>> dp(n+1,vector<int>(d+1,INT_MAX/2));
+        
+        MATRIX dp(n+1,std::vector<int>(d+1,INT_MAX/2));
         dp[0][0]=0;
-
         for(int i=1;i<=n;++i)
         {
             for(int k=1;k<=d;++k)
@@ -31,11 +38,18 @@ public:
                 int md=0;
                 for(int j=i-1;j>=k-1;--j)
                 {
-                    md=max(md,jobDifficulty[j]);
-                    dp[i][k]=min(dp[i][k],dp[j][k-1]+md);
+                    md=std::max(md,jobs[j]);
+                    dp[i][k]=std::min(dp[i][k],dp[j][k-1]+md);
                 }
             }
         }
         return dp[n][d];
     }
 };
+
+int main()
+{
+    VEC jobs{6,5,4,3,2,1};
+    int d=2;
+    cout<<Solution().minDifficulty(jobs,d);
+}
