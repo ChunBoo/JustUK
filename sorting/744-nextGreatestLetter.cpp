@@ -10,6 +10,10 @@ Explanation: The smallest character that is lexicographically greater than 'a' i
 
  * 
 */
+#include<iostream>
+#include<vector>
+
+using namespace std;
 
 class Solution {
 public:
@@ -21,21 +25,31 @@ public:
         //         return letters[i];
         // }
         // return letters[0];
+        
+        //method#2 traversing  
         // for(const char c:letters)
         //     if(c>target)
         //         return c;
         // return letters.front();
-
-        int n=letters.size();
-        int l=0,r=n;
+        
+        //method#3 binary search
+        int sz=letters.size();
+        int l=0,r=sz;
         while(l<r)
         {
-            const int m=l+(r-l)/2;
+            int m=l+(r-l)/2;
             if(letters[m]<=target)
                 l=m+1;
             else
                 r=m;
         }
-        return letters[l%n];
+        return letters[l];
     }
 };
+
+int main()
+{
+    vector<char> letters{'c','f','j'};
+    char target = 'a';
+    std::cout<<Solution().nextGreatestLetter(letters,target);
+}
