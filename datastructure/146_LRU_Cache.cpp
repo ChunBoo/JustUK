@@ -11,26 +11,23 @@ public:
     }
     
     int get(int key) {
-        const auto it=m_map.find(key);
+        auto it=m_map.find(key);
         if(it==m_map.cend())
-        {
-            cout<<"\n Error: can not find the value of "<<key<<'\n';
             return -1;
-        }
         m_cache.splice(m_cache.begin(),m_cache,it->second);
         return it->second->second;
     }
     
     void put(int key, int value) {
-        const auto it=m_map.find(key);
-        if(it!=m_map.cend())
-        {
+        auto it=m_map.find(key);
+        if(it!=m_map.cend()){
             it->second->second=value;
             m_cache.splice(m_cache.begin(),m_cache,it->second);
             return;
         }
-        if((int)(m_cache.size())==m_capacity)
+        if((int)m_cache.size()==m_capacity)
         {
+            //findout the last one in m_cache
             auto &node=m_cache.back();
             m_map.erase(node.first);
             m_cache.pop_back();
@@ -41,7 +38,7 @@ public:
     private:
         int m_capacity;
         list<pair<int,int>> m_cache;
-        unordered_map<int, list<pair<int,int>>::iterator> m_map;
+        unordered_map<int,list<pair<int,int>>::iterator> m_map;
 };
 
 /**
