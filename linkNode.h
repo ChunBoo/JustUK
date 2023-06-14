@@ -6,7 +6,7 @@ class LinkNode
     public:
         int m_val;
         LinkNode* next;
-        LinkNode(int val):m_val{val},next{nullptr}{}
+        LinkNode(int val=0):m_val{val},next{nullptr}{}
 
         LinkNode* addNode(int val)
         {
