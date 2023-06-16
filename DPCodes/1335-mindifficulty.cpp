@@ -29,16 +29,17 @@ public:
         if(n<d)
             return -1;
         
-        MATRIX dp(n+1,std::vector<int>(d+1,INT_MAX/2));
+        MATRIX dp(n+1,std::vector<int>(d+1,INT_MAX/2)); //here initialize the value as INT_MAX/2 for avoiding the overflow
+                                                        //dp[i][k] means the min difficulty to complete the i jobs in K days
         dp[0][0]=0;
-        for(int i=1;i<=n;++i)
+        for(int i=1;i<=n;++i) //traverse through the days
         {
             for(int k=1;k<=d;++k)
             {
                 int md=0;
                 for(int j=i-1;j>=k-1;--j)
                 {
-                    md=std::max(md,jobs[j]);
+                    md=std::max(jobs[j],md);
                     dp[i][k]=std::min(dp[i][k],dp[j][k-1]+md);
                 }
             }
@@ -49,7 +50,7 @@ public:
 
 int main()
 {
-    VEC jobs{6,5,4,3,2,1};
+    VEC jobs{6,8,4,3,2,1};
     int d=2;
     cout<<Solution().minDifficulty(jobs,d);
 }
