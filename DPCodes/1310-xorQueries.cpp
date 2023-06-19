@@ -9,17 +9,16 @@ using std::cout;
 
 VEC xorQueries(const VEC& arrs, const MATRIX& query)
 {
-    size_t n=arrs.size();
+    size_t n=query.size();
     VEC xors(n+1,0);
-    for(size_t i=0;i<n;++i)
+    for(size_t i=0;i<n+1;++i)
         xors[i+1]=xors[i]^arrs[i];
 
     VEC ans{};
-
-    for(const auto& lr:query)
+    for(auto &se:query)
     {
-        const int  l=lr[0];
-        const int r=lr[1];
+        const int l=se[0];
+        const int r=se[1];
         ans.push_back(xors[r+1]^xors[l]);
     }
     return ans;

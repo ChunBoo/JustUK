@@ -9,22 +9,45 @@ Output: [[1,5],[6,9]]
 
  * 
 */
+#include<iostream>
+#include<vector>
+#include<cmath>
+
+using VEC=std::vector<int>;
+using MATRIX=std::vector<VEC>;
+using std::cout;
 
 class Solution {
 public:
-    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
-        auto iter=intervals.begin();
-        while(iter!=intervals.end() && newInterval[0]>(*iter)[0]) ++iter;
-        intervals.insert(iter,newInterval);
-
-        vector<vector<int>> ans{};
-        for(auto interval:intervals)
+    MATRIX insert(MATRIX& intervals, VEC& newInterval) {
+        auto it=intervals.begin();
+        //insert the new interval into intervals
+        while(it!=intervals.end()&&newInterval[0]>(*it)[0]) ++it;
+        intervals.insert(it,newInterval);
+        //create new matrix to save the result
+        MATRIX ans{};
+        //iterate through all of the elements to merge newInterval into intervals
+        for(auto & interval:intervals)
         {
-            if(ans.empty()||interval[0]>((ans.back())[1]))
+            if(ans.empty()||interval[0]>ans.back()[1])
                 ans.push_back(interval);
             else
-                (ans.back())[1]=max(interval[1],(ans.back())[1]);
+                ans.back()[1]=std::max(interval[1],ans.back()[1]);
+
         }
         return ans;
     }
 };
+
+int main(){
+   MATRIX intervals{{1,3},{6,9}};
+   VEC newInterval{3,5};
+   MATRIX ans=Solution().insert(intervals,newInterval);
+   for(auto &v:ans)
+   {
+    cout<<'\n';
+    for(auto &d:v)
+        cout<<d<<",";
+   }
+
+}

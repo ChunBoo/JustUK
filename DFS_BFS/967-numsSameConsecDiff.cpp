@@ -1,5 +1,6 @@
 /**
- * Given two integers n and k, return an array of all the integers of length n where the difference between every two consecutive digits is k. You may return the answer in any order.
+ * Given two integers n and k, return an array of all the integers of length n where the difference between every two consecutive digits is k.
+  You may return the answer in any order.
 
 Note that the integers should not have leading zeros. Integers as 02 and 043 are not allowed.
 
@@ -10,6 +11,11 @@ Output: [181,292,707,818,929]
 Explanation: Note that 070 is not a valid number, because it has leading zeroes.
  * 
 */
+#include<vector>
+#include<iostream>
+
+using std::cout;
+using std::vector;
 
 class Solution {
 public:
@@ -22,17 +28,24 @@ public:
         return ans;
     }
 private:
-    void dfs(int n,int k,int cur,vector<int>& ans){
-        if(n==0){
-            ans.push_back(cur);
-            return;
-        }
-        int l=cur%10;
-        if(l+k<=9)
+    void dfs(int n,int k,int cur,vector<int>& ans){  // n: current remainder length, k: the length of number, cur: current value
+        if(n==0)
         {
-            dfs(n-1,k,cur*10+l+k,ans);
+            ans.push_back(cur);
+            return ;
         }
-        if(l-k>=0 &&k!=0)
-            dfs(n-1,k,cur*10+l-k,ans);
+        int r=cur%10;
+        if(r+k<=9)
+            dfs(n-1,k,cur*10+r+k,ans);
+        if(r-k>=0&&k!=0)
+            dfs(n-1,k,cur*10+r-k,ans);
     }
 };
+
+int main()
+{
+    int n = 3, k = 7;
+    vector<int> ans=Solution().numsSameConsecDiff(n,k);
+    for(auto &v:ans)
+        cout<<v<<',';
+}
