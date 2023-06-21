@@ -17,17 +17,23 @@ Output: 2
 Explanation: "12" could be decoded as "AB" (1 2) or "L" (12).
  * 
 */
+#include<unordered_map>
+#include<string>
+#include<iostream>
+
+using std::cout;
+using namespace std;
 
 class Solution {
 private:
-    unordered_map<int,int> m_ways{};
-    int ways(const string& s,int l,int r)
+    unordered_map<int,int> m_ways{};   //key is the index, value is the count of ways
+    int ways(const string& s,int l,int r)  //l is the previous position, r is the next position
     {
         if(m_ways.count(l)) return m_ways[l];
+        if(l>=r) return 1;//empty string,check here why empty string also is reasonable
         if(s[l]=='0') return 0;
-        if(l>=r) return 1;
         int w=ways(s,l+1,r);
-        const int prefix=(s[l]-'0')*10+(s[l+1]-'0');
+        int prefix=(s[l]-'0')*10+s[l+1]-'0';
         if(prefix<=26)
             w+=ways(s,l+2,r);
         m_ways[l]=w;
@@ -39,3 +45,9 @@ public:
         return ways(s,0,s.size()-1);
     }
 };
+
+int main()
+{
+    std::string s{"12"};
+    cout<<Solution().numDecodings(s);
+}
