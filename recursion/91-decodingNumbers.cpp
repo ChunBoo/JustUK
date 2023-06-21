@@ -46,6 +46,44 @@ public:
     }
 };
 
+class Solution {
+private:
+    unordered_map<string,int> m_ways{};
+    int ways(const  string& s)
+    {
+        if(m_ways.count(s)) 
+            return m_ways[s];
+        if(s[0]=='0')
+            return 0;
+        if(s.length()==1)
+            return 1;
+        int w=ways(s.substr(1));
+        int prefix=(s[0]-'0')*10+s[1]-'0';
+        if(prefix<=26)
+            w+=ways(s.substr(2));
+        m_ways[s]=w;
+        return w;
+
+        // if(m_ways.count(l)) return m_ways[l];
+        // if(s[l]=='0') return 0;
+        // if(l>=r) return 1;
+        // int w=ways(s,l+1,r);
+        // const int prefix=(s[l]-'0')*10+(s[l+1]-'0');
+        // if(prefix<=26)
+        //     w+=ways(s,l+2,r);
+        // m_ways[l]=w;
+        // return w;
+    }
+public:
+
+    int numDecodings(string s) {
+        // return ways(s,0,s.size()-1);
+        m_ways[""]=1;
+        return ways(s);
+    }
+};
+
+
 int main()
 {
     std::string s{"12"};
