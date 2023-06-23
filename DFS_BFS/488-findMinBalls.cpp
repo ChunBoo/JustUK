@@ -1,17 +1,23 @@
+#include<string>
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
 class Solution {
 public:
     int findMinStep(string board, string hand) {
         vector<int> h(128,0);
-        for(char c:board)
+        for(char c:hand)
             h[c]++;
-        return dfs(board,hand);
+        return dfs(board,h);
     }
 private:
     string update(string board)
     {
-        int i=0;
+        size_t i=0;
         while(i<board.size()){
-            int j=i;
+            size_t j=i;
             while(j<board.size()&&board[j]==board[i]) ++j;
             if(j-i>=3)
             {
@@ -23,13 +29,14 @@ private:
         }
         return board;
     }
-    int dfs(string& board, string& hand)
+    int dfs(string& board, vector<int>& hand)
     {
         if(board.size()==0)
             return 0;
         int ans=INT_MAX;
-        int i=0,j=0;
+        size_t i=0,j=0;
         while(i<board.size()){
+            // j=i;
             while(j<board.size()&&board[j]==board[i]) ++j;
             const int b=3-(j-i);
             const char color=board[i];
@@ -45,5 +52,10 @@ private:
          }
          return ans==INT_MAX?-1:ans;
     }
-
 };
+
+int main()
+{
+   string board= "RRWWRRBBRR",hand="WB";
+   cout<<Solution().findMinStep(board,hand);
+}
