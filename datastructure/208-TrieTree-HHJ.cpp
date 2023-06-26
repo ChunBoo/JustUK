@@ -1,12 +1,15 @@
 #include<memory>
 #include<vector>
 #include<string>
+#include<iostream>
 using namespace std;
 
 
 class Trie{
     public:
-        Trie():m_root(new TrieNode()){};
+        Trie():m_root(new TrieNode()){
+            cout<<"create smart pointer.\n";
+        };
         //insert
         void insert(const string& word){
             TrieNode* p=m_root.get();
@@ -28,8 +31,11 @@ class Trie{
         }
     private:
         struct  TrieNode{
-            TrieNode():isWord(false),children(26,nullptr){}
+            TrieNode():isWord(false),children(26,nullptr){
+                cout<<"Ctor trieNode.\n";
+            }
             ~TrieNode(){
+                cout<<"dtor of TrieNode.\n";
                 for(TrieNode* child:children)
                     if(child)
                         delete child;
@@ -47,8 +53,20 @@ class Trie{
             }
             return p;
         }
-
         std::unique_ptr<TrieNode> m_root;
-
-        
 };
+
+
+int main()
+{
+    vector<string> slist{"at","apt","pat"};
+    Trie trie=Trie();
+    for(auto &s:slist){
+        trie.insert(s);
+    }
+    cout<<trie.search("at")<<'\n';
+    cout<<trie.search("ta")<<'\n';
+
+
+    
+}

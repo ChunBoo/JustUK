@@ -8,30 +8,37 @@ Explanation: "aba" is also a valid answer.
  * 
 */
 #include<string>
-
+#include <cmath>
+#include<iostream>
 using namespace std;
 
 class Solution{
 public:
     string longestPalindrome(string s){
-        const int n=s.length();
-        auto getlen=[&](int l,int r){
-            while(l>=0&&r<n && s[l]==s[r])
-            {
+        const int len=s.length();
+        auto getLen=[&](int l,int r){
+            while(l>=0&&r<len&&s[l]==s[r]){
                 --l;
                 ++r;
             }
             return r-l+1-2;
         };
-        int len=0;
+
         int start=0;
-        for(int i=0;i<n;++i){
+        int maxLen=0;
+        for(int i=0;i<len;++i){
             int cur=max(getLen(i,i),getLen(i,i+1));
-            if(cur>len){
-                len=cur;
-                start=i-(len-1)/2;
+            if(cur>maxLen){
+                maxLen=cur;
+                start=i-(cur-1)/2;  //Unclear here, for the even case?
             }
-        } 
-        return s.substr(start,len);
+        }
+        return s.substr(start,maxLen);
     }
 };
+
+int main()
+{
+    string s="abba";
+    cout<<Solution().longestPalindrome(s);
+}
