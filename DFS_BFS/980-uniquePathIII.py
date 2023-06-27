@@ -11,7 +11,7 @@ def uniquePaths(grid):
             elif grid[i][j]==0:
                 n+=1
                 
-    @lru_cache(None)
+    # @lru_cache(None)  #lru_cache can not be used for list,as it is not hashable type
     def dfs(grid, x,y,n):# x: current row, y:current column, n: the nodes left
         if x<0 or x==len(grid) or y<0 or y==len(grid[0]) or grid[x][y]==-1:
             return 0
@@ -23,6 +23,8 @@ def uniquePaths(grid):
         grid[x][y]=0
         return paths
     return dfs(grid,sx,sy,n)
+
+
 grid=(((1,0,0,0),(0,0,0,0),(0,0,2,-1)))
 print(uniquePaths(grid))
 
