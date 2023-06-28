@@ -19,6 +19,11 @@ Thus, we return an answer of [2, 5, 5].
 
  * 
 */
+#include<vector>
+#include<cmath>
+#include<iostream>
+
+using namespace std;
 
 class Solution {
 private:
@@ -26,31 +31,37 @@ private:
         int start;
         int end;
         int height;
-        Intervals(int s,int e,int h):start{s},end{e},height{h}{};
+        Intervals(int s,int e,int h):start{s},end{e},height(h){};
     };
 public:
     vector<int> fallingSquares(vector<vector<int>>& positions) {
-        #if 0
-        vector<int> ans;
-        vector<Intervals> Interval;
-        int maxHeight=INT_MIN;
-        for(const auto& kv:positions){
-            int start=kv[0];
-            int end=start+kv[1];
-            int baseHeight=0;
-            for(struct Intervals& interval:Interval){
-                if(start>=interval.end||end<=interval.start)
-                    continue;
-                baseHeight=max(baseHeight,interval.height);
-            }
-            int height=kv[1]+baseHeight;
-            Interval.push_back(Intervals(start,end,height));
-            maxHeight=max(maxHeight,height);
-            ans.push_back(maxHeight);
+     vector<int> ans{};
+     vector<Intervals> intervals{};
+     int maxHeight=INT_MIN;   //use this var to keep the global maximum value
+     for(auto &pos:positions){
+        int baseHeight=0;
+        int start=pos[0];
+        int end=start+pos[1];
+        for(auto &interval:intervals){
+            if(start>=interval.end||end<=interval.start)
+                continue;
+            baseHeight=max(baseHeight,interval.height);
         }
-        return ans;
-        #endif
+        //update the array of intervals
+        int Height=baseHeight+pos[1];
+        intervals.push_back({start,end,Height});
+        maxHeight=max(maxHeight,Height);
+        ans.push_back(maxHeight);
+     }
+     return ans;
 
-        
     }
 };
+
+int main()
+{
+    vector<vector<int>> positions = {{1,2},{2,3},{6,1}};
+    vector<int> ans=Solution().fallingSquares(positions);
+    for(auto &v:ans)
+        cout<<v<<',';
+}
