@@ -16,26 +16,38 @@ That partition would lead to a score of 5 + 2 + 6 = 13, which is worse.
 
  * 
 */
+#include<iostream>
+#include<vector>
+#include<cmath>
+
+using namespace std;
 
 class Solution {
 public:
-    double largestSumOfAverages(vector<int>& nums, int k) {
-        int n=nums.size();
+    double largestSumOfAverages(vector<int>& nums, int K) {
+        const int n=nums.size();
         vector<double> sum(n+1);
-        for(int i=1;i<=n;++i)
+        for(int i=1;i<=n;++i)   //here the i must from 1
             sum[i]=sum[i-1]+nums[i-1];
-       vector<vector<double>> dp(n+1,vector<double>(k+1));
-       for (int i = 1; i <= n; i++) {
-            dp[i][1] = sum[i] / i;
-        }
 
-        for(int i=1;i<=n;++i)
-            for(int K=2;K<=k;++K)
-                for(int j=1;j<i;++j)
-                {   
-                    double avg=(sum[i]-sum[j])/(i-j);
-                    dp[i][K]=max(dp[i][K],dp[j][K-1]+avg);
-                }
-        return dp[n][k];
+        vector<vector<double>> dp(n+1,vector<double>(K+1));
+
+        for(int i=1;i<=n;++i)   
+            dp[i][1]=sum[i]/i;
+        
+        for(int i=1;i<=n;++i){
+            for(int k=2;k<=K;++k){
+                for(int j=1;j<i;++j)  //here the j must from 1
+                    dp[i][k]=max(dp[i][k],dp[j][k-1]+(sum[i]-sum[j])/(i-j));
+            }
+        }
+        return dp[n][K];
     }
 };
+
+int main()
+{
+    vector<int> nums{9,1,2,3,9};
+    int k = 3;
+    cout<<Solution().largestSumOfAverages(nums,k);
+}
