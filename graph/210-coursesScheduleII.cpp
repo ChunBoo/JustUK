@@ -14,6 +14,12 @@ Explanation: There are a total of 2 courses to take. To take course 1 you should
 
  * 
 */
+#include<iostream>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
+
 
 class Solution {
 public:
@@ -48,3 +54,12 @@ private:
         return false;
     }
 };
+
+int main()
+{
+    int numCourses = 3;
+    vector<vector<int>> prerequisites{{1,0},{2,1}};
+    vector<int> res=Solution().findOrder(numCourses, prerequisites);
+    for(auto v:res)
+        cout<<v<<',';
+}

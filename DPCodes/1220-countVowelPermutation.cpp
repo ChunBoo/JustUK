@@ -16,6 +16,8 @@ Output: 5
 Explanation: All possible strings are: "a", "e", "i" , "o" and "u".
  * 
 */
+#include<iostream>
+using namespace std;
 
 class Solution {
 public:
@@ -37,3 +39,8 @@ public:
         return (a+e+i+o+u)%kMod;
     }
 };
+
+int main()
+{
+    cout<<Solution().countVowelPermutation(2);
+}
