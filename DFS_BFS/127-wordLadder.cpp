@@ -11,6 +11,13 @@ Output: 5
 Explanation: One shortest transformation sequence is "hit" -> "hot" -> "dot" -> "dog" -> cog", which is 5 words long.
  * 
 */
+#include<iostream>
+#include<unordered_set>
+#include<vector>
+#include<queue>
+#include<string>
+
+using namespace std;
 
 class Solution {
 public:
@@ -19,8 +26,6 @@ public:
         if(!dict.count(endWord)) return 0;
 
         queue<string> q;
-        unordered_map<string,int> words;
-        words[beginWord]=-1;
         q.push(beginWord);
 
         int l=beginWord.length();
@@ -36,7 +41,6 @@ public:
                         w[i]=j;
                         if(w==endWord) return step+1;
                         if(!dict.count(w)) continue;
-                        // words[w]=i;
                         dict.erase(w);
                         q.push(w);
                     }
@@ -47,3 +51,10 @@ public:
         return 0;
     }
 };
+
+int main()
+{
+    string beginWord = "hit", endWord = "cog";
+    vector<string> wordList = {"hot","dot","dog","lot","log","cog"};
+    cout<<Solution().ladderLength(beginWord,endWord,wordList);
+}
