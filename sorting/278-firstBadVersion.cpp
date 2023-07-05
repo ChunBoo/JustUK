@@ -21,18 +21,34 @@ Output: 1
  * 
  * 
 */
+#include<iostream>
+
+using std::cout;
+
 class Solution {
 public:
     int firstBadVersion(int n) {
-        int l=1,r=n;
+        int l=0,r=n;
         while(l<r)
         {
             int m=l+(r-l)/2;
-            if(!isBadVersion(m))
-                l=m+1;
-            else
+            if(isBadVersion(m))
                 r=m;
+            else
+                l=m+1;
         }
         return l;
     }
+private:
+   bool isBadVersion(int n)
+   {
+    if(n>=4)
+        return true;
+    return false;
+   }
 };
+
+int main()
+{
+    cout<<Solution().firstBadVersion(8);
+}
