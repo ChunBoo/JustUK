@@ -22,33 +22,40 @@ using namespace std;
 class Solution {
 public:
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
-        unordered_set<string> dict(wordList.begin(),wordList.end());
-        if(!dict.count(endWord)) return 0;
+       unordered_set<string> dict{wordList.begin(),wordList.end()};
+       if(!dict.count(endWord)) return 0;
 
-        queue<string> q;
-        q.push(beginWord);
-
-        int l=beginWord.length();
-        int step=0;
-        while(!q.empty()){
-            ++step;
-            for(int size=q.size();size>0;--size){
-                string w=q.front();
-                q.pop();
-                for(int i=0;i<l;++i){
-                    char ch=w[i];
-                    for(int j='a';j<='z';++j){
-                        w[i]=j;
-                        if(w==endWord) return step+1;
-                        if(!dict.count(w)) continue;
-                        dict.erase(w);
-                        q.push(w);
-                    }
-                    w[i]=ch;
+       int l=beginWord.length();
+       queue<string> q;
+       q.push(beginWord);
+       int step=0;
+       int cnt=0;
+       while(!q.empty()){
+        ++step;
+        cout<<"queue.size= "<<q.size()<<'\n';
+        for(size_t size=0;size<q.size();++size)  //here can not go through from 0 to q.size()
+        {
+            cnt+=1;
+            cout<<"count= "<<cnt<<'\n';
+            string w=q.front();
+            q.pop();
+            for(int i=0;i<l;++i)
+            {
+                char ch=w[i];
+                for(char c='a';c<='z';++c)
+                {
+                    w[i]=c;
+                    if(w==endWord) return step+1;
+                    if(!dict.count(w)) continue;
+                    dict.erase(w);
+                    q.push(w);
                 }
+                w[i]=ch;
             }
         }
-        return 0;
+
+       }
+       return 0;
     }
 };
 
