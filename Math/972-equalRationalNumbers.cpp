@@ -1,24 +1,28 @@
+#include<iostream>
+#include<string>
+#include<cmath>
+#include <regex>
+
+using namespace std;
+
 class Solution {
 public:
     bool isRationalEqual(string s, string t) {
       auto convert=[](const string& s){
-          auto i=s.find('.');
-          auto p=s.find('(');
-          string num;
-          if(p==string::npos)
-          {
-              num=s;
-          }
-          else
-          {
-              num=s.substr(0,p);
-              string r=s.substr(p+1,s.length()-p-2);
-              while(num.length()<16)
+        //   auto i=s.find('.');
+        auto p=s.find("(");
+        string num;
+        if(p==string::npos)
+            num=s;
+        else{
+            num=s.substr(0,p);
+            string r=s.substr(p+1,s.length()-p-2);
+            while(num.length()<16)
                 num+=r;
-          }
-          return stod(num);
+        }
+        return stod(num);
       };
-      return abs(convert(s)-convert(t))<1e-9;
+    return abs(convert(s)-convert(t))<1e-9;
     }
 };
 
@@ -40,7 +44,7 @@ class Friction{
         long d_;
 };
 
-class Solution {
+class Solution2 {
 public:
     bool isRationalEqual(string s, string t) {
       auto convert=[](string s){
@@ -63,3 +67,10 @@ public:
       return convert(s)==convert(t);
     }
 };
+
+int main()
+{
+    string s("0.9(2)"),t("1");
+    // string s("0.5(25)"),t("0.52(52)");
+    cout<<Solution().isRationalEqual(s,t);
+}
