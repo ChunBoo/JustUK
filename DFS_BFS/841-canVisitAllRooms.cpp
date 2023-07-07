@@ -16,6 +16,11 @@ Since we were able to visit every room, we return true.
 
  * 
 */
+#include<iostream>
+#include<vector>
+#include<unordered_set>
+
+using namespace std;
 
 
 class Solution {
@@ -38,3 +43,9 @@ public:
 
     }
 };
+
+int main()
+{
+    vector<vector<int>> rooms = {{1},{2},{0},{}};
+    cout<<Solution().canVisitAllRooms(rooms);
+}
