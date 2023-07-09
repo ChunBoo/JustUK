@@ -1,6 +1,6 @@
 #include<iostream>
 #include<memory>
-
+#include<cassert>
 using std::cout;
 
 class CFoo
@@ -28,7 +28,11 @@ void bar(std::unique_ptr<CFoo> f)
 
 void foo()
 {
-
+    cout<<"Enter foo()\n";
+    {
+        auto e=std::make_unique<CFoo>();
+    }
+    cout<<"Leaving foo()\n";
 }
 int main()
 {
@@ -36,5 +40,11 @@ int main()
     auto f=std::make_unique<CFoo>();
     cout<<"\nCall the bar()\n";
     bar(std::move(f));
-    cout<<"\t Leaving foo()\n";
+    // cout<<"\t Leaving foo()\n";
+    assert(f!=nullptr);
+    f->doSomething();
+    // auto e2=std::move(f);
+    // e2->doSomething();
+    cout<<"---------------\n";
+    foo();
 }
