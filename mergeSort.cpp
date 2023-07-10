@@ -48,7 +48,7 @@ std::vector<int> mergeSort(std::vector<int>& nums)
 
     for(int i=0;i<mid;++i)
         left.push_back(nums[i]);
-    for(int i=mid;i<nums.size();++i)
+    for(std::size_t i=mid;i<nums.size();++i)
         right.push_back(nums[i]);
     
     left=mergeSort(left);
