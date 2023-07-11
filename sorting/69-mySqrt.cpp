@@ -32,8 +32,9 @@ public:
         while(l<r)
         {
             long long m=l+(r-l)/2;
-            if(m*m>x)
-                r=m;
+            // if(m*m>x)
+            if (x / m < m)  // use the division here to avoid possible overflow 
+              r = m;
             else
                 l=m+1;
         }
