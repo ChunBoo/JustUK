@@ -1,9 +1,10 @@
 
 
-#include<string>
-#include<list>
-#include<unordered_map>
-#include<unordered_set>
+#include <iostream>
+#include <list>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -82,7 +83,18 @@ allOne.inc("hello");
 allOne.inc("hello");
 allOne.getMaxKey(); // 返回 "hello"
 allOne.getMinKey(); // 返回 "hello"
-allOne.inc("leet");
+allOne.inc("le");
 allOne.getMaxKey(); // 返回 "hello"
 allOne.getMinKey(); // 返回 "leet"
 */
+
+int main() {
+  AllOne allOne = AllOne();
+  allOne.inc("hello");
+  allOne.inc("hello");
+  cout << allOne.getMaxKey() << '\n'; // 返回 "hello"
+  cout << allOne.getMinKey() << '\n'; // 返回 "hello"
+  allOne.inc("world");
+  cout << allOne.getMaxKey() << '\n'; // 返回 "hello"
+  cout << allOne.getMinKey() << '\n'; // 返回 "leet"
+}
