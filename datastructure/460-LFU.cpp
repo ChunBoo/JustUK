@@ -46,6 +46,13 @@ lfu.get(4);      // return 4
  *
 */
 
+#include <iostream>
+#include <list>
+#include <set>
+#include <unordered_map>
+
+using namespace std;
+
 namespace
 {
     struct CacheNode
@@ -65,20 +72,21 @@ namespace
     };
 }
 
-class LFUCache
+class LFUCache // set method
 {
 private:
-    long tick_;
-    int capacity_;
-    unordered_map<int, CacheNode> m_;
-    set<CacheNode> cache_;
-    void touch(CacheNode &node)
-    {
-        cache_.erase(node);
-        ++node.freq;
-        node.tick = ++tick_;
-        cache_.insert(node);
-    }
+  int capacity_;
+  long tick_;
+  unordered_map<int, CacheNode> m_;
+  set<CacheNode> cache_;
+  void touch(CacheNode &node) {
+    cache_.erase(node);
+    ++node.freq;
+    node.tick = ++tick_;
+    cache_.insert(node); // here will use the operator< of CacheNode to
+                         // determine, and put the smallest frequency into
+                         // the top of banlanced binary tree
+  }
 
 public:
     LFUCache(int capacity) : capacity_(capacity), tick_(0) {}
@@ -104,11 +112,10 @@ public:
             touch(it->second);
             return;
         }
-        if (m_.size() == capacity_)
-        {
-            const CacheNode &node = *cache_.cbegin();
-            m_.erase(node.key);
-            cache_.erase(node);
+        if (int(m_.size()) == capacity_) {
+          const CacheNode &node = *cache_.cbegin();
+          m_.erase(node.key);
+          cache_.erase(node);
         }
         CacheNode node{key, value, 1, ++tick_};
         m_[node.key] = node;
@@ -123,54 +130,49 @@ public:
  * obj->put(key,value);
  */
 
-struct CacheNode
-{
-    int key;
-    int value;
-    int freq;
-    list<int>::const_iterator it; // pointer to the node in the list
+struct CacheNode2 {
+  int key;
+  int value;
+  int freq;
+  list<int>::const_iterator it; // pointer to the node in the list
 };
 
-class LFUCache
-{
+class LFUCache2 {
 private:
     int capacity_;
     int min_freq_;
     // key--->CacheNode
-    unordered_map<int, CacheNode>  ;
+    unordered_map<int, CacheNode2> n_;
     // freq-->keys with freq
     unordered_map<int, list<int>> l_;
-    void touch(CacheNode &node)
-    {
-        // s1:update the freq
-        const int prev_freq = node.freq;
-        const int freq = ++(node.freq);
-        // s2:remove the entry from old freq_list
-        l_[prev_freq].erase(node.it);
-        // s3
-        if (l_[prev_freq].empty() && prev_freq == min_freq_)
-        {
-            // del the lsit
-            l_.erase(prev_freq);
-            ++min_freq_;
-        }
-        // s4, insert the key into the front of the new freq list
-        l_[freq].push_front(node.key);
-        // s5: update the pointer
-        node.it = l_[freq].cbegin();
+    void touch(CacheNode2 &node) {
+      // s1:update the freq
+      const int prev_freq = node.freq;
+      const int freq = ++(node.freq);
+      // s2:remove the entry from old freq_list
+      l_[prev_freq].erase(node.it);
+      // s3
+      if (l_[prev_freq].empty() && prev_freq == min_freq_) {
+        // del the lsit
+        l_.erase(prev_freq);
+        ++min_freq_;
+      }
+      // s4, insert the key into the front of the new freq list
+      l_[freq].push_front(node.key);
+      // s5: update the pointer
+      node.it = l_[freq].cbegin();
     }
 
 public:
-    LFUCache(int capacity) : capacity_(capacity), min_freq_(0) {}
+  LFUCache2(int capacity) : capacity_(capacity), min_freq_(0) {}
 
-    int get(int key)
-    {
-        auto it = n_.find(key);
-        if (it == n_.cend())
-            return -1;
-        touch(it->second);
-        return it->second.value;
-    }
+  int get(int key) {
+    auto it = n_.find(key);
+    if (it == n_.cend())
+      return -1;
+    touch(it->second);
+    return it->second.value;
+  }
 
     void put(int key, int value)
     {
@@ -183,14 +185,14 @@ public:
             touch(it->second);
             return;
         }
-        if (n_.size() == capacity_)
-        {
-            // no capacity, remove one entry that has lowest freq or least recently used if there are mul one
-            // s1:remove the element from m_freq_list
-            const int key_to_evict = l_[min_freq_].back();
-            l_[min_freq_].pop_back();
-            // s2:remove the key from cache
-            n_.erase(key_to_evict);
+        if ((int)n_.size() == capacity_) {
+          // no capacity, remove one entry that has lowest freq or least
+          // recently used if there are mul one s1:remove the element from
+          // m_freq_list
+          const int key_to_evict = l_[min_freq_].back();
+          l_[min_freq_].pop_back();
+          // s2:remove the key from cache
+          n_.erase(key_to_evict);
         }
         const int freq = 1;
         min_freq_ = freq;
@@ -207,3 +209,15 @@ public:
  * int param_1 = obj->get(key);
  * obj->put(key,value);
  */
+
+int main() {
+  LFUCache obj(2);
+  obj.put(1, 1);
+  obj.put(2, 2);
+  cout << obj.get(1) << '\n';
+  obj.put(3, 3);
+  cout << obj.get(3) << '\n';
+  cout << "-----------------\n";
+  cout << obj.get(2) << '\n';
+  cout << obj.get(1) << '\n';
+}
