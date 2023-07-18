@@ -12,7 +12,10 @@ Output: true
 Explanation: 1 has no prime factors, therefore all of its prime factors are limited to 2, 3, and 5.
  * 
 */
+#include<iostream>
+#include<vector>
 
+using namespace std;
 class Solution {
 public:
     bool isUgly(int n) {
@@ -24,3 +27,8 @@ public:
         return n==1;
     }
 };
+
+int main()
+{
+    cout<<Solution().isUgly(14);
+}
