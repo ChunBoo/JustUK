@@ -19,6 +19,7 @@ Explanation: Both "apply" and "apple" can be built from other words in the dicti
 class Trie{
     public:
         Trie():root_(new TrieNode()){}
+
         void insert(const string& word){
             TrieNode* p=root_.get();
             for(const char c:word){
@@ -28,6 +29,7 @@ class Trie{
             }
             p->isWord=true;
         }
+
         bool hasAllPrefixes(const string& word){
             const TrieNode* p=root_.get();
             for(const char c:word){
@@ -37,6 +39,7 @@ class Trie{
             }
             return true;
         }
+
     private:
         struct TrieNode{
             TrieNode():isWord{false},children(26,nullptr){}
@@ -54,7 +57,7 @@ class Trie{
 class Solution {
 public:
   string longestWord(vector<string>& words) {
-            std::sort(words.begin(),words.end(),[](const string& w1,const string& w2){
+      std::sort(words.begin(),words.end(),[](const string& w1,const string& w2){
           if(w1.length()!=w2.length())
             return w1.length()>w2.length();
           return w1<w2;
@@ -74,6 +77,7 @@ public:
       });
 
       unordered_set<string> d(words.begin(),words.end());
+      
       for(const string& word:words){
           string prefix;
           bool isValid=true;

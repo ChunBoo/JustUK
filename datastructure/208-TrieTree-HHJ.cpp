@@ -26,9 +26,11 @@ class Trie{
             const TrieNode* p=find(word);
             return p&&p->isWord;
         }
+        
         bool startWith(const string& prefix) const{
             return find(prefix) !=nullptr;
         }
+
     private:
         struct  TrieNode{
             TrieNode():isWord(false),children(26,nullptr){
@@ -66,7 +68,4 @@ int main()
     }
     cout<<trie.search("at")<<'\n';
     cout<<trie.search("ta")<<'\n';
-
-
-    
 }
