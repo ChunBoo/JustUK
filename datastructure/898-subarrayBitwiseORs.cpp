@@ -23,6 +23,10 @@ There are 3 unique values, so the answer is 3.
 
  * 
 */
+#include<iostream>
+#include<unordered_set>
+#include<vector>
+using namespace std;
 
 class Solution {
 public:
@@ -33,7 +37,7 @@ public:
 
         for(int a:arr){
             nxt.clear();
-            nxt.insert({a});
+            nxt.insert(a);
             for(int b:cur)
             {
                 nxt.insert(a|b);
@@ -41,7 +45,11 @@ public:
             cur.swap(nxt);
             ans.insert(begin(cur),end(cur));
         }
-        return ans.size();
-        
+        return ans.size();      
     }
 };
+
+int main() { 
+    vector<int> nums{1, 3, 2};
+    cout<<Solution().subarrayBitwiseORs(nums);
+ }
