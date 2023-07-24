@@ -11,6 +11,12 @@ You must design an algorithm where sumRegion works on O(1) time complexity.
 
 */
 
+
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
 class NumMatrix {
 private:
     vector<vector<int>> sums_;
@@ -46,3 +52,10 @@ public:
  * NumMatrix* obj = new NumMatrix(matrix);
  * int param_1 = obj->sumRegion(row1,col1,row2,col2);
  */
+ int main()
+ {
+   vector<vector<int>> matrix {
+     { 3, 0, 1, 4, 2 }, { 5, 6, 3, 2, 1 }, { 1, 2, 0, 1, 5 }, { 4, 1, 0, 1, 7 },{ 1, 0, 3, 0, 5 } };
+
+   cout << NumMatrix(matrix).sumRegion(2, 1, 4, 3);
+ }
