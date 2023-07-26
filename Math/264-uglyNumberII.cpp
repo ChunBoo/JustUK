@@ -7,8 +7,12 @@ Output: 12
 Explanation: [1, 2, 3, 4, 5, 6, 8, 9, 10, 12] is the sequence of the first 10 ugly numbers.
  * 
 */
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
 
-class Solution {
+class Solution3 {
 public:
     int nthUglyNumber(int n) {
         vector<int> nums;
@@ -43,7 +47,7 @@ public:
         static int i2=0;
         static int i3=0;
         static int i5=0;
-        while(nums.size()<n){
+        while(static_cast<int>(nums.size())<n){
             const int nxt2=nums[i2]*2;
             const int nxt3=nums[i3]*3;
             const int nxt5=nums[i5]*5;
@@ -56,3 +60,8 @@ public:
         return nums[n-1];
     }
 };
+
+int main()
+{
+    cout<<Solution().nthUglyNumber(10);
+}
