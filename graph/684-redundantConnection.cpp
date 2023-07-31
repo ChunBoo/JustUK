@@ -57,6 +57,7 @@ public:
            if(sizes[pv]>sizes[pu])
             swap(pu,pv);
            parents[pv]=pu;
+           sizes[pu] += sizes[pv];
        }
        return {};
         }
