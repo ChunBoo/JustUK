@@ -20,6 +20,11 @@ Explanation: licensePlate contains letters 's', 'p', 's' (ignoring case), and 't
 "stepple" is missing an 's'.
 Since "steps" is the only word containing all the letters, that is the answer.
 */
+#include<vector>
+#include<string>
+#include<iostream>
+using namespace std;
+
 class Solution {
 public:
     string shortestCompletingWord(string licensePlate, vector<string>& words) {
@@ -28,7 +33,7 @@ public:
             if(isalpha(ch)) ++l[tolower(ch)-'a'];
         
         string ans;
-        int minl=INT_MAX;
+        size_t minl=INT_MAX;
         for(const string& w:words){
             if(w.length()>=minl) continue;
             if(!match(l,w)) continue;
@@ -48,3 +53,10 @@ private:
         return true;
     }
 };
+
+int main()
+{
+  string licensePlate = "1s3 PSt";
+         vector<string> words = {"step", "steps", "stripe", "stepple" };
+         cout << Solution().shortestCompletingWord(licensePlate,words);
+}
