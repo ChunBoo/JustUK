@@ -1,3 +1,11 @@
+#include <iostream>
+#include <unordered_map>
+#include <unordered_set>
+#include <vector>
+
+
+using namespace std;
+
 class Solution {
 public:
     vector<int> findRedundantConnection(vector<vector<int>>& edges) {
@@ -13,7 +21,7 @@ public:
             graph[v].push_back(u);
         }
         return {};
-        }
+    }
 
 private:
     bool hasPath(int cur,
@@ -28,11 +36,10 @@ private:
             if(hasPath(nxt,goal,graph,visited)) return true;
         }
         return false;
-        }
+    }
 };
 
-
-class Solution {
+class Solution2 {
 public:
     vector<int> findRedundantConnection(vector<vector<int>>& edges) {
        vector<int> parents(edges.size()+1,0);
@@ -63,3 +70,15 @@ private:
        return node;
    }
 };
+
+int main() {
+  vector<vector<int>> edges{{1, 2}, {2, 3}, {1, 3}};
+  vector<int> res = Solution().findRedundantConnection(edges);
+  vector<int> res2 = Solution2().findRedundantConnection(edges);
+
+  for (auto v : res)
+    cout << v << ',';
+  cout << '\n';
+  for (auto v : res2)
+    cout << v << ',';
+}
