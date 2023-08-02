@@ -40,32 +40,32 @@ Could you solve it in linear time?
 
 using namespace std;
 
-class Solution1 {
+class s1 {
 public:
   vector<int> maxSlidingWindow(vector<int> &nums, int k) {
     vector<int> ans;
-    for (int i = k - 1; i < int(nums.size()); ++i)
-      ans.push_back(
-          *max_element(nums.begin() + i - k + 1, nums.begin() + i + 1));
+    for(int i=k-1;i<int(nums.size());++i)
+      ans.push_back(*max_element(nums.begin()+i-k+1,nums.begin()+i+1));
     return ans;
   }
 };
 
-class Solution2 {
+class s2 {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-        vector<int> ans;
-        multiset<int> window;
-        for (int i = 0; i < int(nums.size()); ++i) {
-          window.insert(nums[i]); // sorted the
-          if (i - k + 1 >= 0) {
-            ans.push_back(*window.rbegin());
-            window.erase(window.equal_range(nums[i - k + 1]).first);
-            // window.erase(nums[i-k+1]); //will delete all same elements which
-            // is incorrect
-          }
+      vector<int> ans;
+      multiset<int> win;
+      for(int i=0;i<int(nums.size());++i){
+        win.insert(nums[i]);
+        if(i-k+1>=0){
+          ans.push_back(*win.rbegin());
+          win.erase(win.equal_range(nums[i-k+1]).first);  //equal_range return the pair(lowerbound,upperbound)
+          // window.erase(nums[i-k+1]); //will delete all same elements which
+          // is incorrect
         }
-        return ans;
+
+      }
+      return ans;
     }
 };
 
@@ -103,17 +103,17 @@ public:
 int main() {
   vector<int> nums{1, 3, -1, -3, 5, 3, 6, 7};
   int k = 3;
-  vector<int> res1 = Solution1().maxSlidingWindow(nums, k);
-  vector<int> res2 = Solution1().maxSlidingWindow(nums, k);
-  vector<int> res3 = Solution1().maxSlidingWindow(nums, k);
+  vector<int> res1 = s1().maxSlidingWindow(nums, k);
+  vector<int> res2 = s2().maxSlidingWindow(nums, k);
+  vector<int> res3 = Solution3().maxSlidingWindow(nums, k);
 
-  cout << "res1\n";
+  cout << "\nres1\n";
   for (int i : res1)
     cout << i << ',';
-  cout << "res2\n";
+  cout << "\nres2\n";
   for (int i : res2)
     cout << i << ',';
-  cout << "res3\n";
+  cout << "\nres3\n";
   for (int i : res3)
     cout << i << ',';
 }
