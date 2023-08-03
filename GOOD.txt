@@ -1,0 +1,5 @@
+hashtable:
+792   used the hashtable to keep each characters position
+
+recursion
+856  how to parse the parentheses 

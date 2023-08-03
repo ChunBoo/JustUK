@@ -24,8 +24,11 @@ Output: 2
  * 
  * 
 */
+#include <iostream>
+#include <string>
+using namespace std;
 
-class Solution {
+class Solution1 {
 public:
     int scoreOfParentheses(string s) {
         return score(s,0,s.length()-1);
@@ -44,16 +47,21 @@ private:
     }
 };
 
-class Solution {
+class Solution2 {
 public:
     int scoreOfParentheses(string s) {
         int ans=0;
         int d=-1;
-        for(int i=0;i<s.length();++i){
-            d+=s[i]=='('?1:-1;
-            if(s[i]=='(' &&s[i+1]==')')
-                ans+=1<<d;
+        for (int i = 0; i < int(s.length()); ++i) {
+          d += s[i] == '(' ? 1 : -1;
+          if (s[i] == '(' && s[i + 1] == ')')
+            ans += 1 << d;
         }
         return ans;
     }
 };
+
+int main() {
+  string s = "(())";
+  cout << Solution1().scoreOfParentheses(s);
+}
