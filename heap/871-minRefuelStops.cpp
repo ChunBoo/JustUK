@@ -12,17 +12,17 @@ Note that if the car reaches a gas station with 0 fuel left, the car can still r
  * Input: target = 100, startFuel = 10, stations = [[10,60],[20,30],[30,30],[60,40]]
 Output: 2
 */
+#include<vector>
+#include<queue>
+#include<iostream>
+
+using namespace std;
+
 class Solution {
 public:
     int minRefuelStops(int target, int startFuel, vector<vector<int>>& stations) {
         const int n=stations.size();
-        vector<long> dp(n+1,startFuel);
-        for(int i=0;i<n&&stations[i][0]<target;++i)
-            for(int j=i+1;j>=1;--j)
-                if(dp[j-1]>=stations[i][0])
-                    dp[j]=max(dp[j],dp[j-1]+stations[i][1]);
-        for(int i=0;i<dp.size();++i)
-            if(dp[i]>=target) return i;
-        return -1;
+        int i=0,stops=0;
+        
     }
 };  

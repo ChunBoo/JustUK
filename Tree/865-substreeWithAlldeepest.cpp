@@ -8,15 +8,22 @@ The subtree of a node is a tree consisting of that node, plus the set of all des
 
 /**
  * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
  */
+struct TreeNode {
+  int val;
+  TreeNode *left;
+  TreeNode *right;
+  TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  TreeNode(int x, TreeNode *left, TreeNode *right)
+      : val(x), left(left), right(right) {}
+};
+
+#include <cmath>
+#include <iostream>
+
+using namespace std;
+
 class Solution {
 private:
     pair<int,TreeNode*> depth(TreeNode* root){
@@ -33,3 +40,31 @@ public:
         return depth(root).second;
     }
 };
+
+int main() {
+  TreeNode *one = new TreeNode(1);
+  TreeNode *two = new TreeNode(2);
+
+  TreeNode *root = new TreeNode(3);
+  TreeNode *four = new TreeNode(4);
+
+  TreeNode *five = new TreeNode(5);
+  TreeNode *six = new TreeNode(6);
+  TreeNode *seven = new TreeNode(7);
+  TreeNode *eight = new TreeNode(8);
+  TreeNode *nine = new TreeNode(9);
+
+  root->left = five;
+  root->right = six;
+
+  five->left = one;
+  five->right = two;
+
+  two->left = seven;
+  two->right = four;
+
+  six->left = eight;
+  six->right = nine;
+
+  cout << Solution().subtreeWithAllDeepest(root)->val;
+}
