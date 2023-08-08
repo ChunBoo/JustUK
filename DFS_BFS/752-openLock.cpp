@@ -44,35 +44,54 @@ Explanation:
 We can't reach the target without getting stuck.
  * 
 */
+#include <iostream>
+#include <queue>
+#include <string>
+#include <unordered_set>
+#include <vector>
+
+using namespace std;
+
 class Solution {
 public:
     int openLock(vector<string>& deadends, string target) {
-        const string start="0000";
-        unordered_set<string> dead(deadends.begin(),deadends.end());
-        if(dead.count(start)) return -1;
-        if(start==target) return 0;
+      const string start{"0000"};
+      unordered_set<string> dead(deadends.begin(),
+                                 deadends.end()); // for more quick searching
+      unordered_set<string> visited{start};
+      queue<string> q{};
+      q.push(start);
+      int steps = 0;
+      if (dead.count(target))
+        return -1;
+      while (!q.empty()) {
 
-        queue<string> q;
-        unordered_set<string> visited{start};
-        int steps=0;
-        q.push(start);
-        while(!q.empty()){
-            ++steps;
-            const int size=q.size();
-            for(int i=0;i<size;++i){
-                const string cur=q.front();
-                q.pop();
-                for(int i=0;i<4;++i)
-                    for(int j=-1;j<=1;j+=2){
-                        string nxt=cur;
-                        nxt[i]=(nxt[i]-'0'+j+10)%10+'0';
-                        if(nxt==target) return steps;
-                        if(dead.count(nxt)||visited.count(nxt)) continue;
-                        q.push(nxt);
-                        visited.insert(nxt);
-                    }
+        ++steps;
+        const int size = q.size();
+        for (int k = 0; k < size; ++k) {
+          const string cur = q.front();
+          q.pop();
+          for (int i = 0; i < 4; ++i) {
+             //string nxt=cur;  //can not place here,will check the reason.
+            for (int j = -1; j <= 1; j += 2) {
+              string nxt = cur;
+              nxt[i] = (nxt[i] - '0' + j + 10) % 10 + '0';
+              if (nxt == target)
+                return steps;
+              if (dead.count(nxt) || visited.count(nxt))
+                continue;
+              q.push(nxt);
+              visited.insert(nxt);
             }
+          }
         }
+      }
         return -1;
     }
 };
+
+int main() {
+  vector<string> deadends{"0201", "0101", "0102", "1212", "2002"};
+  string target = "0202";
+  cout << Solution().openLock(deadends, target);
+}
