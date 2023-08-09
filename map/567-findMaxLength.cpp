@@ -36,6 +36,6 @@ public:
 };
 
 int main() {
-  vector<int> nums{0, 1, 1, 0,1};
+  vector<int> nums{0, 0,1, 0,1, 0,1,1,0,0,1};
   cout << Solution().findMaxLength(nums);
 }

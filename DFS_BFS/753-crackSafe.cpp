@@ -33,34 +33,44 @@ Thus "01100" will unlock the safe. "10011", and "11001" would also unlock the sa
  * 
 */
 
+#include <cmath>
+#include <iostream>
+#include <string>
+#include <unordered_set>
+
+
+using namespace std;
+
 class Solution {
 public:
     string crackSafe(int n, int k) {
-        const int totalSize=pow(k,n);
-        string ans(n,'0');
-        unordered_set<string> visited{ans};
-        if(dfs(ans,totalSize,n,k,visited))
-            return ans;
-        return "";
+      const int totalSize = pow(k, n); // why is k^n
+      string ans(n, '0');
+      unordered_set<string> visited{ans};
+      if (dfs(ans, totalSize, n, k, visited))
+        return ans;
+      return "";
     }
 private:
-    bool dfs(string& ans,const int totalSize,const int n,const int k,
-            unordered_set<string>& visited){
-                if(visited.size()==totalSize)
-                    return true;
-                //prefix of current node
-                string node=ans.substr(ans.length()-n+1,n-1);
-                for(char c='0';c<'0'+k;++c){
-                    node.push_back(c);
-                    if(!visited.count(node)){
-                        ans.push_back(c);
-                        visited.insert(node);
-                        if(dfs(ans,totalSize,n,k,visited)) return true;
-                        visited.erase(node);
-                        ans.pop_back();
-                    }
-                    node.pop_back();
-                }
-                return false;
-            }
+  bool dfs(string &ans, const int totalSize, const int n, const int k,
+           unordered_set<string> &visited) {
+    if (totalSize == int(visited.size()))
+      return true;
+    string curNode = ans.substr(ans.length() - (n - 1), n - 1);
+    for (char c = '0'; c < '0' + k; ++c) {
+      curNode.push_back(c);   //push_back only work for one character
+      if (!visited.count(curNode)) {
+        ans.push_back(c);  //here is not ans.append(curNode)
+        visited.insert(curNode);
+        if (dfs(ans, totalSize, n, k, visited))
+          return true;
+        ans.pop_back();
+        visited.erase(curNode);
+      }
+      curNode.pop_back();
+    }
+    return false;
+  }
 };
+
+int main() { cout << Solution().crackSafe(2, 2); }
