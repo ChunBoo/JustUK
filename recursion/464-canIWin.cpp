@@ -1,11 +1,13 @@
 /**
- * n the "100 game" two players take turns adding, to a running total, any integer from 1 to 10. The player who first causes the running total to reach or exceed 100 wins.
+ * n the "100 game" two players take turns adding, to a running total, any integer from 1 to 10. 
+ The player who first causes the running total to reach or exceed 100 wins.
 
 What if we change the game so that players cannot re-use integers?
 
 For example, two players might take turns drawing from a common pool of numbers from 1 to 15 without replacement until they reach a total >= 100.
 
-Given two integers maxChoosableInteger and desiredTotal, return true if the first player to move can force a win, otherwise, return false. Assume both players play optimally.
+Given two integers maxChoosableInteger and desiredTotal, 
+return true if the first player to move can force a win, otherwise, return false. Assume both players play optimally.
 
  
 
@@ -28,6 +30,11 @@ Example 3:
 Input: maxChoosableInteger = 10, desiredTotal = 1
 Output: true
 */
+#include<vector>
+#include<iostream>
+
+using namespace std;
+
 
 class Solution {
 public:
@@ -35,20 +42,26 @@ public:
         const  int sum=maxChoosableInteger*(maxChoosableInteger+1)/2;
         if(sum<desiredTotal) return false;
         if(desiredTotal<=0) return true;
-        m_=vector<char>(1<<maxChoosableInteger,0);
+        m_=vector<char>(1<<maxChoosableInteger,0);  //why we need this vector, and set the lenght is 2^M
         return canWin(maxChoosableInteger,desiredTotal,0);
     }
 private:
-    vector<char> m_; //0:unknown,1:can win, -1:can not win
+    vector<char> m_;            //0:unknown,1:can win, -1:can not win
     bool canWin(int M,int T,int state){
         if(T<=0) return false;
         if(m_[state]) return m_[state]==1;
         for(int i=0;i<M;++i){
-            if(state&(1<<i)) continue;
+            if(state&(1<<i)) continue;  //number i has used
             if(!canWin(M,T-(i+1),state|(1<<i)))
-                return m_[state]=1;
+                return (m_[state]=1);
         }
         m_[state]=-1;
         return false;
     }
 };
+
+int main()
+{
+    int T=3, M=2;
+    cout << Solution().canIWin(M,T);
+}
