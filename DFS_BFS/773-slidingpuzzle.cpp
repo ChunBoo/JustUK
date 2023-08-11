@@ -47,17 +47,25 @@ Input: board = [[3,2,4],[1,5,0]]
 Output: 14
 */
 
+#include <iostream>
+#include <queue>
+#include <set>
+#include <string>
+#include <vector>
+
+using namespace std;
+
 class Solution {
 public:
     int slidingPuzzle(vector<vector<int>>& board) {
         constexpr int kRows=2;
         constexpr int kCols=3;
         string goal,start;
-        for(int i=0;i<board.size();++i)
-            for(int j=0;j<board[0].size();++j){
-                start+=(board[i][j]+'0');
-                goal+=(i*kCols+j+1)%(kCols*kRows)+'0';  //123450
-            }
+        for (int i = 0; i < int(board.size()); ++i)
+          for (int j = 0; j < int(board[0].size()); ++j) {
+            start += (board[i][j] + '0');
+            goal += (i * kCols + j + 1) % (kCols * kRows) + '0'; // 123450
+          }
         if(start==goal) return 0;
         constexpr int dirs[4][2]={{-1,0},{1,0},{0,1},{0,-1}};
         set<string> visited{start};
@@ -92,3 +100,8 @@ public:
         return -1;
     }
 };
+
+int main() {
+  vector<vector<int>> board{{4, 1, 2}, {5, 0, 3}};
+  cout << Solution().slidingPuzzle(board);
+}
