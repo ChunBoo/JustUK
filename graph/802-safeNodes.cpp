@@ -1,0 +1,25 @@
+class Solution {
+    private:
+    enum State{UNKNOWN,VISITING,SAFE,UNSAFE};
+    State dfs(const vector<vector<int>>& g,int cur,vector<State>& states){
+        if(states[cur]==VISITING)
+            return UNSAFE;
+        if(states[cur]!=UNKNOWN)
+            return states[cur];
+        states[cur]=VISITING;
+        for(int nxt:g[cur])
+            if(dfs(g,nxt,states)==UNSAFE)
+                return states[cur]=UNSAFE;
+        return states[cur]=SAFE;
+    }
+public:
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+        vector<State> states{graph.size(),UNKNOWN};
+        vector<int> ans;
+        for(int i=0;i<graph.size();++i)
+            if(dfs(graph,i,states)==SAFE)
+                ans.push_back(i);
+        std::sort(ans.begin(),ans.end());
+        return ans;
+    }
+};
