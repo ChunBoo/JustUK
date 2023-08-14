@@ -6,40 +6,52 @@ Input: matrix = [[9,9,4],[6,6,8],[2,1,1]]
 Output: 4
 Explanation: The longest increasing path is [1, 2, 6, 9].
 */
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+using namespace std;
 
 class Solution {
 private:
     int m_;
     int n_;
     vector<vector<int>> dp_;
-    int dfs(const vector<vector<int>>& mat,int x,int y){
-        if(dp_[y][x]!=-1) return dp_[y][x];
-        static int dirs[]={0,-1,0,1,0};
-        dp_[y][x]=1;
-        for(int i=0;i<4;++i){
-            int tx=x+dirs[i];  //col
-            int ty=y+dirs[i+1]; //row
-            if(tx<0||ty<0||tx>=n_||ty>=m_||mat[ty][tx]<=mat[y][x])
-                continue;
-            dp_[y][x]=max(dp_[y][x],1+dfs(mat,tx,ty));
-        }
-        return dp_[y][x];
+    int dfs(const vector<vector<int>> &mat, int r, int c) {
+      if (dp_[r][c] > 0)
+        return dp_[r][c];
+      dp_[r][c] = 1;
+      static int dirs[]{0, -1, 0, 1, 0};
+
+      for (int i = 0; i < 4; ++i) {
+        int tr = r + dirs[i];
+        int tc = c + dirs[i + 1];
+        if (tr < 0 || tc < 0 || tr >= m_ || tc >= n_ ||
+            mat[tr][tc] <= mat[r][c])
+          continue;
+        dp_[r][c] = max(dp_[r][c], 1 + dfs(mat, tr, tc));
+      }
+      return dp_[r][c];
     }
+
 public:
     int longestIncreasingPath(vector<vector<int>>& matrix) {
         if(matrix.empty()) return 0;
         m_=matrix.size();
         n_=matrix[0].size();
-        dp_=vector<vector<int>>(m_,vector<int>(n_,-1));
+        dp_ = vector<vector<int>>(m_, vector<int>(n_, 0));
         int ans=0;
-        for(int y=0;y<m_;++y)  //start from each element
-            for(int x=0;x<n_;++x)
-                ans=max(ans,dfs(matrix,x,y));
+
+        for (int r = 0; r < m_; ++r) {
+          for (int c = 0; c < n_; ++c) {
+            ans = max(ans, dfs(matrix, r, c));
+          }
+        }
         return ans;
     }
 };
 
-class Solution {  //bottom-up
+class Solution2 { // bottom-up
 
 public:
     int longestIncreasingPath(vector<vector<int>>& matrix) {
@@ -72,3 +84,8 @@ public:
         return ans;
     }
 };
+
+int main() {
+  vector<vector<int>> matrix = {{9, 9, 4}, {6, 6, 8}, {2, 1, 1}};
+  cout << Solution().longestIncreasingPath(matrix);
+}
