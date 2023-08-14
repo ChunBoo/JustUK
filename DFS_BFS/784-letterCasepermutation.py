@@ -3,20 +3,24 @@
 def letterCasepermutation(s):
     ans=[]
     n=len(s)
-    def dfs(idx):
+    def dfs(idx,S):
         if idx==n:
-            ans.append(s)
+            ans.append(S)
             return 
         
-        dfs(idx+1)
-        if not s[idx].isalpha():
+        dfs(idx+1,S)
+        if not S[idx].isalpha():
             return
-        s[idx]=chr((ord(s[idx])^(1<<5)))
-        dfs(idx+1)
+        ll=list(S)
+        ll[idx]=chr(ord(ll[idx])^(1<<5))
+        S="".join(ll)
+        dfs(idx+1,S)
         # s[idx]^=(1<<5)
-        s[idx]=chr((ord(s[idx])^(1<<5)))
+        ll=list(S)
+        ll[idx]=chr(ord(ll[idx])^(1<<5))
+        S="".join(ll)
 
-    dfs(0)
+    dfs(0,s)
     return ans
 
 
