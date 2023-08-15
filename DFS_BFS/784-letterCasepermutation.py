@@ -1,5 +1,3 @@
-
-
 def letterCasepermutation(s):
     ans=[]
     n=len(s)
