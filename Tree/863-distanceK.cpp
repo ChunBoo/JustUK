@@ -15,6 +15,16 @@ have values 7, 4, and 1.
  * 
  * 
 */
+#include<vector>
+#include<iostream>
+using namespace std;
+
+struct TreeNode {
+  int val;
+  TreeNode *left;
+  TreeNode *right;
+  TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
 
 class Solution {
 public:
@@ -52,7 +62,6 @@ private:
       collect(root->left, K - r - 2);
       return r + 1;
     }
-    
     return -1;
   }
   
@@ -64,3 +73,24 @@ private:
     collect(root->right, d - 1);
   }
 };
+
+int main() {
+  TreeNode *root = new TreeNode(3);
+  TreeNode *one = new TreeNode(1);
+  TreeNode *two = new TreeNode(2);
+  TreeNode *four = new TreeNode(4);
+  TreeNode *five = new TreeNode(5);
+  TreeNode *six = new TreeNode(6);
+  TreeNode *seven = new TreeNode(7);
+
+  root->left = five;
+  root->right = one;
+  five->left = six;
+  five->right = seven;
+  seven->left = two;
+  seven->right = four;
+  int k = 1;
+  vector<int> res = Solution().distanceK(root, five, k);
+  for (int v : res)
+    cout << v << ',';
+}
