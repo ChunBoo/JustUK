@@ -1,55 +1,69 @@
-class Solution {
+#include <algorithm> //for min_element
+#include <cmath>
+// #include <functional>
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+class Solution1 {
 public:
-    int minimumDistance(string word) {
-        constexpr int K=26;
-        const int n=word.length();
-        vector<vector<vector<int>>> mem(n,vector<vector<int>>(27,vector<int>(27)));
-        auto cost=[](int c1,int c2){
-            if(c1==K) return 0;
-            return abs(c1/6-c2/6)+abs(c1%6-c2%6);
-        };
-        //min cost to type word[i:n], l,r are the last finger position
-        function<int(int,int,int)> dp=[&](int i,int l,int r){
-            if(i==n) return 0;
-            if(mem[i][l][r]) return mem[i][l][r];
-            int c=word[i]-'A';
-            return mem[i][l][r]=min(dp(i+1,c,r)+cost(l,c),
-                                     dp(i+1,l,c)+cost(r,c));
-        };
-        return dp(0,K,K);
-
-
-    }
+  int minimumDistance(string word) {
+    constexpr int K = 26;
+    const int n = word.length();
+    vector<vector<vector<int>>> mem(n,
+                                    vector<vector<int>>(27, vector<int>(27)));
+    auto cost = [](int c1, int c2) {
+      if (c1 == K)
+        return 0;
+      return abs(c1 / 6 - c2 / 6) +
+             abs(c1 % 6 - c2 % 6); // FORMAT:      "A   B   C   D   E   F" ，
+                                   // each line has 6 characters, so c1/6 will
+                                   // get the rows#, c1%6 get the col#
+    };
+    // min cost to type word[i:n], l,r are the last finger position
+     function<int(int, int, int)> dp = [&](int i, int l, int r) {
+    //auto dp = [](int i, int l, int r) {  // use the lambda function here can not work, as the recursion here?
+      if (i == n)
+        return 0;
+      if (mem[i][l][r])
+        return mem[i][l][r];
+      int c = word[i] - 'A';
+      return mem[i][l][r] = min(dp(i + 1, c, r) + cost(l, c),
+                                dp(i + 1, l, c) + cost(r, c));
+    };
+      return dp(0, K, K);
+  }
 };
 
-
-class Solution {
+class Solution2 {
 public:
-    int minimumDistance(string word) {
-        constexpr int K=26;
-        const int n=word.length();
-        vector<vector<int>> mem(n,vector<int>(27));
-        auto cost=[](int c1,int c2){
-            if(c1==K) return 0;
-            return abs(c1/6-c2/6)+abs(c1%6-c2%6);
-        };
-        //min cost to type word[i:n], l,r are the last finger position
-        function<int(int,int)> dp=[&](int i,int o){
-            if(i==n) return 0;
-            if(mem[i][o]) return mem[i][o];
-            int p=i==0?K:word[i-1]-'A';
-            int c=word[i]-'A';
-            return mem[i][o]=min(dp(i+1,o)+cost(p,c),
-                                     dp(i+1,p)+cost(o,c));
-        };
-        return dp(0,K);
-
-
-    }
+  int minimumDistance(string word) {
+    constexpr int K = 26;
+    const int n = word.length();
+    vector<vector<int>> mem(n, vector<int>(27));
+    auto cost = [](int c1, int c2) {
+      if (c1 == K)
+        return 0;
+      return abs(c1 / 6 - c2 / 6) + abs(c1 % 6 - c2 % 6);
+    };
+    // min cost to type word[i:n], l,r are the last finger position
+    function<int(int, int)> dp = [&](int i, int o) {
+      if (i == n)
+        return 0;
+      if (mem[i][o])
+        return mem[i][o];
+      int p = i == 0 ? K : word[i - 1] - 'A';
+      int c = word[i] - 'A';
+      return mem[i][o] =
+                 min(dp(i + 1, o) + cost(p, c), dp(i + 1, p) + cost(o, c));
+    };
+    return dp(0, K);
+  }
 };
 
-
-class Solution {
+class Solution3 {
 public:
   int minimumDistance(string word) {
     constexpr int kRest = 26;
@@ -78,3 +92,10 @@ public:
     return *min_element(begin(dp[n]), end(dp[n]));
   }
 };
+
+int main() {
+  string word{"CAKE"};
+  cout << Solution1().minimumDistance(word) << '\n';
+  cout << Solution1().minimumDistance(word) << '\n';
+  cout << Solution1().minimumDistance(word) << '\n';
+}
