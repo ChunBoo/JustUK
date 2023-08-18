@@ -1,6 +1,6 @@
 hashtable:
 792   used the hashtable to keep each characters position
-
+2564  XOR and hashtable to pre-calculate
 recursion
 856  how to parse the parentheses 
 464  recursion with memorization
@@ -16,3 +16,6 @@ dfs
 
 graph
 863
+
+greedy
+greedyToBuyCars
