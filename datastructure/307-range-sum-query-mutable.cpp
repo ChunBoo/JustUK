@@ -114,6 +114,61 @@ public:
  * int param_2 = obj->sumRange(left,right);
  */
 
+
+class FenwickTree{
+    private:
+        vector<int> _sums;
+        static inline int lowbit(int x){return x&(-x);}
+    public:
+        FenwickTree(int n){
+            _sums=vector<int>(n+1,0);
+        }
+        void update(int i,int delta)
+        {
+            while(i<_sums.size())
+            {
+                _sums[i]+=delta;
+                i+=lowbit(i);
+            }
+        }
+        int query(int i){
+            int sum=0;
+            while(i>0)
+            {
+                sum+=_sums[i];
+                i-=lowbit(i);
+            }
+            return sum;
+        }
+};
+
+class NumArray {
+private:
+    FenwickTree _tree;
+    vector<int> _nums;
+public:
+    NumArray(vector<int>& nums):_nums(std::move(nums)),_tree(nums.size()) {
+    
+        for(int i=0;i<_nums.size();++i)
+            _tree.update(i+1,_nums[i]);
+    }
+    
+    void update(int index, int val) {
+        _tree.update(index+1,val-_nums[index]);
+        _nums[index]=val;
+    }
+    
+    int sumRange(int left, int right) {
+        return _tree.query(right+1)-_tree.query(left);
+    }
+};
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray* obj = new NumArray(nums);
+ * obj->update(index,val);
+ * int param_2 = obj->sumRange(left,right);
+ */
 int main() {
   NumArray numArray{vector<int>{1, 3, 5}};
   cout << numArray.sumRange(0, 2) << '\n';
