@@ -25,6 +25,11 @@ Finally, player 1 has more score (234) than player 2 (12), so you need to return
  * 
 */
 
+#include<vector>
+#include<iostream>
+
+using namespace std;
+
 class Solution {
 private:
     vector<int> m_;
@@ -42,3 +47,9 @@ public:
         return getScore(nums,0,nums.size()-1)>=0;
     }
 };
+
+int main()
+{
+    vector<int> nums{1,5,2};
+    cout<<Solution().predictTheWinner(nums);
+}

@@ -1,3 +1,9 @@
+#include<vector>
+#include<cmath>
+#include<iostream>
+
+using namespace std;
+
 class Solution {
 public:
     vector<int> closestPrimes(int left, int right) {
@@ -20,3 +26,10 @@ public:
        return ans.empty()?vector<int>{-1,-1}:ans;
     }
 };
+
+int main()
+{
+    vector<int> res=Solution().closestPrimes(11,19);
+    for(auto v:res)
+        cout<<v<<',';
+}
