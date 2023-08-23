@@ -26,15 +26,23 @@ Constraints:
 
 /**
  * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
  */
+struct TreeNode {
+  int val;
+  TreeNode *left;
+  TreeNode *right;
+  TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  TreeNode(int x, TreeNode *left, TreeNode *right)
+      : val(x), left(left), right(right) {}
+};
+
+#include <array>
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
 class Solution {
 public:
     vector<TreeNode*> allPossibleFBT(int n) {
@@ -69,7 +77,7 @@ public:
 static constexpr int kMaxN=20+1;
 static array<vector<TreeNode*>,kMaxN> m;
 
-class Solution {
+class Solution2 {
 private:
     vector<TreeNode*>& trees(int n){
         if(m[n].size()>0) return m[n];
@@ -92,3 +100,9 @@ public:
         return trees(n);
     }
 };
+
+int main() {
+  vector<TreeNode *> res = Solution().allPossibleFBT(7);
+  for (const auto &n : res)
+    cout << n->val << ',';
+}
