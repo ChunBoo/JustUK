@@ -10,82 +10,89 @@ deleteAtIndex(index) : Delete the index-th node in the linked list, if the index
  * 
  */
 
+#include <iostream>
+
+using namespace std;
+
 class MyLinkedList {
     private:
     struct Node{
         int val;
         Node* next;
-        Node(int val,Node* next=nullptr):
-         val(val),next(next){};
+        Node(int val, Node *next = nullptr) : val(val), next(next){};
     };
-    Node* tail_;
-    Node* head_;
-    int size_;
-public:
+    Node *tail_; // stack var
+    Node *head_; // stack var
+    int size_;   // stack var
+  public:
     MyLinkedList():tail_{nullptr},head_{nullptr},size_(0) {
 
     }
     ~MyLinkedList()
     {
-        Node* node=head_;
-        while(node)
-        {
-            Node* cur=node;
-            node=node->next;
-            delete cur;
-        }
-        head_=nullptr;
-        tail_=nullptr;
+      Node *node = head_;
+      while (node) {
+        Node *cur = node;
+        node = node->next;
+        delete cur;
+      }
+      tail_ = head_ = nullptr;
     }
     
     int get(int index) {
         if(index<0||index>=size_) return -1;
-        auto node=head_;
-        while(index--)
-            node=node->next;
-        return node->val;
+        Node *pre = head_;
+        while (index--)
+          pre = pre->next;
+        return pre->val;
     }
     
     void addAtHead(int val) {
-        head_=new Node(val,head_);
-        if(size_++==0)
-            tail_=head_;
+      head_ = new Node(val, head_);
+      if (size_++ == 0)
+        tail_ = head_;
     }
     
     void addAtTail(int val) {
-        auto node=new Node(val);
-        if(size_++==0){
-            head_=tail_=node;
-        }
-        else{
-            tail_->next=node;
-            tail_=tail_->next;
-        }
+      Node *node = new Node(val);
+      if (size_++ == 0)
+        head_ = tail_ = node;
+      else {
+        tail_->next=node;   //tail_ = node;
+        tail_= tail_->next;
+      }
     }
     
     void addAtIndex(int index, int val) {
-        if(index<0||index>size_) return ;
-        if(index==0) return addAtHead(val);
-        if(index==size_) return addAtTail(val);
-        Node dummy(0,head_);
-        Node* prev=&dummy;
-        while(index--) prev=prev->next;
-        prev->next=new Node(val,prev->next);
-        ++size_;
+      if (index < 0 || index > size_)
+        return;
+      if (index == 0)
+        return addAtHead(val);
+      if (index == size_)
+        return addAtTail(val);
+
+      Node dummy(0, head_);
+      Node *pre = &dummy;
+      while (index--)
+        pre = pre->next;
+      pre->next = new Node(val, pre->next);
+      ++size_;
     }
     
     void deleteAtIndex(int index) {
-        if(index<0||index>=size_) return;
-        Node dummy(0,head_);
-        Node* prev=&dummy;
-        for(int i=0;i<index;++i)
-            prev=prev->next;
-        Node* nodeToDel=prev->next;
-        prev->next=nodeToDel->next;
-        if(index==0) head_=prev->next;
-        if(index==size_-1) tail_=prev;
-        delete nodeToDel;
-        --size_;
+      if (index < 0 || index >= size_)
+        return;
+      Node dummy(0, head_);
+      Node *prev = &dummy;
+      for (int i = 0; i < index; ++i)
+        prev = prev->next;
+      Node *nodeToDel = prev->next;
+      prev->next = nodeToDel->next;
+      if (index == 0)
+        head_ = prev;
+      if (index == size_ - 1)
+        tail_ = prev;
+      delete nodeToDel;
     }
 };
 
@@ -98,3 +105,17 @@ public:
  * obj->addAtIndex(index,val);
  * obj->deleteAtIndex(index);
  */
+
+int main() {
+
+  MyLinkedList *obj = new MyLinkedList();
+  //   int param_1 = obj->get(index);
+  obj->addAtHead(1);
+  obj->addAtTail(3);
+  cout << obj->get(1) << '\n';
+  obj->addAtIndex(1, 2);
+  cout << obj->get(1) << '\n';
+
+  obj->deleteAtIndex(1);
+  cout << obj->get(1) << '\n';
+}
