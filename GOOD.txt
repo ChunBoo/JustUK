@@ -19,3 +19,6 @@ graph
 
 greedy
 greedyToBuyCars
+
+LinkedList
+707 design linked list
