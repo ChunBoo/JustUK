@@ -14,7 +14,7 @@ Example 3:
 Input: times = [[1,2,1]], n = 2, k = 2
 Output: -1
 */
-
+//bell-man
 class Solution {
 public:
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
@@ -29,5 +29,32 @@ public:
         }
         int max_dist=*max_element(dist.begin(),dist.end());
         return max_dist==MAX_TIME?-1:max_dist;
+    }
+};
+//Floyd-warshall-allpairs
+class Solution2 {
+public:
+    int networkDelayTime(vector<vector<int>>& times, int n, int k) {
+        constexpr int MAX_TIME=101*100;
+        vector<vector<int>> d(n,vector<int>(n,MAX_TIME));
+
+        for(auto time:times)
+            d[time[0]-1][time[1]-1]=time[2];
+        
+        for(int i=0;i<n;++i)
+            d[i][i]=0;
+
+        for(int k=0;k<n;++k)
+            for(int i=0;i<n;++i)
+                for(int j=0;j<n;++j)
+                    d[i][j]=min(d[i][j],d[i][k]+d[k][j]);
+        
+        int ans=INT_MIN;
+        for(int i=0;i<n;++i)
+        {
+            if(d[k-1][i]>=MAX_TIME) return -1;
+            ans=max(ans,d[k-1][i]);
+        }
+        return ans;
     }
 };
