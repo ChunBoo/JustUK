@@ -15,20 +15,25 @@ Input: times = [[1,2,1]], n = 2, k = 2
 Output: -1
 */
 //bell-man
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
 class Solution {
 public:
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
-        constexpr int MAX_TIME=101*100;
-        vector<int> dist(n,MAX_TIME);
+        constexpr int MAX_TIMES=100*100;
+        vector<int> dist(n,MAX_TIMES);
         dist[k-1]=0;
-        for(int i=1;i<n;++i){
-            for(const auto& time:times){
-                int u=time[0]-1,v=time[1]-1,w=time[2];
-                dist[v]=min(dist[v],dist[u]+w);
+        for(int i=0;i<n;++i){
+            for(auto &time:times)
+            {
+                int u=time[0],v=time[1],w=time[2];
+                dist[v-1]=min(dist[v-1],dist[u-1]+w);
             }
         }
-        int max_dist=*max_element(dist.begin(),dist.end());
-        return max_dist==MAX_TIME?-1:max_dist;
+        int ans=*max_element(dist.begin(),dist.end());
+        return ans==MAX_TIMES?-1:ans;
     }
 };
 //Floyd-warshall-allpairs
@@ -58,3 +63,12 @@ public:
         return ans;
     }
 };
+
+int main()
+{
+    vector<vector<int>> times = {{2,1,1},{2,3,1},{3,4,1}};
+    int n = 4, k = 2;
+
+    // cout<<Solution().networkDelayTime(times,n,k);
+    cout<<Solution2().networkDelayTime(times,n,k);
+}
