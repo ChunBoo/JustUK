@@ -31,6 +31,6 @@ void multipleProcess()
 }
 int main()
 {
-    // multipleThread();
-    multipleProcess();
+    multipleThread();
+    // multipleProcess();
 }
