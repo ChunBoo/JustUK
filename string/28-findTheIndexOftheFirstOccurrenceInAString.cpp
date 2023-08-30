@@ -17,6 +17,11 @@ Output: -1
 Explanation: "leeto" did not occur in "leetcode", so we return -1.
  * 
 */
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
 
 class KMP{
     private:
@@ -66,3 +71,11 @@ public:
         return matched.empty()?-1:matched[0];
     }
 };
+
+int main() {
+  string haystack = "sadbutsad", needle = "sad";
+  cout << Solution().strStr(haystack, needle);}
+  //   vector<int> res = Solution().strStr(haystack, needle);
+  //   for (auto &v : res)
+  //     cout << v << ',';
+  // }
