@@ -52,3 +52,36 @@ public:
         return true;
     }
 };
+
+class Solution {
+private:
+    vector<vector<int>> g_;
+    vector<int> colors_;
+
+public:
+    bool possibleBipartition(int n, vector<vector<int>>& dislikes) {
+        g_=vector<vector<int>>(n);
+        for(const auto&d:dislikes){
+            g_[d[0]-1].push_back(d[1]-1);
+            g_[d[1]-1].push_back(d[0]-1);
+        }
+        queue<int> q;
+        colors_=vector<int>(n,0);
+        for(int i=0;i<n;++i){
+            if(colors_[i]!=0) continue;
+            q.push(i);
+            colors_[i]=1;
+            while(!q.empty()){
+                int cur=q.front();
+                q.pop();
+                for(int nxt:g_[cur]){
+                    if(colors_[nxt]==colors_[cur]) return false;
+                    if(colors_[nxt]!=0)  continue;
+                    colors_[nxt]=-colors_[cur];
+                    q.push(nxt);
+                }
+            }
+        }
+        return true;
+    }
+};
