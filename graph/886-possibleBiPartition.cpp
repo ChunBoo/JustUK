@@ -26,6 +26,12 @@ dislikes[i].length == 2
 1 <= ai < bi <= n
 All the pairs of dislikes are unique.
 */
+#include <iostream>
+#include <queue>
+#include <vector>
+
+using namespace std;
+
 class Solution {
 private:
     vector<vector<int>> g_;
@@ -34,26 +40,30 @@ private:
         colors_[cur]=color;
         for(int nxt:g_[cur]){
             if(colors_[nxt]==color) return false;
-            if((colors_[nxt])==0&&!dfs(nxt,-color)) return false;
+            if (colors_[nxt] == 0 && !dfs(nxt, -color))
+              return false;
         }
         return true;
     }
 public:
     bool possibleBipartition(int n, vector<vector<int>>& dislikes) {
-        g_=vector<vector<int>>(n);
-        for(const auto&d:dislikes){
-            g_[d[0]-1].push_back(d[1]-1);
-            g_[d[1]-1].push_back(d[0]-1);
-        }
-        colors_=vector<int>(n,0); //unknow-0, red-1,blue:-1
-        for(int i=0;i<n;++i){
-            if(colors_[i]==0&&!dfs(i,1)) return false;
-        }
+      g_ = vector<vector<int>>(n); // vector<vector<int>>(n,vector<int>(n)) is incorrect, as the inner vec will be initialized with size as n,   
+      colors_ = vector<int>(n, 0); // 0:unknown, 1:red, -1:blue
+      for (auto const &d : dislikes) {
+        g_[d[0] - 1].push_back(d[1] - 1);
+        g_[d[1] - 1].push_back(d[0] - 1);
+      }
+
+      for (int i = 0; i < n; ++i) {
+        // colors_[i]=1;
+        if (colors_[i] == 0 && !dfs(i, 1))
+          return false;
+      }
         return true;
     }
 };
 
-class Solution {
+class Solution2 {
 private:
     vector<vector<int>> g_;
     vector<int> colors_;
@@ -85,3 +95,9 @@ public:
         return true;
     }
 };
+
+int main() {
+  int n = 4;
+  vector<vector<int>> dislikes{{1, 2}, {1, 3}, {2, 4}};
+  cout << Solution().possibleBipartition(n, dislikes);
+}
