@@ -49,6 +49,7 @@ private:
         ans.pop_back();
       ans.push_back(num);
     }
+    ans.resize(k);//only keep the first k values
     return ans;
   }
 
