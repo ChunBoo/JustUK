@@ -10,7 +10,7 @@ def smallestEquivalString(s1,s2,baseStr):
     for i in range(len(s1)):
         r1=find(ord(s1[i])-ord('a'))
         r2=find(ord(s2[i])-ord('a'))
-        if r1<r2:
+        if r1>r2:  #little one in the first
             r1,r2=r2,r1
         p[r2]=r1
     ans=[]
