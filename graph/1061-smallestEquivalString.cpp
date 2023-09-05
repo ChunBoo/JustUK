@@ -27,24 +27,44 @@ Output: "hdld"
 Explanation: Based on the equivalency information in s1 and s2, we can group their characters as [h,w], [d,e,o], [l,r].
 So only the second letter 'o' in baseStr is changed to 'd', the answer is "hdld".
 */
+#include <algorithm>
+#include <functional>
+#include <iostream>
+#include <numeric>
+#include <string>
+#include <vector>
+
+using namespace std;
 
 class Solution {
 public:
     string smallestEquivalentString(string s1, string s2, string baseStr) {
         vector<int> p(26);
-        iota(begin(p),end(p),0);
+        iota(begin(p), end(p), 0); // will fill an iterator range with
+                                   // successively incremented values
         function<int(int)> find=[&](int x){
-            return p[x]==x?x:p[x]=find(p[x]);        };
-        for(int i=0;i<s1.length();++i){
-            int r1=find(s1[i]-'a');
-            int r2=find(s2[i]-'a');
-            if(r2<r1) swap(r1,r2);
-            p[r2]=r1;
+            return p[x]==x?x:p[x]=find(p[x]);
+        }; //union find steps
+        
+        for (int i = 0; i < int(s1.length()); ++i) {
+          int r1 = find(s1[i] - 'a');
+          int r2 = find(s2[i] - 'a');
+          if (r2 < r1)
+            swap(r1, r2);
+          p[r2] = r1;
         }
+        
         string ans(baseStr);
-        for(int i=0;i<baseStr.length();++i){
-            ans[i]=find(baseStr[i]-'a')+'a';
+        
+        for (int i = 0; i < int(baseStr.length()); ++i) 
+        {
+          ans[i] = find(baseStr[i] - 'a') + 'a';
         }
         return ans;
     }
 };
+
+int main() {
+  string s1 = "parker", s2 = "morris", baseStr = "parser";
+  cout << Solution().smallestEquivalentString(s1, s2, baseStr);
+}
