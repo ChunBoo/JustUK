@@ -32,6 +32,11 @@ Constraints:
 0 <= start < end <= 109
 At most 1000 calls will be made to book.
 */
+#include<iostream>
+#include<map>
+#include<vector>
+
+using namespace std;
 
 class MyCalendar {
 public:
@@ -45,6 +50,7 @@ public:
             int e=event.second;
             if(max(s,start)<min(e,end))
                 return false;
+            // booked_.emplace_back(start, end); //if put here, then each time will not be insert to the booked array
         } 
         booked_.emplace_back(start,end);
         return true;
@@ -52,17 +58,17 @@ public:
 private:
     vector<pair<int,int>> booked_;
 };
-class MyCalendar {
+class MyCalendar2 {
 public:
-    MyCalendar() {
+    MyCalendar2() {
 
     }
     
     bool book(int start, int end) {
-        auto it=booked_.lower_bound(start); //>=start
+        auto it=booked_.lower_bound(start); //the first element which >=start,ceiling element
         if(it!=booked_.cend()&&it->first<end)
             return false;
-        if(it!=booked_.cbegin()&&(--it)->second>start)
+        if(it!=booked_.cbegin()&&(--it)->second>start)  //the floor element
             return false;
         booked_[start]=end;
         return true;
@@ -71,6 +77,13 @@ private:
     map<int,int> booked_;  //start->end
 };
 
+int main() { 
+    vector<int>  v1{10, 20}, v2{ 15, 25 }, v3{20, 30};
+    MyCalendar m{};
+    m.book(v1[0],v1[1]);
+    m.book(v2[0],v2[1]);
+    m.book(v3[0],v3[1]);
+ }
 /**
  * Your MyCalendar object will be instantiated and called as such:
  * MyCalendar* obj = new MyCalendar();
