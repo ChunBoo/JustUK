@@ -22,22 +22,28 @@ Note: Do not use class member/global/static variables to store states. Your seri
 
 /**
  * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
  */
+
+#include <iostream>
+#include <sstream>
+#include <string>
+using namespace std;
+
+struct TreeNode {
+  int val;
+  TreeNode *left;
+  TreeNode *right;
+  TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
 class Codec {
 public:
-
-    // Encodes a tree to a single string.
-    string serialize(TreeNode* root) {
-        ostringstream out;
-        serialize(root,out);
-        return out.str();
-    }
+  // Encodes a tree to a single string.
+  string serialize(TreeNode *root) {
+    ostringstream out;
+    serialize(root, out);
+    return out.str();
+  }
 
     // Decodes your encoded data to tree.
     TreeNode* deserialize(string data) {
@@ -55,6 +61,7 @@ private:
         out<<root->val<<" ";
         serialize(root->left,out);
         serialize(root->right,out);
+        return;
     }
     TreeNode* deserialize(istringstream& in){
         string val;
@@ -80,7 +87,7 @@ private:
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
-class Codec {
+class Codec2 {
 public:
 
     // Encodes a tree to a single string.
@@ -117,7 +124,8 @@ private:
     TreeNode* deserialize(istringstream& in){
         char status;
         in.read(&status,sizeof(char));
-        if(!status&ROOT) return nullptr;
+        if (!(status & ROOT))
+          return nullptr;
         auto root=new TreeNode(0);
         in.read(reinterpret_cast<char*>(&root->val),sizeof(root->val));
         root->left=(status&LEFT)?deserialize(in):nullptr;
@@ -129,3 +137,21 @@ private:
 // Your Codec object will be instantiated and called as such:
 // Codec ser, deser;
 // TreeNode* ans = deser.deserialize(ser.serialize(root));
+
+int main() {
+  Codec2 ser; //, deser;
+  TreeNode *root = new TreeNode(1);
+  TreeNode *two = new TreeNode(2);
+  TreeNode *three = new TreeNode(3);
+  TreeNode *four = new TreeNode(4);
+  TreeNode *five = new TreeNode(5);
+
+  root->left = two;
+  root->right = three;
+  three->left = four;
+  three->right = five;
+  // ostreamstring out;
+  //   string data{"1 2 # # 3 4 # # 5 # # "};
+  cout << ser.serialize(root) << '\n';
+  //   cout << deser.deserialize(data)->val;
+}
