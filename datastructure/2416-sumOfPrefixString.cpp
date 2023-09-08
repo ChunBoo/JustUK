@@ -36,10 +36,11 @@ Explanation:
 Each prefix has a score of one, so the total is answer[0] = 1 + 1 + 1 + 1 = 4.
 */
 
-#include<string_view>
-#include<string>
-#include<vector>
-#include<iostream>
+#include <iostream>
+#include <memory>
+#include <string>
+#include <string_view>
+#include <vector>
 
 using namespace std;
 
@@ -47,36 +48,50 @@ struct Trie{
     Trie* ch[26]={};
     int cnt=0;
     void insert(string_view s){
-        Trie* cur;
-        for(char c:s){
-            if(!cur->ch[c-'a'])
-                cur->ch[c-'a']=new Trie();
-            cur=cur->ch[c-'a'];
-            ++cur->cnt;
-        }
+      Trie *cur = this;
+      for (char c : s) {
+        if (!cur->ch[c - 'a'])
+          cur->ch[c - 'a'] = new Trie();
+        cur = cur->ch[c - 'a'];
+        ++cur->cnt;
+      }
+    }
+    ~Trie() {
+      // free the dynamic space
+      cout << "free the heap\n";
+      for (auto t : ch) {
+        if(t)
+          cout<<"ctor the t->val:"<<t->cnt<<'\n';
+        free(t);
+        // delete t;
+      }
     }
     int query(string_view s){
-        Trie* cur;
-        int ans=0;
-        for(char c:s){
-            cur=cur->ch[c-'a'];
-            ans+=cur->cnt;
-        }
+      Trie *cur = this;
+      int ans = 0;
+      for (char c : s) {
+        cur = cur->ch[c - 'a'];
+        ans += cur->cnt;
+      }
         return ans;
     }
 };
 
 
 class Solution {
+private:
+  std::unique_ptr<Trie> root;
+
 public:
+    Solution():root{new Trie()}{};
     vector<int> sumPrefixScores(vector<string>& words) {
-        Trie* root=new Trie();
-        for(const string& w:words)
-            root->insert(w);
-        vector<int> ans;
-        for(const string& w:words)
-            ans.push_back(root->query(w));
-        return ans;
+      //root = new Trie();
+      for (const string &w : words)
+        root->insert(w);
+      vector<int> ans;
+      for (const string &w : words)
+        ans.push_back(root->query(w));
+      return ans;
     }
 };
 
