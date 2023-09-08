@@ -17,11 +17,14 @@ class CCalendar2:
         self.map=OrderedDict()
 
     def book(self,start,end):  #https://stackoverflow.com/questions/62731393/using-bisect-left-on-dict-raising-dict-is-not-a-sequence-error-how-to-t
-        for k,v in self.map.items():
-            if k>=start and v<=end:
-                return False
-            if 
-
+        ll=list(self.map.keys())
+        ceil=bisect_left(ll,start)
+        if ceil>0 and ceil<end:
+            return False
+        floor=bisect_right(ll,start)
+        if floor>0 and self.map[floor]>start:
+            return False
+        self.map[start]=end
         return True
 
 

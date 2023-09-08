@@ -36,11 +36,18 @@ Explanation:
 Each prefix has a score of one, so the total is answer[0] = 1 + 1 + 1 + 1 = 4.
 */
 
+#include<string_view>
+#include<string>
+#include<vector>
+#include<iostream>
+
+using namespace std;
+
 struct Trie{
     Trie* ch[26]={};
     int cnt=0;
     void insert(string_view s){
-        Trie* cur=this;
+        Trie* cur;
         for(char c:s){
             if(!cur->ch[c-'a'])
                 cur->ch[c-'a']=new Trie();
@@ -49,7 +56,7 @@ struct Trie{
         }
     }
     int query(string_view s){
-        Trie* cur=this;
+        Trie* cur;
         int ans=0;
         for(char c:s){
             cur=cur->ch[c-'a'];
@@ -58,6 +65,7 @@ struct Trie{
         return ans;
     }
 };
+
 
 class Solution {
 public:
@@ -71,3 +79,9 @@ public:
         return ans;
     }
 };
+
+int main() { vector<string> words{"abc", "ab", "bc", "b" };
+  vector<int> res = Solution().sumPrefixScores(words);
+  for(auto &v:res)
+    cout<<v<<',';
+ }
