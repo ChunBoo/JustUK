@@ -1,3 +1,4 @@
+// https://en.cppreference.com/w/cpp/container/priority_queue/push
 struct cmp {
   bool operator()(int a, int b) { return a < b; }
 };
