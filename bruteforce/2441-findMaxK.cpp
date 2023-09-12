@@ -1,4 +1,14 @@
-class Solution {
+#include <algorithm>
+#include <cmath>
+#include <iostream>
+#include <map>
+#include <unordered_set>
+#include <vector>
+
+
+using namespace std;
+
+class Solution1 {
 public:
     int findMaxK(vector<int>& nums) {
         int n=nums.size();
@@ -12,7 +22,7 @@ public:
         return ans;
     }
 };
-class Solution {
+class Solution2 {
 public:
     int findMaxK(vector<int>& nums) {
         int n=nums.size();
@@ -27,7 +37,7 @@ public:
     }
 };
 
-class Solution {
+class Solution3 {
 public:
     int findMaxK(vector<int>& nums) {
         std::map<int,int> m;
@@ -43,7 +53,7 @@ public:
     }
 };
 
-class Solution {
+class Solution4 {
 public:
     int findMaxK(vector<int>& nums) {
         unordered_set<int> s{nums.begin(),nums.end()};
@@ -57,7 +67,7 @@ public:
     }
 };
 
-class Solution {
+class Solution5 {
 public:
     int findMaxK(vector<int>& nums) {
         unordered_set<int> s;
@@ -73,7 +83,7 @@ public:
     }
 };
 
-class Solution {
+class Solution6 {
 public:
     int findMaxK(vector<int>& nums) {
         int n=nums.size();
@@ -92,14 +102,20 @@ public:
     }
 };
 
-class Solution {
+class Solution7 {
 public:
-    int findMaxK(vector<int>& nums) {
-        sort(nums.begin(),nums.end(),[](int a,int b){
-            return abs(a)==abs(b)?a<b:abs(a)>abs(b);
-        });
-        for(int i=1;i<nums.size();++i)
-            if(nums[i]==-nums[i-1]) return nums[i];
-        return -1;
-    }
+  int findMaxK(vector<int> &nums) { //-1,1,2,3,-4,4,7,8
+    std::sort(nums.begin(), nums.end(), [](int a, int b) {
+      return abs(a) == abs(b) ? a < b : abs(a) > abs(b);
+    });
+    for (int i = 1; i < int(nums.size()); ++i)
+      if (nums[i] == -nums[i - 1])
+        return nums[i];
+    return -1;
+  }
 };
+
+int main() {
+  vector<int> values{1, 2, 3, 4, -1, -4, 7, 8};
+  cout << Solution7().findMaxK(values);
+}
