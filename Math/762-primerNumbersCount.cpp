@@ -36,6 +36,11 @@ Constraints:
 1 <= left <= right <= 106
 0 <= right - left <= 104
 */
+#include <bits/stdc++.h>
+#include <iostream>
+#include <cmath>
+#include <set>
+using namespace std;
 
 class Solution {
 private:
@@ -70,7 +75,7 @@ public:
     }
 };
 
-class Solution {
+class Solution2 {
 public:
     int countPrimeSetBits(int left, int right) {
         int ans=0;
@@ -83,3 +88,9 @@ public:
         return ans;
     }
 };
+
+int main() {
+    int left = 6, right = 10;
+    cout << Solution().countPrimeSetBits(left, right);
+    cout << Solution2().countPrimeSetBits(left, right);
+    }
