@@ -30,8 +30,12 @@ Follow up:
 How can we prove that at least one duplicate number must exist in nums?
 Can you solve the problem in linear runtime complexity?
 */
+#include<vector>
+#include<iostream>
+#include<algorithm>
 
-class Solution {
+using namespace std;
+class Solution1 {
 public:
     int findDuplicate(vector<int>& nums) {
         int l=1, r=nums.size();
@@ -49,10 +53,10 @@ public:
     }
 };
 
-class Solution {
+class Solution2 {
 public:
     int findDuplicate(vector<int>& nums) {
-        for(int i=0;i<nums.size();++i){
+        for(int i=0;i<int(nums.size());++i){
             int x=abs(nums[i]);
             if(nums[x]<0) return x;
             nums[x]=-nums[x];
@@ -60,7 +64,7 @@ public:
         return -1;
     }
 };
-class Solution {
+class Solution3 {
 public:
     int findDuplicate(vector<int>& nums) {
         int slow=0,fast=0;
@@ -76,3 +80,18 @@ public:
         return entry;
     }
 };
+
+int findDuplicateNumber(vector<int>& nums){
+    for(int i=0;i<int(nums.size());++i){
+        int x=abs(nums[i]);
+        if(nums[x]<0) return x;
+        nums[x]=-nums[x];
+    }
+    return -1;
+}
+
+int main()
+{
+    vector<int> nums{1,3,4,2,2};
+    cout<<findDuplicateNumber(nums);
+}
