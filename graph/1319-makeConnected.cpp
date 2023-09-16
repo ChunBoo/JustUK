@@ -8,13 +8,20 @@ Input: n = 4, connections = [[0,1],[0,2],[1,2]]
 Output: 1
 Explanation: Remove cable between computer 1 and 2 and place between computers 1 and 3.
 */
+#include <functional>
+#include <iostream>
+#include <vector>
+
+
+using namespace std;
 
 class Solution {
 public:
   int makeConnected(int n, vector<vector<int>>& connections) {
-    if (connections.size() < n - 1) return -1;
+    if (int(connections.size()) < n - 1)
+      return -1;
     vector<vector<int>> g(n);
-    for (const auto& c : connections) {
+    for (const auto& c : connections) {  //create the un-directed graph
       g[c[0]].push_back(c[1]);
       g[c[1]].push_back(c[0]);
     }
@@ -30,3 +37,9 @@ public:
     return count - 1;
   }
 };
+
+int main() {
+  int n = 4;
+  vector<vector<int>> connections{{0, 1}, {0, 2}, {1, 2}};
+  cout << Solution().makeConnected(n, connections);
+}
