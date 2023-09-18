@@ -31,13 +31,23 @@ Constraints:
 
 s contains only lower case English letters.
 */
+
+#include <cmath>
+#include <functional>
+#include <iostream>
+#include <string>
+#include <string_view>
+#include <unordered_set>
+
+using namespace std;
+
 class Solution {
 public:
-    int maxUniqueSplit(string s) {
+    int maxUniqueSplit(string_view s) {
         const int n=s.length();
         size_t ans=0;
         unordered_set<string_view> seen;
-        for(int m=0;m<1<<(n-1);++m){
+        for(int m=0;m<1<<(n-1);++m){   //what's usage of m here, will control which condition
             if(__builtin_popcount(m)<ans) continue;
             bool valid=true;
             int p=0;
@@ -54,7 +64,7 @@ public:
     }
 };
 
-class Solution {
+class Solution2 {
 public:
     int maxUniqueSplit(string s) {
         size_t ans=1;
@@ -76,3 +86,8 @@ public:
         return ans;
     }
 };
+
+int main() {
+  string s = "ababccc";
+  cout << Solution().maxUniqueSplit(s);
+}
