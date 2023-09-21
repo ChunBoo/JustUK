@@ -29,7 +29,9 @@ Constraints:
 1 <= n, k <= 30
 1 <= target <= 1000
 */
-
+#include<iostream>
+#include<vector>
+using namespace std;
 class Solution {
 public:
     int numRollsToTarget(int n, int k, int target) {
@@ -43,3 +45,7 @@ public:
         return dp[n][target];
     }
 };
+
+int main(){
+    cout<<Solution().numRollsToTarget(3,3,7);
+}

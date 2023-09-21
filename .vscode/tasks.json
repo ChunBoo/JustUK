@@ -9,6 +9,7 @@
                 "-Wall",
                 "-Werror",
                 "-std=c++17",
+                "-pthread",
                 "-g",
                 "${file}",
                 "-o",
