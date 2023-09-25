@@ -34,6 +34,10 @@ public:
       --cnt;
     }
   }
+  void flip() {
+    cnt = s.size() - cnt;
+    swap(s, s_flip);
+  }
 };
 
 int main() {
@@ -41,6 +45,9 @@ int main() {
 
   BSet b(SIZE);
   b.fix(0);
+
+  cout << b.toString()<<'\n';
+  b.flip();
   cout << b.toString();
   //   string t(10, 'x');
   //   cout << t;
