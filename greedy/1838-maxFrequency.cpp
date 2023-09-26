@@ -33,6 +33,11 @@ Constraints:
 1 <= nums[i] <= 105
 1 <= k <= 105
 */
+#include<iostream>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
 
 class Solution {
 public:
@@ -41,7 +46,7 @@ public:
         int l=0;
         long sum=0;
         int ans=0;
-        for(int r=0;r<nums.size();++r){
+        for(int r=0;r<int(nums.size());++r){
             sum+=nums[r];
             while(l<r&& sum+k<static_cast<long>(nums[r])*(r-l+1))
                 sum-=nums[l++];
@@ -50,3 +55,10 @@ public:
         return ans;
     }
 };
+
+int main()
+{
+    vector<int> nums{1,4,8,13};
+    int k=5;
+    cout<<Solution().maxFrequency(nums,k);
+}
