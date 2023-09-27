@@ -1,3 +1,8 @@
+#include<iostream>
+#include<vector>
+// #include<>
+using namespace std;
+
 class Solution {
 private:
     vector<vector<int>> m_;
@@ -15,3 +20,9 @@ public:
         return score(piles,0,n-1);
     }
 };
+
+int main()
+{
+    vector<int> piles{2,7,9,4,4};
+    cout<<Solution().stoneGame(piles);
+}
