@@ -32,6 +32,13 @@ Constraints:
 1 <= nums.length <= 40
 -107 <= nums[i] <= 107
 -109 <= goal <= 109*/
+
+#include<iostream>
+#include<vector>
+#include<set>
+#include<unordered_set>
+#include<algorithm>
+using namespace std;
 class Solution {
 public:
     int minAbsDifference(vector<int>& nums, int goal) {
@@ -43,7 +50,8 @@ public:
         int ans=abs(goal);
 
         for(int i=0;i<n/2;++i)
-            for(int j=t1.size()-1;j>=0;--j)
+            //for(int j=0;j<int(t1.size());++j)
+            for(int j=t1.size()-1;j>-1;--j)  //here, we should start from t1.size()-1
                 t1.push_back(t1[j]+nums[i]);
         
         for(int i=n/2;i<n;++i)
@@ -61,3 +69,10 @@ public:
         return ans;
     }
 };
+
+int main()
+{
+    vector<int> nums{7,-9,15,-2};
+    int goal = -5;
+    cout<<Solution().minAbsDifference(nums,goal);
+}
