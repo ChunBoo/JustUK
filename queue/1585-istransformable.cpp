@@ -1,12 +1,14 @@
-/*Given two strings s and t, transform string s into string t using the following operation any number of times:
+/*Given two strings s and t, transform string s into string t using the
+following operation any number of times:
 
-Choose a non-empty substring in s and sort it in place so the characters are in ascending order.
-For example, applying the operation on the underlined substring in "14234" results in "12344".
-Return true if it is possible to transform s into t. Otherwise, return false.
+Choose a non-empty substring in s and sort it in place so the characters are in
+ascending order. For example, applying the operation on the underlined substring
+in "14234" results in "12344". Return true if it is possible to transform s into
+t. Otherwise, return false.
 
 A substring is a contiguous sequence of characters within a string.
 
- 
+
 
 Example 1:
 
@@ -26,21 +28,27 @@ Example 3:
 
 Input: s = "12345", t = "12435"
 Output: false
- 
+
 
 Constraints:
 
 s.length == t.length
 1 <= s.length <= 105
 s and t consist of only digits.
-
 */
+#include <deque>
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
 class Solution {
 public:
     bool isTransformable(string s, string t) {
         vector<deque<int>> idx(10);
-        for(int i=0;i<s.length();++i)
-            idx[s[i]-'0'].push_back(i);
+        for (int i = 0; i < int(s.length()); ++i)
+          idx[s[i] - '0'].push_back(i);
         for(char c:t){
             const int d=c-'0';
             if(idx[d].empty()) return false;
@@ -54,3 +62,8 @@ public:
         return true;
     }
 };
+
+int main() {
+  string s = "845", t = "485";
+  cout << Solution().isTransformable(s, t);
+}
