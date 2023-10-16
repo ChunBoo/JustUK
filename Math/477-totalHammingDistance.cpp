@@ -25,7 +25,11 @@ Constraints:
 0 <= nums[i] <= 109
 The answer for the given input will fit in a 32-bit integer.
 */
-class Solution {
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class S {
 public:
     int totalHammingDistance(vector<int>& nums) {
         int mask=1;
@@ -44,3 +48,8 @@ public:
         return ans;
     }
 };
+
+int main() {
+  vector<int> nums{4, 14, 2};
+  cout << S().totalHammingDistance(nums);
+}
