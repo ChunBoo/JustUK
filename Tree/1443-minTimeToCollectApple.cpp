@@ -3,7 +3,14 @@ Given an undirected tree consisting of n vertices numbered from 0 to n-1, which 
 
 The edges of the undirected tree are given in the array edges, where edges[i] = [ai, bi] means that exists an edge connecting the vertices ai and bi. Additionally, there is a boolean array hasApple, where hasApple[i] = true means that vertex i has an apple; otherwise, it does not have any apple.
 */
-class Solution {
+
+#include <functional>
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class S {
 public:
     int minTime(int n, vector<vector<int>>& edges, vector<bool>& hasApple) {
         // vector<vector<int>> g(n);
@@ -41,3 +48,10 @@ public:
         return dfs(0);
     }
 };
+
+int main() {
+  int n = 7;
+  vector<vector<int>> edges = {{0, 1}, {0, 2}, {1, 4}, {1, 5}, {2, 3}, {2, 6}};
+  vector<bool> hasApple = {false, false, true, false, true, true, false};
+  cout << S().minTime(n, edges, hasApple);
+}
