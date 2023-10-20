@@ -32,7 +32,13 @@ Constraints:
 1 <= m <= 10^3
 1 <= queries.length <= m
 1 <= queries[i] <= m*/
-class Solution {
+#include <iostream>
+#include <numeric>
+#include <vector>
+
+using namespace std;
+
+class CC {
 public:
     vector<int> processQueries(vector<int>& queries, int m) {
         vector<int> p(m);
@@ -51,3 +57,10 @@ public:
         return ans;
     }
 };
+
+int main(){vector<int> queries = { 3, 1, 2, 1};
+int m = 5;
+vector<int> res = CC().processQueries(queries, m);
+for(int v : res)
+  cout << v << ',';
+}
