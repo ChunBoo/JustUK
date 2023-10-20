@@ -34,30 +34,37 @@ You need at least 3 days to eat the 6 oranges.
 Constraints:
 
 1 <= n <= 2 * 109*/
+#include <iostream>
+#include <queue>
+#include <unordered_set>
 
-class Solution {
+
+using namespace std;
+
+class S {
 public:
     int minDays(int n) {
-        queue<int> q{{n}};
-        unordered_set<int> seen;
-        int steps=0;
-        while(!q.empty())
-        {
-            int size=q.size();
-            while(size--)
-            {
-                int x=q.front();
-                q.pop();
-                if(x==0) return steps;
-                if(x%2==0&&seen.insert(x/2).second)
-                    q.push(x/2);
-                if(x%3==0&&seen.insert(x/3).second)
-                    q.push(x/3);
-                if(seen.insert(x-1).second)
-                    q.push(x-1);
-            }
-            ++steps;
+      queue<int> q{{n}}; //{n} is wrong, as adaptor did not has the ctor for initializor list
+      unordered_set<int> seen;
+      int steps = 0;
+      while (!q.empty()) {
+        int size = q.size();
+        while (size--) {
+          int x = q.front();
+          q.pop();
+          if (x == 0)
+            return steps;
+          if (x % 2 == 0 && seen.insert(x / 2).second)
+            q.push(x / 2);
+          if (x % 3 == 0 && seen.insert(x / 3).second)
+            q.push(x / 3);
+          if (seen.insert(x - 1).second)
+            q.push(x - 1);
+        }
+        ++steps;
         }
         return -1;
     }
 };
+
+int main() { cout << S().minDays(10); }
