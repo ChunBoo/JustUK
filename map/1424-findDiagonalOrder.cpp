@@ -22,15 +22,18 @@ Constraints:
 1 <= sum(nums[i].length) <= 105
 1 <= nums[i][j] <= 105
 */
+#include<vector>
+#include<iostream>
+// #include<>
+using namespace std;
 
-
-class Solution {
+class S {
 public:
     vector<int> findDiagonalOrder(vector<vector<int>>& nums) {
  vector<vector<int>> m;    
-    for (int i = 0; i < nums.size(); ++i)
-      for (int j = 0; j < nums[i].size(); ++j) {
-        if (m.size() <= i + j) m.push_back({});
+    for (int i = 0; i < int(nums.size()); ++i)
+      for (int j = 0; j < int(nums[i].size()); ++j) {
+        if (int(m.size()) <= i + j) m.push_back({});
         m[i + j].push_back(nums[i][j]);
     }
     vector<int> ans;    
@@ -39,3 +42,13 @@ public:
     return ans;
     }
 };
+
+int main()
+{
+  vector<vector<int>> nums= {{1,2,3},
+                             {4,5,6},
+                             {7,8,9}};
+  vector<int> res=S().findDiagonalOrder(nums);
+  for(int v:res)
+  cout<<v<<',';
+}
