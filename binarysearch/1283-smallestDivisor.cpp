@@ -27,7 +27,14 @@ Constraints:
 nums.length <= threshold <= 106
  * 
 */
-class Solution {
+
+#include<vector>
+#include<iostream>
+#include<algorithm>
+
+using namespace std;
+
+class SS {
 public:
     int smallestDivisor(vector<int>& nums, int threshold) {
         auto sum=[&](int d)
@@ -50,3 +57,9 @@ public:
         return l;
     }
 };
+
+int main() { 
+    vector<int> nums {1, 2, 5, 9 };
+    int threshold = 6 ;
+    cout<<SS().smallestDivisor(nums,threshold);
+}
