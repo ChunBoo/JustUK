@@ -47,7 +47,7 @@ class Solution {
 public:
     bool isTransformable(string s, string t) {
         vector<deque<int>> idx(10);
-        for (int i = 0; i < int(s.length()); ++i)
+        for (int i = 0; i < int(s.length()); ++i) //get the index and put them into queue
           idx[s[i] - '0'].push_back(i);
         for(char c:t){
             const int d=c-'0';

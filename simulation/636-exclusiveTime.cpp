@@ -56,8 +56,14 @@ No two end events will happen at the same timestamp.
 Each function has an "end" log for each "start" log.
 */
 
+#include <iostream>
+#include <stack>
+#include <string>
+#include <vector>
 
-class Solution {
+using namespace std;
+
+class SS {
 public:
     vector<int> exclusiveTime(int n, vector<string>& logs) {
         vector<int> ans(n,0);
@@ -85,3 +91,11 @@ public:
         return ans;
     }
 };
+
+int main() {
+  int n = 2;
+  vector<string> logs = {"0:start:0", "1:start:2", "1:end:5", "0:end:6"};
+  vector<int> res = SS().exclusiveTime(n, logs);
+  for (auto &v : res)
+    cout << v << ',';
+}
