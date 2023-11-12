@@ -31,7 +31,11 @@ products[i] consists of lowercase English letters.
 1 <= searchWord.length <= 1000
 searchWord consists of lowercase English letters.
 */
-
+#include<iostream>
+#include<vector>
+#include<string>
+#include<algorithm>
+using namespace std;
 
 struct Trie{
     Trie():nodes(26){}
@@ -53,7 +57,7 @@ struct Trie{
     }
     static vector<vector<string>> getWords(Trie* root,const string& prefix){
         vector<vector<string>> ans(prefix.size());
-        for(int i=0;i<prefix.size();++i){
+        for(int i=0;i<int(prefix.size());++i){
             char c=prefix[i];
             root=root->nodes[c-'a'];
             if(!root) break;
@@ -74,3 +78,43 @@ public:
         return Trie::getWords(&root,searchWord);
     }
 };
+
+//binary search method
+class Solution {
+public:
+    vector<vector<string>> suggestedProducts(vector<string>& products, string searchWord) {
+        vector<vector<string>> ans;
+        sort(begin(products),end(products));  //why we need this step?
+        string key;
+        for(char c:searchWord)
+        {
+            key+=c;
+            auto l=lower_bound(begin(products),end(products),key);
+            auto r=upper_bound(begin(products),end(products),key+='~');
+            if(l==r)      //did not find the words
+                break;
+            key.pop_back();//remove the last char '~'
+            ans.emplace_back(l,min(l+3,r));
+        }
+        while(ans.size()!=searchWord.length())
+            ans.push_back({});
+        return ans;
+    }
+};
+
+int main()
+{
+   vector<string> products = {"mobile","mouse","moneypot","monitor","mousepad"};
+   string searchWord = "mouse";
+
+   vector<vector<string>> res=Solution().suggestedProducts(products,searchWord);
+
+   for( auto& l:res)
+   {
+        cout<<'\n';
+        for(auto& s:l)
+            cout<<s<<',';
+
+   }
+    // cout<<s<<'\n';
+}
