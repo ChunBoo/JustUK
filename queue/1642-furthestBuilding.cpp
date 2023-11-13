@@ -35,22 +35,34 @@ Constraints:
 0 <= ladders <= heights.length
 */
 
+#include <iostream>
+#include <queue>
+#include <vector>
 
-class Solution {
+using namespace std;
+
+class SS {
 public:
     int furthestBuilding(vector<int>& heights, int bricks, int ladders) {
         const int n=heights.size();
-        priority_queue<int,vector<int>,greater<int>> q;
+        priority_queue<int,vector<int>,greater<int>> q;  //created the min heap, initialized it with greater<> as default is max heap
         for(int i=1;i<n;++i)
         {
-            const int d=heights[i]-heights[i-1];
-            if(d<=0) continue;
-            q.push(d);
-            if(q.size()<=ladders) continue;
-            bricks-=q.top();
-            q.pop();
-            if(bricks<0) return i-1;
+          const int d=heights[i]-heights[i-1];
+          if(d<=0) continue;                   //here is "<="
+          q.push(d);
+          if(int(q.size())<=ladders) continue;  //here is "<="
+          bricks-=q.top();
+          q.pop();
+          if(bricks<0)
+            return i-1;
         }
         return n-1;
     }
 };
+
+int main() {
+  vector<int> heights = {4, 2, 7, 6, 9, 14, 12};
+  int bricks = 5, ladders = 1;
+  cout << SS().furthestBuilding(heights, bricks, ladders);
+}
