@@ -11,7 +11,11 @@ points[i].length == 2
 -104 <= xi, yi <= 104
 All the points are unique.
 */
+#include <iostream>
+#include <map>
+#include <vector>
 
+using namespace std;
 
 struct Point{
     int x;
@@ -19,13 +23,13 @@ struct Point{
     Point(vector<int> vec):x(vec[0]),y(vec[1]){};
     // Point operator=(const p)
 };
-class Solution {
+class S {
 public:
     int maxPoints(vector<vector<int>>& points) {
         int n=points.size();
         int ans=0;
         for(int i=0;i<n;++i){
-            map<pair<int,int>,int> count;
+            map<pair<int,int>,int> count; //key is the pair<int,int>, value is the count of this slope
             int dup_points=1;
             int max_points=0;
              Point p1=points[i];
@@ -48,11 +52,15 @@ private:
        const int dy=p2.y-p1.y;
        if(dy==0) return {p1.y,0};
        if(dx==0) return {0,p1.x};
-       const int d=gcd(dx,dy);
+       const int d=gcd(dx,dy); //used the gcd value to avoid the float number is not precise.
        return {dy/d,dx/d};
    }
    int gcd(int m,int n){
        return n==0?m:gcd(n,m%n);
    }
-
 };
+
+int main() {
+  vector<vector<int>> points{{1, 1}, {3, 2}, {5, 3}, {4, 1}, {2, 3}, {1, 4}};
+  cout << S().maxPoints(points);
+}
