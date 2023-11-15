@@ -30,13 +30,20 @@ n == grid.length == grid[i].length
 grid[i][j] is either 0 or 1.
 There are exactly two islands in grid.
 */
-class Solution {
+
+#include<iostream>
+#include<vector>
+#include<queue>
+// #include<>
+using namespace std;
+
+class S {
 public:
   int shortestBridge(vector<vector<int>>& A) {
     queue<pair<int, int>> q;
     bool found = false;
-    for (int i = 0; i < A.size() && !found; ++i)
-      for (int j = 0; j < A[0].size() && !found; ++j)
+    for (int i = 0; i < int(A.size()) && !found; ++i)
+      for (int j = 0; j < int(A[0].size()) && !found; ++j)
         if (A[i][j]) {
           dfs(A, j, i, q);
           found = true;
@@ -53,7 +60,7 @@ public:
         for (int i = 0; i < 4; ++i) {
           int tx = x + dirs[i];
           int ty = y + dirs[i + 1];
-          if (tx < 0 || ty < 0 || tx >= A[0].size() || ty >= A.size() || A[ty][tx] == 2) continue;          
+          if (tx < 0 || ty < 0 || tx >= int(A[0].size()) || ty >= int(A.size()) || A[ty][tx] == 2) continue;          
           if (A[ty][tx] == 1) return steps;
           A[ty][tx] = 2;
           q.emplace(tx, ty);
@@ -65,7 +72,7 @@ public:
   }
 private:  
   void dfs(vector<vector<int>>& A, int x, int y, queue<pair<int, int>>& q) {
-    if (x < 0 || y < 0 || x >= A[0].size() || y >= A.size() || A[y][x] != 1) return;
+    if (x < 0 || y < 0 || x >= int(A[0].size()) || y >=int(A.size()) || A[y][x] != 1) return;
     A[y][x] = 2;
     q.emplace(x, y);
     dfs(A, x - 1, y, q);
@@ -75,6 +82,12 @@ private:
   }
 };
 
+
+int main()
+{
+  vector<vector<int>> grid{{0,1},{1,0}};
+  cout<<S().shortestBridge(grid);
+}
 // class Solution {
 
 // private:
