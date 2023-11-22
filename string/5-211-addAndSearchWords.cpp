@@ -36,34 +36,41 @@ There are also per length hashtable to store words of length k. And do a brute f
 Time complexity: Init: O(n*l)
 search: best: O(l) worst: O(n*l)
 */
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
 
-class WordDictionary {
+using namespace std;
+class WD {
 public:
-    WordDictionary() {
+  WD() {}
 
-    }
-    
-    void addWord(string word) {
-        words.insert(word);
-        ws[word.size()].insert(word);
-    }
-    
+  void addWord(string word) {
+   words.insert(word);
+   ws[word.size()].insert(word);
+  }
+
     bool search(string word) {
-        if(word.find(".")==std::string::npos)
-            return words.count(word);
-        for(const string& w:ws[word.size()])
-        if(match(word,w))
+       if(word.find(".")==std::string::npos) //did not found the '.' in current word
+        return words.count(word);
+       for(const string& w:ws[word.size()])  
+       {
+        if(match(word,w))    //here should be use match(),since the word might be not in the ws, likes word=".dad"
             return true;
-        return false;
+       }
+       return false;
     }
     bool match(const string& word,const string& w)
     {
-        for(int i=0;i<word.size();++i)
-        {
-            if(word[i]=='.') continue;
-            if(word[i]!=w[i]) return false;
-        }
-        return true;
+      for(int i=0;i<int(word.size());++i)
+      {
+        if(word[i]=='.')
+            continue;
+        if(word[i]!=w[i])
+            return false;
+      }
+      return true;
     }
 private:
     unordered_set<string> words;
@@ -76,3 +83,11 @@ private:
  * obj->addWord(word);
  * bool param_2 = obj->search(word);
  */
+
+int main() {
+
+  WD wd;
+  wd.addWord("bad");
+  wd.addWord("pad");
+  cout << wd.search(".dad");
+}
