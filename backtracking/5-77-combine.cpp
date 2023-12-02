@@ -50,7 +50,7 @@ public:
     vector<vector<int>> ans;
     vector<int> cur;
     function<void(int)> dfs = [&](int s) {
-      if (cur.size() == k) { 
+      if (int(cur.size()) == k) { 
         ans.push_back(cur); 
         return;
       }
