@@ -22,7 +22,14 @@ Constraints:
 -10 <= nums[i] <= 10
 */
 
-class Solution {
+
+#include<vector>
+#include<algorithm>
+#include<functional>
+#include<iostream>
+using namespace std;
+
+class Solution2 {
 private:
     void dfs(const vector<int>& nums,vector<int>& cur, vector<bool>& used,
     vector<vector<int>>& ans)
@@ -32,7 +39,7 @@ private:
             ans.push_back(cur);
             return;
         }
-        for(int i=0;i<nums.size();++i)
+        for(int i=0;i<int(nums.size());++i)
         {
             if(used[i])
                 continue;
@@ -58,3 +65,51 @@ public:
         return ans;
     }
 };
+
+
+class Solution {
+public:
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        sort(begin(nums),end(nums));
+        int n=nums.size();
+        vector<vector<int>> ans;
+          vector<int> cur;
+        vector<bool> used(n,false);
+        function<void()> dfs=[&]()
+        {
+            if(int(cur.size())==n)
+            {
+                ans.push_back(cur);
+                return;
+            }
+            for(int i=0;i<n;++i)
+            {
+                if(used[i])
+                  continue;
+                if(i>0&&nums[i]==nums[i-1]&&!used[i-1]) 
+                    continue;
+                used[i]=true;
+                cur.push_back(nums[i]);
+                dfs();
+                cur.pop_back();
+                used[i]=false;
+            }
+            
+        };
+
+        dfs();
+        return ans;
+    }
+};
+
+int main()
+{
+    vector<int> nums = {1,1,2};
+    vector<vector<int>> ans=Solution().permuteUnique(nums);
+    for(auto v:ans)
+    {
+        cout<<'\n';
+        for(auto d:v)
+            cout<<d<<',';
+    }
+}
