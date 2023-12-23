@@ -90,6 +90,51 @@ public:
     }
 };
 
+class Solution {
+public:
+    vector<double> calcEquation(vector<vector<string>>& equations, vector<double>& values, vector<vector<string>>& queries) {
+        unordered_map<string,unordered_map<string,double>> g_;
+        int n=equations.size();
+        for(int i=0;i<n;++i)
+        {
+            const string& A=equations[i][0];
+            const string& B=equations[i][1];
+            g_[A][B]=values[i];
+            g_[B][A]=1.0/values[i];
+        }
+        vector<double> ans;
+        for(const auto& pair:queries){
+            const string& X=pair[0];
+            const string& Y=pair[1];
+            if(!g_.count(X)||!g_.count(Y)){
+                ans.push_back(-1.0);
+                continue;
+            }
+            unordered_set<string> visited;
+            ans.push_back(divide(X,Y,g_,visited));
+        }
+        return ans;
+    }
+private:
+    double divide(const string& A,const string& B,
+                  unordered_map<string,unordered_map<string,double>>& g_,
+                unordered_set<string>& visited)
+    {
+        if(A==B)    
+            return 1.0;
+        visited.insert(A);
+        for(const auto& pair:g_[A]){
+            const string& C=pair.first;
+            if(visited.count(C))
+                continue;
+            double d=divide(C,B,g_,visited);
+            if(d>0)
+                return d*g_[A][C];
+        }
+        return -1.0;
+    }
+};
+
 
 int main()
 {
