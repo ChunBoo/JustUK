@@ -72,6 +72,54 @@ private:
    }
 };
 
+
+
+class UnionFindSet{
+public:
+    UnionFindSet(int n)
+    {
+        parent_=vector<int>(n+1,0);
+        rank_=vector<int>(n+1,0);
+        for(int i=0;i<parent_.size();++i)
+            parent_[i]=i;
+    }
+    int find(int x)
+    {
+        if(x!=parent_[x])
+            parent_[x]=find(parent_[x]);
+        return parent_[x];
+    }
+    bool _union(int x,int y)
+    {
+        int px=find(x),py=find(y);
+        if(px==py)
+            return false;
+        if(rank_[px]<rank_[py]) parent_[px]=py;
+        if(rank_[px]>rank_[py]) parent_[py]=px;
+        if(rank_[px]==rank_[py]){
+            parent_[px]=py;
+            ++rank_[px];
+        }
+        return true;
+    }
+
+private:
+    vector<int> parent_;
+    vector<int> rank_;
+};
+
+class Solution {
+public:
+    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
+        UnionFindSet us=UnionFindSet(edges.size());
+        for(const auto& e:edges)
+        {
+            if(!us._union(e[0],e[1]))
+                return e;
+        }
+        return {};
+    }
+};
 int main() {
   vector<vector<int>> edges{{1, 2}, {2, 3}, {1, 3}};
   vector<int> res = Solution().findRedundantConnection(edges);
