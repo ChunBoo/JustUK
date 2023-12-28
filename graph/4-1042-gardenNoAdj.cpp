@@ -33,6 +33,9 @@ Space complexity: O(|V|+|E|)
 */
 
 
+#include<iostream>
+#include<vector>
+using namespace std;
 
 class Solution {
 public:
@@ -55,3 +58,12 @@ public:
 
     }
 };
+
+int main()
+{
+    int N = 3;
+    vector<vector<int>> paths = {{1,2},{2,3},{3,1}};
+    vector<int> res=Solution().gardenNoAdj(N,paths);
+    for(const auto& v:res)
+        cout<<v<<',';
+}
