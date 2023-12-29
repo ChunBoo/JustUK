@@ -37,7 +37,41 @@ int minMutations(const STR& s, const STR& e, VEC bank)
     }
     return -1;
 }
+class Solution {
+public:
+    int minMutation(string startGene, string endGene, vector<string>& bank) {
+        queue<string> q;
+        q.push(startGene);
 
+        unordered_set<string> visited;
+        visited.insert(startGene);
+        int steps=0;
+        while(!q.empty()){
+            size_t size=q.size();
+            while(size--){
+                string curr=std::move(q.front());
+                q.pop();
+                if(curr==endGene)
+                    return steps;
+                for(const string& gene:bank){
+                    if(visited.count(gene)||!validMutation(curr,gene)) continue;
+                    visited.insert(gene);
+                    q.push(gene);
+                }
+            }
+            ++steps;
+        }
+        return -1;
+    }
+private:
+    bool validMutation(const string& s1,const string& s2){
+        int count=0;
+        for(int i=0;i<s1.length();++i)
+            if(s1[i]!=s2[i]&&count++)
+                return false;
+        return true;
+    }
+};
 int main()
 {
     STR s="AACCGGTT",e="AACCGGTA";
