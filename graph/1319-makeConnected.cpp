@@ -37,7 +37,30 @@ public:
     return count - 1;
   }
 };
+class Solution {
+public:
+    int makeConnected(int n, vector<vector<int>>& connections) {
+        if(connections.size()<n-1)
+            return -1;
+        vector<int> p(n,0);
+        iota(begin(p),end(p),0);  //p[0]=0,p[1]=1,p[2]=2
+        function<int(int)> find=[&](int node){
+            return node==p[node]?node:p[node]=find(p[node]);
+        };
 
+        for(const auto& c:connections){
+            p[find(c[0])]=find(c[1]);
+        }
+
+        unordered_set<int> s;
+        for(int i=0;i<n;++i)
+        {
+            s.insert(find(i));
+        }
+        return s.size()-1;
+    }
+
+};
 int main() {
   int n = 4;
   vector<vector<int>> connections{{0, 1}, {0, 2}, {1, 2}};
