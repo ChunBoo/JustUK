@@ -23,13 +23,14 @@ class Solution {
 public:
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
         constexpr int MAX_TIMES=100*100;
-        vector<int> dist(n,MAX_TIMES);
-        dist[k-1]=0;
+        vector<int> dist(n+1,MAX_TIMES);
+        dist[0]=0;
+        dist[k]=0;
         for(int i=0;i<n;++i){
             for(auto &time:times)
             {
                 int u=time[0],v=time[1],w=time[2];
-                dist[v-1]=min(dist[v-1],dist[u-1]+w);
+                dist[v]=min(dist[v],dist[u]+w);
             }
         }
         int ans=*max_element(dist.begin(),dist.end());
@@ -69,6 +70,6 @@ int main()
     vector<vector<int>> times = {{2,1,1},{2,3,1},{3,4,1}};
     int n = 4, k = 2;
 
-    // cout<<Solution().networkDelayTime(times,n,k);
-    cout<<Solution2().networkDelayTime(times,n,k);
+    cout<<Solution().networkDelayTime(times,n,k);
+    // cout<<Solution2().networkDelayTime(times,n,k);
 }
