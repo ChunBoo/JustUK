@@ -51,6 +51,11 @@ Find the smallest capacity such that can finish in D days.
 Time complexity: O(n * log(sum(weights))
 Space complexity: O(1)
 */
+#include<vector>
+#include<iostream>
+#include<numeric>       //accumulate
+#include<algorithm>  //max_element
+using namespace std;
 class Solution {
 public:
     int shipWithinDays(vector<int>& weights, int days) {
@@ -71,3 +76,10 @@ public:
         return l;
     }
 };
+
+int main()
+{
+    vector<int> weights{3,2,2,4,1,4};
+    int D = 3;
+    cout<<Solution().shipWithinDays(weights,D);
+}
