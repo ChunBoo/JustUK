@@ -111,3 +111,74 @@ private:
     return found;
   }
 };
+
+
+
+class TrieNode{
+    public:
+        vector<TrieNode*> nodes;
+        const string* word;
+        TrieNode():nodes(26), word(nullptr){};
+        ~TrieNode()
+        {
+            for(auto node:nodes)
+                delete node;
+        }
+};
+
+
+
+class Solution {
+public:
+    vector<string> findWords(vector<vector<char>>& board, vector<string>& words) {
+        TrieNode root;
+        for(const string& word:words)
+        {
+            TrieNode* cur=&root;
+            for(char c:word)
+            {
+                TrieNode* &next = cur->nodes[c-'a'];
+                if(!next)
+                {
+                    cout<<"create new trieNode.\n";
+                    next= new TrieNode();
+                }
+                cur=next;
+            }
+            cur->word=&word;
+        }
+        int R=board.size();
+        int C=board[0].size();
+        vector<string> ans;
+
+        function<void(int,int,TrieNode*)> dfs=[&](int r,int c,TrieNode* node)
+        {
+            if(r<0||r==R||c<0||c==C||board[r][c]=='#')
+                return;
+            const char ch=board[r][c];
+            auto nextNode=node->nodes[ch-'a'];
+            if(!nextNode)
+            {
+                return ;
+            }
+            if(nextNode->word)
+            {
+                cout<<"found the string:"<<*nextNode->word<<'\n';
+                ans.push_back(*nextNode->word);
+                nextNode->word=nullptr;
+            }
+            board[r][c]='#';
+            dfs(r+1,c,nextNode);
+            dfs(r-1,c,nextNode);
+            dfs(r,c+1,nextNode);
+            dfs(r,c-1,nextNode);
+            board[r][c]=ch;
+        };
+        for(int r=0;r<R;++r)
+            for(int c=0;c<C;++c)
+            {
+                dfs(r,c,&root);
+            }
+        return ans;
+    }
+};
