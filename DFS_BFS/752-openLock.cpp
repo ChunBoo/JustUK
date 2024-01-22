@@ -56,6 +56,9 @@ class Solution {
 public:
     int openLock(vector<string>& deadends, string target) {
       const string start{"0000"};
+
+      if(start==target)
+        return 0;
       unordered_set<string> dead(deadends.begin(),
                                  deadends.end()); // for more quick searching
       unordered_set<string> visited{start};
