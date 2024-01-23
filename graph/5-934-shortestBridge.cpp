@@ -81,7 +81,69 @@ private:
     dfs(A, x, y + 1, q);
   }
 };
+class Solution {
+public:
+    int shortestBridge(vector<vector<int>>& grid) {
+        m_=grid.size();
+        n_=grid[0].size();
 
+        bool found=false;
+        queue<pair<int,int>> q;
+        for(int r=0;r<m_&&!found;++r)
+        {
+            for(int c=0;c<n_&&!found;++c)
+            {
+                if(grid[r][c])
+                {
+                    dfs(grid,c,r,q);
+                    found =true;
+                }
+            }
+        }
+        int steps=0;
+        const vector<int> dirs{0,-1,0,1,0};
+        while(!q.empty())
+        {
+            size_t size=q.size();
+            while(size--)
+            {
+                auto p=q.front();
+                q.pop();
+                int r=p.first, c=p.second;
+
+                for(int i=0;i<4;++i)
+                {
+                    int tr=r+dirs[i];
+                    int tc=c+dirs[i+1];
+                    if(tr<0||tr>=m_||tc<0||tc>=n_||grid[tr][tc]==2)
+                        continue;
+                    if(grid[tr][tc]==1)
+                        return steps;
+                    grid[tr][tc]=2;
+                    q.emplace(tr,tc);
+                }
+            }
+            ++steps;
+        }
+        return -1;
+    }
+
+private:
+    int m_;
+    int n_;
+    void dfs(vector<vector<int>>& grid,int x,int y,queue<pair<int,int>>& q)
+    {
+        if(x<0||x>=n_||y<0||y>=m_||grid[y][x]!=1)
+            return;
+        grid[y][x]=2;
+
+        q.emplace(y,x);
+        dfs(grid,x+1,y,q);
+        dfs(grid,x-1,y,q);
+        dfs(grid,x,y+1,q);
+        dfs(grid,x,y-1,q);
+    }
+};
 
 int main()
 {
