@@ -37,3 +37,33 @@ public:
         // return f[n][m];
     }
 };
+
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        // if(m<0||n<0)
+        //     return 0;
+        // if(m==1&&n==1)
+        //     return 1;
+        // if(f_[m][n]>0) return f_[m][n];
+        // int left=uniquePaths(m,n-1);
+        // int top=uniquePaths(m-1,n);
+        //  f_[m][n]=left+top;
+        //  return f_[m][n];
+         if(m<0||n<0)
+            return 0;
+        vector<vector<int>> f(m+1,vector<int>(n+1,0));
+        f[1][1]=1;
+        for(int r=1;r<=m;++r)
+            for(int c=1;c<=n;++c)
+            {
+                if(r==1&&c==1)
+                  continue;
+                f[r][c]=f[r-1][c]+f[r][c-1];
+            }
+         return f[m][n];
+
+    }
+// private:
+//     unordered_map<int,unordered_map<int,int>> f_;
+};
