@@ -23,6 +23,8 @@ Time complexity: pre-compute: O(n), query: O(1)
 Space complexity: O(n)
 
 */
+
+//refer to 221
 class NumArray {
 public:
   NumArray(vector<int> nums): sums_(nums) {      
