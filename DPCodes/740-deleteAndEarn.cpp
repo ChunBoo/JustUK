@@ -32,6 +32,34 @@ private:
     }
 };
 
+class Solution {
+public:
+    int deleteAndEarn(vector<int>& nums) {
+        const int n=nums.size();
+        if(n<=1)
+            return nums[0];
+        
+        int r=*max_element(begin(nums),end(nums));
+        vector<int> points(r+1,0);
+
+        for(int i:nums)
+            points[i]+=i;
+        
+        return rob(points);
+    }
+private:
+    int rob(const vector<int>& nums){
+        int dp1=0,dp2=0;
+        for(int i=0;i<nums.size();++i)
+        {
+            int dp=max(dp1,dp2+nums[i]);
+            dp2=dp1;
+            dp1=dp;
+        }
+        return dp1;
+    }
+};
+
 int main()
 {
     vector<int> nums{3,4,2};
