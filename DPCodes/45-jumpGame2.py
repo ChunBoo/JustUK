@@ -14,7 +14,9 @@ class Solution:
                 return 0
             if i+nums[i]>=n-1:
                 return 1
-            ans=n
+            ans=n  #can not define this ans as global varaible
+            #1. Global Variable Misuse: The use of ans as a global variable inside the dp function is not appropriate. In Python, the global keyword is used to refer to variables defined at the top level of the script, 
+            #not for variables defined outside of a nested function. Moreover, modifying ans inside the dp function affects its value across all recursive calls, which is not the intended logic for dynamic programming.
             for s in range(1,nums[i]+1):
                 ans=min(ans,dp(s+i)+1)
             return ans
