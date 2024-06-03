@@ -40,6 +40,6 @@ bool canAttendSort(MATRIX& m)  //can not pass const for std::sort?
 int main()
 {
     MATRIX m{{7,10},{9,11}};
-    std::cout<<canAttend(m)<<'\n';
+    // std::cout<<canAttend(m)<<'\n';
     std::cout<<canAttendSort(m);
 }
