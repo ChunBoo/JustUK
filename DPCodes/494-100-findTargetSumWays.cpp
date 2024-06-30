@@ -4,6 +4,30 @@
 using std::cout;
 using VEC=std::vector<int>;
 
+class Solution {
+public:
+    int findTargetSumWays(vector<int>& nums, int target) {
+        const int n=nums.size();
+        const int sum=std::accumulate(begin(nums),end(nums),0);
+        if(sum<abs(target))
+            return 0;
+        vector<vector<int>> dp(n+1,vector<int>(2*sum+1,0));
+        int offset=sum;
+        dp[0][offset]=1;
+
+        for(int i=0;i<n;i++){
+            for(int j=nums[i];j<2*sum+1-nums[i];j++){
+                if(dp[i][j]){
+                    dp[i+1][j-nums[i]]+=dp[i][j];
+                    dp[i+1][j+nums[i]]+=dp[i][j];
+                }
+            }
+        }
+        return dp.back()[target+offset];
+    }
+};
+
+
 int foo(const VEC& nums,int idx,int t)
 {
     // if(t<0)
