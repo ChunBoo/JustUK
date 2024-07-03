@@ -29,6 +29,11 @@ Constraints:
 1 <= nums[i] <= 100
 The input is generated such that the number of prime numbers in the nums is at least one.
  */
+#include<iostream>
+#include<vector>
+#include<map>
+using namespace std;
+
 
 class Solution {
 public:
@@ -46,26 +51,22 @@ public:
             j--;
         }
         return j-i;
-        // map<int,int> m;
-        // for(int i=0;i<n;i++){
-        //     if(isPrime(nums[i])){
-        //         m[i]=nums[i];
-        //     }
-        // }
-        // int minPos=n, maxPos=0;
-
-        // for(auto &[p,v]:m){
-        //     cout<<p<<'\n';
-        //     if(p>=0){
-        //         if(p<minPos){
-        //             minPos=p;
-        //         }}
-        //         if(p>maxPos){
-        //             maxPos=p;
-        //         }
-            
-        // }
-        // return maxPos-minPos;
+    }
+    int foo(vector<int>& nums){
+        const int n=nums.size();
+        map<int,int> m;
+        for(int i=0;i<n;i++){
+            if(isPrime(nums[i])){
+                m[i]=nums[i];
+            }
+        }
+        auto last=m.rbegin();
+        auto start=m.begin();
+        if(last!=m.rend()){
+            return last->first - start->first;
+        }else{
+            return 1;
+        }
     }
 private:
     bool isPrime(int num){
@@ -81,3 +82,9 @@ private:
         return true;
     }
 };
+
+int main(){
+    vector<int> nums{4,2,9,5,3},nums2{ 4,8,2,8};
+
+    cout<<Solution().foo(nums2);
+}
