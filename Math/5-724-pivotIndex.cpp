@@ -59,3 +59,24 @@ public:
         return -1;
     }
 };
+
+class Solution {
+public:
+    int pivotIndex(vector<int>& nums) {
+        const int n=nums.size();
+        int sum=accumulate(begin(nums),end(nums),0);
+        int leftSum=0;
+        // if(leftSum==(sum-nums[0]))
+        //     return 0;
+        for(int i=0;i<n;i++){
+          
+            if(leftSum==(sum-nums[i]-leftSum))
+            {
+                return i;
+            }
+
+              leftSum+=nums[i];
+        }
+        return -1;
+    }
+};
