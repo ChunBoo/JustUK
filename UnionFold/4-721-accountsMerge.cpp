@@ -114,3 +114,80 @@ public:
     return ans;
   }
 };
+
+
+
+class UnionFind{
+    public:
+        vector<int> parent;
+        UnionFind(int n){
+            parent.resize(n);
+            for(int i=0;i<n;i++){
+                parent[i]=i;
+            }
+        }
+        void unionSet(int idx1,int idx2){
+            parent[find(idx2)]=find(idx1);
+        }
+
+        int find(int idx){
+            if(parent[idx]!=idx){
+                parent[idx]=find(parent[idx]);
+            }
+            return parent[idx];
+        }
+};
+
+class Solution {
+public:
+    vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
+        map<string,int> mailToIndex;
+        map<string,string> mailToName;
+
+        int mailsCount=0;
+        for(auto& account:accounts){
+            string& name=account[0];
+            int sz=account.size();
+            for(int i=1;i<sz;i++){
+                string& mail=account[i];
+                if(!mailToIndex.count(mail)){
+                    mailToIndex[mail]=mailsCount++;
+                    mailToName[mail]=name;
+                }
+            }
+        }
+        UnionFind uf(mailsCount);
+        for(auto& account:accounts){
+            string& firstMail=account[1];
+            int firstIndex=mailToIndex[firstMail];
+            int sz=account.size();
+            for(int i=2;i<sz;i++){
+                string& nextMail=account[i];
+                int nextIndex=mailToIndex[nextMail];
+                uf.unionSet(firstIndex,nextIndex);
+            }
+        }
+
+        map<int,vector<string>> indexToMails;
+        for(auto& [mail,_]:mailToIndex){
+            int idx=uf.find(mailToIndex[mail]);
+            vector<string>& account=indexToMails[idx];
+            account.emplace_back(mail);
+            indexToMails[idx]=account;
+        }
+
+        vector<vector<string>> ans;
+        for(auto &[_,mails]:indexToMails){
+            sort(mails.begin(),mails.end());
+            string& name=mailToName[mails[0]];
+            vector<string> account;
+            account.emplace_back(name);
+
+            for(auto& mail:mails){
+                account.emplace_back(mail);
+            }
+            ans.emplace_back(account);
+        }
+        return ans;
+    }
+};
